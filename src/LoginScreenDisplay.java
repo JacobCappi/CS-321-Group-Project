@@ -37,5 +37,7 @@ public class LoginScreenDisplay  extends JPanel{
     }
 
 
-
+    public void addChangeListener(ChangeListener listener) {
+        listeners.add(listener);
+    }
 }

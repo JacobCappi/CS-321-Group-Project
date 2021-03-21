@@ -20,9 +20,14 @@ public class Main {
 
         test.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         test.setVisible(true);
+        userLogin.addChangeListener(new ChangeListener(){
+            @Override
+            public void stateChanged(ChangeEvent  e){
+                CardLayout cl = (CardLayout) (cardset.getLayout());
+                cl.show(cardset,  "RANDOM");
+            }
 
-
-
+        });
 
 
     }
