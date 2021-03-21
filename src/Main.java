@@ -7,19 +7,19 @@ public class Main {
 
 
     public static  void main ( String []args ){
-        JFrame test = new JFrame();
-        test.setSize(500,500);
-        test.setLocationRelativeTo(null);
+        JFrame testFrame = new JFrame();
+        testFrame.setSize(500,500);
+        testFrame.setLocationRelativeTo(null);
         final LoginScreenDisplay userLogin = new LoginScreenDisplay();
         final cardTestDisplay userDisplay = new cardTestDisplay();
         final JPanel cardset= new JPanel(new CardLayout());
         cardset.add(userLogin.getLoginPanel(), " Login View");
         cardset.add(userDisplay.getJklsdhgisdhgsfdkhjgsfg(), "RANDOM");
-        test.add(cardset);
+        testFrame.add(cardset);
 
 
-        test.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        test.setVisible(true);
+        testFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        testFrame.setVisible(true);
         userLogin.addChangeListener(new ChangeListener(){
             @Override
             public void stateChanged(ChangeEvent  e){

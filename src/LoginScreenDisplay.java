@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class LoginScreenDisplay  extends JPanel{
-    private JPanel LoginPanel;
+    private JPanel loginPanel;
     private JLabel WelcomeLabel;
     private JTextField usernameTextField;
     private JLabel usernameLabel;
@@ -33,7 +33,7 @@ public class LoginScreenDisplay  extends JPanel{
     }
 
     public JPanel getLoginPanel (){
-        return LoginPanel;
+        return loginPanel;
     }
 
 
