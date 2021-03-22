@@ -50,6 +50,9 @@ public class LoginScreenDisplay  extends JPanel{
                         for (ChangeListener listener : listeners)
                             listener.stateChanged(event);
                     }
+                    else{
+                        JOptionPane.showMessageDialog(null, "USER NOT FOUND", "ERROR", JOptionPane.ERROR_MESSAGE);
+                    }
 
 
                 } catch (ParseException | IOException e1) {
