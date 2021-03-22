@@ -29,15 +29,23 @@ public class LoginScreenDisplay  extends JPanel{
 
     public  LoginScreenDisplay() throws FileNotFoundException {;
 
-
+        /**
+         * Action Button Listener that will search a JSON file for a username and try  and match it with the inputted username and passowrd on the login button lick
+         *
+         */
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    Object obj = parser.parse(new FileReader("C:/Users/gdors/Documents/test.json"));
+                    Object obj = parser.parse(new FileReader("C:/Users/gdors/Documents/test.json")); // Object that will parse the JSON file for its information
 
-                    JSONObject jsonObject = (JSONObject) obj;
-                    if (usernameTextField.getText().equals((String) jsonObject.get("username"))) {
+                    JSONObject jsonObject = (JSONObject) obj; //creates a JSON object so it can retrieve the information from the JSON File
+
+                    /**
+                     * If the user's username and pass word are identical to the JSON file's password, it will alert the change listener that it can change the screen to a test string (AS of 3/22/21)
+                     */
+
+                    if (usernameTextField.getText().equals((String) jsonObject.get("username")) && passwordTextField.getText().equals((String) jsonObject.get("password"))) {
                         ChangeEvent event = new ChangeEvent(this);
                         for (ChangeListener listener : listeners)
                             listener.stateChanged(event);
@@ -52,6 +60,11 @@ public class LoginScreenDisplay  extends JPanel{
         });
     }
 
+    /**
+     * Function: getLoginPanel
+     * Description: function that returns the Jpanel of the Login view
+     * @return the Jpanel of the LoginView
+     */
     public JPanel getLoginPanel (){
         return loginPanel;
     }

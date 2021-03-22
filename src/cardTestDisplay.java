@@ -3,10 +3,10 @@ import javax.swing.event.ChangeListener;
 import java.util.ArrayList;
 
 public class cardTestDisplay extends JPanel {
-    private JPanel jklsdhgisdhgsfdkhjgsfg;
-    private JLabel gjsdlsjkhjksdhkjsdjkshdgsdfhjkg;
+    private JPanel testingPanel;
+    private JLabel testingLabel;
     final ArrayList<ChangeListener> listeners = new ArrayList<>();
 
-    public JPanel getJklsdhgisdhgsfdkhjgsfg() {return jklsdhgisdhgsfdkhjgsfg;}
+    public JPanel getTestingPanel() {return testingPanel;}
 
 }
