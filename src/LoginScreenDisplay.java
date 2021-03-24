@@ -22,7 +22,8 @@ public class LoginScreenDisplay  extends JPanel{
     private JLabel loginLabel;
     private JLabel registerLabel;
     private JButton registerButton;
-    final ArrayList<ChangeListener> listeners = new ArrayList<>();
+    ArrayList<ChangeListener> listeners = new ArrayList<>();
+     ArrayList<ChangeListener> listeners2 = new ArrayList<>();
     JSONParser parser = new JSONParser();
 
 
@@ -61,6 +62,16 @@ public class LoginScreenDisplay  extends JPanel{
 
             }
         });
+
+
+        registerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ChangeEvent event = new ChangeEvent(this);
+                for (ChangeListener listener : listeners2)
+                    listener.stateChanged(event);
+            }
+        });
     }
 
     /**
@@ -76,4 +87,10 @@ public class LoginScreenDisplay  extends JPanel{
     public void addChangeListener(ChangeListener listener) {
         listeners.add(listener);
     }
+
+    public void addChangeListener2(ChangeListener listener) {
+        listeners2.add(listener);
+    }
+
 }
+
