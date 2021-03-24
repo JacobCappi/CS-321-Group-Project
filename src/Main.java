@@ -15,7 +15,7 @@ public class Main {
         final LoginScreenDisplay userLogin = new LoginScreenDisplay(); //creates a new loginDisplay for the card Layout
         final cardTestDisplay userDisplay = new cardTestDisplay(); // creates a new loginDisplay for the card Layout
         final TestForm2021 testForm = new TestForm2021();
-        final JPanel cardSet= new JPanel(new CardLayout());       //creates a card set which will accept Jpanels into its cardset;
+        final JPanel cardSet= new JPanel(new CardLayout());       //creates a card set which will accept Jpanels into the cardset;
 
         cardSet.add(userLogin.getLoginPanel(), " Login View"); //adds the login display Panel
         cardSet.add(userDisplay.getTestingPanel(), "UserList"); //adds the Test display Panel
