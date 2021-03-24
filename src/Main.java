@@ -15,11 +15,11 @@ public class Main {
         final LoginScreenDisplay userLogin = new LoginScreenDisplay(); //creates a new loginDisplay for the card Layout
         final cardTestDisplay userDisplay = new cardTestDisplay(); // creates a new loginDisplay for the card Layout
         final TestForm2021 testForm = new TestForm2021();
-        final JPanel cardSet= new JPanel(new CardLayout());       //creates a card set which will accept Jpanels into the cardset;
+        final JPanel cardSet= new JPanel(new CardLayout());       //creates a card set which will accept Jpanels into its cardset;
 
         cardSet.add(userLogin.getLoginPanel(), " Login View"); //adds the login display Panel
-        cardSet.add(userDisplay.getTestingPanel(), "UserList"); //adds the Test display Panel
-        cardSet.add(testForm.getYes(),"Register User");
+        cardSet.add(userDisplay.getTestingPanel(), "RANDOM"); //adds the Test display Panel
+        cardSet.add(testForm.getYes(),"DOES THIS WORK");
         testFrame.add(cardSet);  //adds  cardset to the JFrame
 
 
@@ -32,18 +32,16 @@ public class Main {
             @Override
             public void stateChanged(ChangeEvent  e){
                 CardLayout cl = (CardLayout) (cardSet.getLayout());
-                cl.show(cardSet,  "UserList"); //shows the the testing card
+                cl.show(cardSet,  "RANDOM"); //shows the the testing card
             }
 
         });
-        /**
-         * Change listener that listens for a change to happen when the user presses the register button, then takes them into the registerUserDisplay
-         */
+
         userLogin.addChangeListener2(new ChangeListener(){
             @Override
             public void stateChanged(ChangeEvent  e2){
                 CardLayout cl = (CardLayout) (cardSet.getLayout());
-                cl.show(cardSet,  "RegisterUser"); //shows the the testing card
+                cl.show(cardSet,  "DOES THIS WORK"); //shows the the testing card
             }
 
         });

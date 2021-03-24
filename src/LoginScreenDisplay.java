@@ -43,7 +43,7 @@ public class LoginScreenDisplay  extends JPanel{
                     JSONObject jsonObject = (JSONObject) obj; //creates a JSON object so it can retrieve the information from the JSON File
 
                     /**
-                     * If the user's username and pass word are identical to the JSON file's password,  alert the change listener that it can change the screen to a test string (AS of 3/22/21)
+                     * If the user's username and pass word are identical to the JSON file's password, it will alert the change listener that it can change the screen to a test string (AS of 3/22/21)
                      */
 
                     if (usernameTextField.getText().equals((String) jsonObject.get("username")) && passwordTextField.getText().equals((String) jsonObject.get("password"))) {
