@@ -17,7 +17,7 @@ public class Main {
         final TestForm2021 testForm = new TestForm2021();
         final JPanel cardSet= new JPanel(new CardLayout());       //creates a card set which will accept Jpanels into its cardset;
 
-        cardSet.add(userLogin.getLoginPanel(), " Login View"); //adds the login display Panel
+        cardSet.add(userLogin.getLoginPanel(), "LoginView"); //adds the login display Panel
         cardSet.add(userRegister.getRegisterDisplay(), "RegisterView"); //adds the Test display Panel
         cardSet.add(testForm.getYes(),"goToUserPage");
         testFrame.add(cardSet);  //adds  cardset to the JFrame
@@ -45,11 +45,11 @@ public class Main {
             }
 
         });
-        userRegister.addChangeListerRegister(new ChangeListener() {
+        userRegister.addChangeListenerRegister(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
                 CardLayout loginLayout = (CardLayout) (cardSet.getLayout());
-                loginLayout.show(cardSet, "Login View");
+                loginLayout.show(cardSet, "LoginView");
             }
         });
 

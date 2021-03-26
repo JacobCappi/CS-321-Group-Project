@@ -31,7 +31,7 @@ public class RegisterUserDisplay extends JPanel{
         if(inputPassword == null || inputPassword == ""){
             inputPassword = "Create Password: ";
         }
-        l_passwordLabel.setText(inputUser);
+        l_passwordLabel.setText(inputPassword);
 
         l_userNameBlank.setPreferredSize(new Dimension(150, 20));
         l_passwordBlank.setPreferredSize(new Dimension(150, 20));
@@ -61,11 +61,11 @@ public class RegisterUserDisplay extends JPanel{
             public void actionPerformed(ActionEvent actionEvent) {
                 m_inputStringUserName = l_userNameBlank.getText();
                 m_inputStringPassword = l_userNameBlank.getText();
-                if(m_inputStringUserName.trim().equals("Guest") && m_inputStringPassword.trim().equals("")){
+
                     ChangeEvent event = new ChangeEvent(this);
                     for (ChangeListener listener : listeners)
                     listener.stateChanged(event);
-                }
+
 
             }
         });
@@ -76,7 +76,7 @@ public class RegisterUserDisplay extends JPanel{
             return registerDisplay;
         }
 
-    public void addChangeListerRegister(ChangeListener listener) {
+    public void addChangeListenerRegister(ChangeListener listener) {
         listeners.add(listener);
     }
 }
