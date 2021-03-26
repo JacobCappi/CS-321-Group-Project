@@ -72,5 +72,11 @@ public class RegisterUserDisplay extends JPanel{
 
 
     }
+        public JPanel getRegisterDisplay(){
+            return registerDisplay;
+        }
 
+    public void addChangeListerRegister(ChangeListener listener) {
+        listeners.add(listener);
+    }
 }
