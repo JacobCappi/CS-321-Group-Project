@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class User {
-    ArrayList<GameList> m_uGameLists = new ArrayList<>(); // Game list placeholder
+    ArrayList<GameList> m_GameLists = new ArrayList<>(); // Game list placeholder
     String m_Name;
     String m_Password;
 
@@ -21,13 +21,11 @@ public class User {
     public String getPassword(String password){return m_Password;}
 
 
-    public void createGameList(GameList gameList){ // again 'Integer' is placeholder for 'GameList' when we build that
-        m_uGameLists.add(gameList);
+    public void createGameList(GameList gameList){
+        m_GameLists.add(gameList);
     }
 
     public void removeGameList(String gameListName){
-
-
     }
 
     public boolean addGame(Integer gameList, Integer game){
