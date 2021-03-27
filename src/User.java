@@ -1,34 +1,32 @@
 import java.util.ArrayList;
 
 public class User {
-    ArrayList<Integer> m_uGameLists = new ArrayList<>(); // Game list placeholder
-    String m_uName;
-    String m_uPassword;
+    ArrayList<GameList> m_uGameLists = new ArrayList<>(); // Game list placeholder
+    String m_Name;
+    String m_Password;
 
     public User(){
-        m_uName = "Guest";
-        m_uPassword = " ";
+        m_Name = "Guest";
+        m_Password = " ";
     }
 
-    public void setUPassword(String password){m_uPassword = password;}
-    public void setUName(String name){m_uName = name;}
-    public void setUInfo(String name, String password){
-        m_uName = name;
-        m_uPassword = password;
+    public void setPassword(String password){m_Password = password;}
+    public void setName(String name){m_Name = name;}
+    public void setInfo(String name, String password){
+        m_Name = name;
+        m_Password = password;
     }
 
-    public String getUname(String name){return m_uName;}
-    public String getUPassword(String password){return m_uPassword;}
+    public String getName(String name){return m_Name;}
+    public String getPassword(String password){return m_Password;}
 
 
-    public void createUGameList(Integer gameList){ // again 'Integer' is placeholder for 'GameList' when we build that
+    public void createGameList(GameList gameList){ // again 'Integer' is placeholder for 'GameList' when we build that
         m_uGameLists.add(gameList);
     }
 
-    public void removeUGameList(String gameListName){
-        //some search method once gameList object is created
-        m_uGameLists.get(0).compareTo(1);
-        m_uGameLists.remove(0);
+    public void removeGameList(String gameListName){
+
 
     }
 
