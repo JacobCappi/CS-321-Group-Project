@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import org.json.simple.*;
 import org.json.simple.parser.JSONParser;
@@ -38,7 +39,7 @@ public class LoginScreenDisplay  extends JPanel{
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    Object obj = parser.parse(new FileReader("C:/Users/gdors/Documents/test.json")); // Object that will parse the JSON file for its information
+                    Object obj = parser.parse(new FileReader(String.valueOf(Paths.get("test.json")))); // Object that will parse the JSON file for its information
 
                     JSONObject jsonObject = (JSONObject) obj; //creates a JSON object so it can retrieve the information from the JSON File
 
