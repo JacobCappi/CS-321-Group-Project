@@ -1,3 +1,5 @@
+import org.json.simple.parser.ParseException;
+
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -6,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class RegisterUserDisplay extends JPanel{
@@ -19,6 +22,8 @@ public class RegisterUserDisplay extends JPanel{
 
     String m_inputStringUserName;
     String m_inputStringPassword;
+    UserList tempUserList= new UserList();
+
     final ArrayList<ChangeListener> listeners = new ArrayList<>(); // unsure what to do with quite yet
     FileReader inputFile;
 
@@ -60,9 +65,13 @@ public class RegisterUserDisplay extends JPanel{
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 m_inputStringUserName = l_userNameBlank.getText();
-                m_inputStringPassword = l_userNameBlank.getText();
-
-                    ChangeEvent event = new ChangeEvent(this);
+                m_inputStringPassword = l_passwordBlank.getText();
+                try {
+                    tempUserList.addUser(m_inputStringUserName,m_inputStringPassword);
+                } catch (IOException | ParseException e) {
+                    e.printStackTrace();
+                }
+                ChangeEvent event = new ChangeEvent(this);
                     for (ChangeListener listener : listeners)
                     listener.stateChanged(event);
 

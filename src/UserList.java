@@ -3,7 +3,9 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Paths;
 
@@ -21,7 +23,23 @@ public class UserList {
             }
         }
         return false;
-    }
 
+
+    }
+    public boolean addUser(String inputUsername, String inputPassword) throws IOException, ParseException {
+        Object obj = parser.parse(new FileReader(String.valueOf(Paths.get("test.json")))); // Object that will parse the JSON file for its information
+        JSONArray addUserJSONArray = (JSONArray) obj;
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("username", inputUsername);
+        jsonObject.put("password",inputPassword);
+        addUserJSONArray.add(jsonObject);
+        FileWriter jsonFileWriter = new FileWriter(String.valueOf(Paths.get("test.json")));
+        jsonFileWriter.write(addUserJSONArray.toJSONString());
+        jsonFileWriter.flush();
+        jsonFileWriter.close();
+        return true;
+
+
+    }
 
 }

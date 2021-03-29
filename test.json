@@ -1,15 +1,4 @@
-[
-	{
-		"username": "UAHCharger",
-		"password": "Go Chargers!"
-	},
-	{
-		"username":  "Username",
-		"password": "Password"
-	},
-	{
-		"username": "gdorsey2001",
-		"password": "abc123"
-	}
-]
-
+[{"password":"Go Chargers!","username":"UAHCharger"},{"password":"Password","username":"Username"},
+  {"password":"abc123","username":"gdorsey2001"},
+  {"password":"123123","username":"testingtesting"},
+  {"password":"cheddar","username":"cheese"}]
