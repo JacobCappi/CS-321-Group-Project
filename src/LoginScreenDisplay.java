@@ -26,7 +26,8 @@ public class LoginScreenDisplay  extends JPanel{
     ArrayList<ChangeListener> listeners = new ArrayList<>();
      ArrayList<ChangeListener> listeners2 = new ArrayList<>();
     JSONParser parser = new JSONParser();
-
+    UserList tempUserList  = new UserList();
+    User tempUser = new User();
 
 
     public  LoginScreenDisplay() throws FileNotFoundException {;
@@ -39,15 +40,11 @@ public class LoginScreenDisplay  extends JPanel{
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    Object obj = parser.parse(new FileReader(String.valueOf(Paths.get("test.json")))); // Object that will parse the JSON file for its information
+                    tempUser.setName(usernameTextField.getText());
+                    tempUser.setPassword(passwordTextField.getText());
 
-                    JSONObject jsonObject = (JSONObject) obj; //creates a JSON object so it can retrieve the information from the JSON File
-
-                    /**
-                     * If the user's username and pass word are identical to the JSON file's password, it will alert the change listener that it can change the screen to a test string (AS of 3/22/21)
-                     */
-
-                    if (usernameTextField.getText().equals((String) jsonObject.get("username")) && passwordTextField.getText().equals((String) jsonObject.get("password"))) {
+                    //if the the login function is true.
+                    if(tempUserList.loginUser(tempUser)) {
                         ChangeEvent event = new ChangeEvent(this);
                         for (ChangeListener listener : listeners)
                             listener.stateChanged(event);

@@ -17,8 +17,8 @@ public class User {
         m_Password = password;
     }
 
-    public String getName(String name){return m_Name;}
-    public String getPassword(String password){return m_Password;}
+    public String getName(){return m_Name;} //Changed the gets for right now so that it does not require a String for a parameter for login (3/28/21)
+    public String getPassword(){return m_Password;} //Changedthe gets for right now so that it does not require the String for a parameter for login (3/28/21)
 
 
     public void createGameList(GameList gameList){
