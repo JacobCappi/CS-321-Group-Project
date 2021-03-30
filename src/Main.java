@@ -8,12 +8,15 @@ public class Main {
 
 
     public static  void main ( String []args ) throws FileNotFoundException {
+
         JFrame testFrame = new JFrame(); //creates a new Jframe
+
+        User m_newUser = new User();
 
         testFrame.setSize(500,500); //sets the Jframe size
         testFrame.setLocationRelativeTo(null); // sets the location to null so that the Jframe does not open in the top left corner of the screen
         final LoginScreenDisplay userLogin = new LoginScreenDisplay(); //creates a new loginDisplay for the card Layout
-        final RegisterUserDisplay userRegister = new RegisterUserDisplay("",""); // creates a new Register user display for the card Layout;
+        final RegisterUserDisplay userRegister = new RegisterUserDisplay(m_newUser); // creates a new Register user display for the card Layout;
         final userpage userListPage = new userpage();
         final JPanel cardSet= new JPanel(new CardLayout());       //creates a card set which will accept Jpanels into its cardset;
 
@@ -25,8 +28,8 @@ public class Main {
 
         testFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         testFrame.setVisible(true);
-        /**
-         * Change listener that listens for a change to happen in the userLogin(LoginScreenDisplay) panel, which will be when the Log in button is clicked
+        /*
+          Change listener that listens for a change to happen in the userLogin(LoginScreenDisplay) panel, which will be when the Log in button is clicked
          */
         userLogin.addChangeListener(new ChangeListener(){
             @Override

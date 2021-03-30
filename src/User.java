@@ -6,15 +6,24 @@ public class User {
     String m_Password;
 
     public User(){
-        m_Name = "Guest";
-        m_Password = " ";
+        m_Name = "";
+        m_Password = "";
+    }
+
+    public User(String name, String password){
+        m_Name = name;
+        m_Password = password;
     }
 
     public void setPassword(String password){m_Password = password;}
     public void setName(String name){m_Name = name;}
-    public void setInfo(String name, String password){
+    public boolean setInfo(String name, String password){
+        if(m_Name.equals("") || m_Password.equals("")){
+            return false;
+        }
         m_Name = name;
         m_Password = password;
+        return true;
     }
 
     public String getName(){return m_Name;} //Changed the gets for right now so that it does not require a String for a parameter for login (3/28/21)
