@@ -22,7 +22,7 @@ public class Main {
 
         cardSet.add(userLogin.getLoginPanel(), "LoginView"); //adds the login display Panel
         cardSet.add(userRegister.getRegisterDisplay(), "RegisterView"); //adds the Test display Panel
-        cardSet.add(userListPage.getRootPanel(),"goToUserPage");
+        cardSet.add(userListPage.getRootPanel(),"UserView");
         testFrame.add(cardSet);  //adds  cardset to the JFrame
 
 
@@ -31,11 +31,12 @@ public class Main {
         /*
           Change listener that listens for a change to happen in the userLogin(LoginScreenDisplay) panel, which will be when the Log in button is clicked
          */
+        CardLayout cl = (CardLayout) (cardSet.getLayout());
+
         userLogin.addChangeListener(new ChangeListener(){
             @Override
             public void stateChanged(ChangeEvent  e){
-                CardLayout cl = (CardLayout) (cardSet.getLayout());
-                cl.show(cardSet,  "goToUserPage"); //shows the the testing card
+                cl.show(cardSet,  "UserView"); //shows the the testing card
             }
 
         });
@@ -43,16 +44,22 @@ public class Main {
         userLogin.addChangeListener2(new ChangeListener(){
             @Override
             public void stateChanged(ChangeEvent  e2){
-                CardLayout cl = (CardLayout) (cardSet.getLayout());
                 cl.show(cardSet,  "RegisterView"); //shows the the testing card
             }
 
         });
-        userRegister.addChangeListenerRegister(new ChangeListener() {
+
+        userRegister.addListenerReturntoLogin(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent changeEvent) {
+                cl.show(cardSet, "LoginView");
+            }
+        });
+        // Needs error Checking :: will work on soon
+        userRegister.addListenerLogin(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                CardLayout loginLayout = (CardLayout) (cardSet.getLayout());
-                loginLayout.show(cardSet, "LoginView");
+                cl.show(cardSet, "UserView");
             }
         });
 

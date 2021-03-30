@@ -20,14 +20,14 @@ public class RegisterUserDisplay extends JPanel{
     final JLabel l_passwordLabel = new JLabel("Create Password:");
     final JTextField l_passwordBlank = new JTextField(30);
     final JButton l_submitButton = new JButton("Create User");
+    final JButton l_returnToLogin = new JButton("Return to Login Page");
     final JLabel l_spaceField = new JLabel("<html><br><br>");
     final JLabel l_errorMessage = new JLabel();
 
     String m_inputStringUserName;
     String m_inputStringPassword;
-    User m_newUser = new User();
 
-    final ArrayList<ChangeListener> listeners = new ArrayList<>(); // unsure what to do with quite yet
+    final ArrayList<ChangeListener> listeners = new ArrayList<>();
 
     public RegisterUserDisplay(User user){
         if(user.getName() == null || user.getName().equals("")){
@@ -58,6 +58,7 @@ public class RegisterUserDisplay extends JPanel{
         registerDisplay.add(l_passwordBlank);
         registerDisplay.add(l_spaceField);
         registerDisplay.add(l_submitButton);
+        registerDisplay.add(l_returnToLogin);
         registerDisplay.add(l_errorMessage);
 
         registerDisplay.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -67,6 +68,7 @@ public class RegisterUserDisplay extends JPanel{
         l_passwordLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         l_passwordBlank.setAlignmentX(Component.CENTER_ALIGNMENT);
         l_submitButton.setAlignmentX(Component.LEFT_ALIGNMENT);
+        l_returnToLogin.setAlignmentX(Component.RIGHT_ALIGNMENT);
         l_errorMessage.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 
@@ -81,8 +83,21 @@ public class RegisterUserDisplay extends JPanel{
 
                 if(!(user.setInfo(m_inputStringUserName, m_inputStringPassword))){
                     l_errorMessage.setText("Could not set username and password");
+                }
 
+                ChangeEvent event = new ChangeEvent(this);
+                for(ChangeListener listener : listeners){
+                    listener.stateChanged(event);
+                }
+            }
+        });
 
+        l_returnToLogin.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                ChangeEvent event = new ChangeEvent(this);
+                for(ChangeListener listener : listeners){
+                    listener.stateChanged(event);
                 }
             }
         });
@@ -94,7 +109,11 @@ public class RegisterUserDisplay extends JPanel{
         return registerDisplay;
     }
 
-    public void addChangeListenerRegister(ChangeListener listener) {
+    public void addListenerReturntoLogin(ChangeListener listener) {
+        listeners.add(listener);
+    }
+
+    public void addListenerLogin(ChangeListener listener) {
         listeners.add(listener);
     }
 }
