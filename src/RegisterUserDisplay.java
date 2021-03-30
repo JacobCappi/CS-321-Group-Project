@@ -28,7 +28,7 @@ public class RegisterUserDisplay extends JPanel{
     String m_inputStringPassword;
 
     final ArrayList<ChangeListener> listeners = new ArrayList<>();
-
+    final ArrayList<ChangeListener> returnToLoginListener = new ArrayList<>();
     public RegisterUserDisplay(User user){
         if(user.getName() == null || user.getName().equals("")){
             l_userNameLabel.setText("Create Username: ");
@@ -85,10 +85,7 @@ public class RegisterUserDisplay extends JPanel{
                     l_errorMessage.setText("Could not set username and password");
                 }
 
-                ChangeEvent event = new ChangeEvent(this);
-                for(ChangeListener listener : listeners){
-                    listener.stateChanged(event);
-                }
+
             }
         });
 
@@ -96,7 +93,7 @@ public class RegisterUserDisplay extends JPanel{
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 ChangeEvent event = new ChangeEvent(this);
-                for(ChangeListener listener : listeners){
+                for(ChangeListener listener : returnToLoginListener){
                     listener.stateChanged(event);
                 }
             }
@@ -110,7 +107,7 @@ public class RegisterUserDisplay extends JPanel{
     }
 
     public void addListenerReturntoLogin(ChangeListener listener) {
-        listeners.add(listener);
+        returnToLoginListener.add(listener);
     }
 
     public void addListenerLogin(ChangeListener listener) {
