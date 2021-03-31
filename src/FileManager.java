@@ -6,6 +6,7 @@ import org.json.simple.parser.ParseException;
 import java.io.*;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class FileManager {
 
@@ -17,12 +18,22 @@ public class FileManager {
         Reader m_reader = new FileReader(m_loginFiles);
         JSONObject m_objJSON = (JSONObject)m_parser.parse(m_reader);
 
-        String userInFile = (String)m_objJSON.get("ID");
-        System.out.println(userInFile);
-        if(insertUser.toString().equals(userInFile)){
-            return true;
+        File m_testFile = new File("login.json");
+        if(m_testFile.length() == 0) {
+            return false;
+        }
+        JSONArray m_jsonArray = (JSONArray) m_objJSON.get("Users");
+
+        Iterator<String> m_jsonArrayIterator = m_jsonArray.iterator();
+
+        while(m_jsonArrayIterator.hasNext()){
+            String m_tmpCheck = m_jsonArrayIterator.next();
+            if(m_jsonArrayIterator.next().equals(insertUser.toString())){
+                return true;
+            }
         }
         return false;
+
     }
 
     public boolean addUser(User user) throws IOException, ParseException {
