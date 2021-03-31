@@ -11,27 +11,39 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class UserList {
-   public ArrayList<User> listOfUsers = new ArrayList<>();
-    int length;
-  public UserList(){ length = 0;}
+    String m_listName;
+    ArrayList<User> m_userList = new ArrayList<>();
+    int m_length;
 
-  public void addUser(User user){
-      listOfUsers.add(user);
-     length++;
-  }
+    public UserList(){
+        m_length = 0;
+    }
 
-  public boolean findUser(User user){
+    public void setListName(String listName){m_listName = listName;}
+    public String getListName(){return m_listName;}
 
-     for(int i = 0; i < listOfUsers.size(); i++){
-         if(user.getName().equals(listOfUsers.get(i).getName()) && user.getPassword().equals(listOfUsers.get(i).getPassword())){
-             return true;
-         }
-         else{
-             return false;
-         }
-     }
-     return false;
-  }
+    public void addUser(User user){
+        m_userList.add(user);
+        m_length++;
+    }
 
+    public boolean deleteUser(User user){
+        for(int i =0; i<m_length; i++){
+            if(ifExists(user)){
+                m_userList.remove(i);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean ifExists(User user){
+        for(int i =0; i<m_length; i++){
+            if(m_userList.get(i).toString().equals(user.toString())){
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

@@ -9,11 +9,11 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-public class Manager
-{
+public class FileManager {
+
     private final JSONParser parser = new JSONParser();
 
-    public boolean loginUser (User insertUser) throws IOException, ParseException {
+    public boolean loginUser(User insertUser) throws IOException, ParseException {
         Object obj = parser.parse(new FileReader(String.valueOf(Paths.get("test.json")))); // Object that will parse the JSON file for its information
         JSONArray jsonArray = (JSONArray) obj;
 
@@ -27,12 +27,13 @@ public class Manager
 
 
     }
-    public boolean addUser(String inputUsername, String inputPassword) throws IOException, ParseException {
+
+    public boolean addUser(User user) throws IOException, ParseException {
         Object obj = parser.parse(new FileReader(String.valueOf(Paths.get("test.json")))); // Object that will parse the JSON file for its information
         JSONArray addUserJSONArray = (JSONArray) obj;
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("username", inputUsername);
-        jsonObject.put("password",inputPassword);
+        jsonObject.put("username", user.getName());
+        jsonObject.put("password", user.getPassword());
         addUserJSONArray.add(jsonObject);
         FileWriter jsonFileWriter = new FileWriter(String.valueOf(Paths.get("test.json")));
         jsonFileWriter.write(addUserJSONArray.toJSONString());

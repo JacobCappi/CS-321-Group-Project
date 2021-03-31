@@ -1,14 +1,23 @@
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.io.FileNotFoundException;
+import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import java.awt.*;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Paths;
 
-public class Main {
-
-
-    public static  void main ( String []args ) throws FileNotFoundException {
-
+public class ScreenManager {
+    public ScreenManager() throws FileNotFoundException{
         JFrame testFrame = new JFrame(); //creates a new Jframe
 
         User m_newUser = new User();
@@ -28,14 +37,14 @@ public class Main {
 
         testFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         testFrame.setVisible(true);
-        /*
-          Change listener that listens for a change to happen in the userLogin(LoginScreenDisplay) panel, which will be when the Log in button is clicked
-         */
+    /*
+      Change listener that listens for a change to happen in the userLogin(LoginScreenDisplay) panel, which will be when the Log in button is clicked
+     */
         CardLayout cl = (CardLayout) (cardSet.getLayout());
 
         userLogin.addChangeListener(new ChangeListener(){
             @Override
-            public void stateChanged(ChangeEvent  e){
+            public void stateChanged(ChangeEvent e){
                 cl.show(cardSet,  "UserView"); //shows the the testing card
             }
 
@@ -49,9 +58,11 @@ public class Main {
 
         });
 
+        // Can't seem to get different buttons to do different things
         userRegister.addListenerReturntoLogin(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent changeEvent) {
+                String event = changeEvent.getSource().toString();
                 cl.show(cardSet, "LoginView");
             }
         });
@@ -62,7 +73,6 @@ public class Main {
                 cl.show(cardSet, "UserView");
             }
         });
-
 
     }
 }

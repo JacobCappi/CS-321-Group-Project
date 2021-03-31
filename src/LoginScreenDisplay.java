@@ -43,7 +43,7 @@ public class LoginScreenDisplay  extends JPanel{
                 tempUser.setPassword(passwordTextField.getText());
 
                 //if the the login function is true.
-                if(tempUserList.findUser(tempUser)) {
+                if(tempUserList.ifExists(tempUser)) {
                     ChangeEvent event = new ChangeEvent(this);
                     for (ChangeListener listener : listeners)
                         listener.stateChanged(event);

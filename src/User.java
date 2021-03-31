@@ -29,6 +29,13 @@ public class User {
     public String getName(){return m_Name;} //Changed the gets for right now so that it does not require a String for a parameter for login (3/28/21)
     public String getPassword(){return m_Password;} //Changedthe gets for right now so that it does not require the String for a parameter for login (3/28/21)
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "m_Name='" + m_Name + '\'' +
+                ", m_Password='" + m_Password + '\'' +
+                '}';
+    }
 
     public void createGameList(GameList gameList){
         m_GameLists.add(gameList);
