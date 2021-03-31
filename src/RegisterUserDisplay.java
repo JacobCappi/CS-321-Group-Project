@@ -94,8 +94,10 @@ public class RegisterUserDisplay extends JPanel{
                     }
                 } catch (IOException e) {
                     JOptionPane.showMessageDialog(null, "Issue", "ERROR", JOptionPane.ERROR_MESSAGE);
+                    e.printStackTrace();
                 } catch (ParseException e) {
                     JOptionPane.showMessageDialog(null, "Issue", "ERROR", JOptionPane.ERROR_MESSAGE);
+                    e.printStackTrace();
                 }
 
 

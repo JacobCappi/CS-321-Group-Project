@@ -29,6 +29,8 @@ public class LoginScreenDisplay  extends JPanel{
     UserList tempUserList  = new UserList();
     User tempUser = new User();
 
+    FileManager m_fileManager = new FileManager();
+
 
     public  LoginScreenDisplay() throws FileNotFoundException {;
 
@@ -43,13 +45,19 @@ public class LoginScreenDisplay  extends JPanel{
                 tempUser.setPassword(passwordTextField.getText());
 
                 //if the the login function is true.
-                if(tempUserList.ifExists(tempUser)) {
-                    ChangeEvent event = new ChangeEvent(this);
-                    for (ChangeListener listener : listeners)
-                        listener.stateChanged(event);
-                }
-                else{
-                    JOptionPane.showMessageDialog(null, "USER NOT FOUND", "ERROR", JOptionPane.ERROR_MESSAGE);
+                try{
+                    if(m_fileManager.isRegisteredUser(tempUser)){
+                        ChangeEvent event = new ChangeEvent(this);
+                        for (ChangeListener listener : listeners)
+                            listener.stateChanged(event);
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "USER NOT FOUND", "ERROR", JOptionPane.ERROR_MESSAGE);
+                    }
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                } catch (ParseException parseException) {
+                    parseException.printStackTrace();
                 }
 
 
