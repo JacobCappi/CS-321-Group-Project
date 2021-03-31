@@ -39,24 +39,19 @@ public class LoginScreenDisplay  extends JPanel{
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    tempUser.setName(usernameTextField.getText());
-                    tempUser.setPassword(passwordTextField.getText());
+                tempUser.setName(usernameTextField.getText());
+                tempUser.setPassword(passwordTextField.getText());
 
-                    //if the the login function is true.
-                    if(tempUserList.loginUser(tempUser)) {
-                        ChangeEvent event = new ChangeEvent(this);
-                        for (ChangeListener listener : listeners)
-                            listener.stateChanged(event);
-                    }
-                    else{
-                        JOptionPane.showMessageDialog(null, "USER NOT FOUND", "ERROR", JOptionPane.ERROR_MESSAGE);
-                    }
-
-
-                } catch (ParseException | IOException e1) {
-                    e1.printStackTrace();
+                //if the the login function is true.
+                if(tempUserList.findUser(tempUser)) {
+                    ChangeEvent event = new ChangeEvent(this);
+                    for (ChangeListener listener : listeners)
+                        listener.stateChanged(event);
                 }
+                else{
+                    JOptionPane.showMessageDialog(null, "USER NOT FOUND", "ERROR", JOptionPane.ERROR_MESSAGE);
+                }
+
 
             }
         });

@@ -11,7 +11,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class UserList {
-    ArrayList<User> listOfUsers = new ArrayList<>();
+   public ArrayList<User> listOfUsers = new ArrayList<>();
     int length;
   public UserList(){ length = 0;}
 
@@ -20,6 +20,18 @@ public class UserList {
      length++;
   }
 
+  public boolean findUser(User user){
+
+     for(int i = 0; i < listOfUsers.size(); i++){
+         if(user.getName().equals(listOfUsers.get(i).getName()) && user.getPassword().equals(listOfUsers.get(i).getPassword())){
+             return true;
+         }
+         else{
+             return false;
+         }
+     }
+     return false;
+  }
 
 
 }
