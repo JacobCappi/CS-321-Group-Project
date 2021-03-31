@@ -11,12 +11,13 @@ public class FileManager {
 
     private String m_loginFiles = "login.json";
     private String m_userFiles = "users.json";
+    private JSONArray m_users;
 
     public boolean isRegisteredUser(User insertUser) throws IOException, ParseException, FileNotFoundException {
         JSONParser m_parser = new JSONParser();
         Reader m_reader = new FileReader(m_loginFiles);
         JSONObject m_objJSON = (JSONObject)m_parser.parse(m_reader);
-        return false;
+        return false;// not complete
 
     }
 
@@ -27,7 +28,7 @@ public class FileManager {
         m_jsonObject.put("ID", user.toString());
 
         try {
-            FileWriter m_fileToWrite = new FileWriter(m_loginFiles);
+            FileWriter m_fileToWrite = new FileWriter(m_loginFiles, true);
             m_fileToWrite.write(m_jsonObject.toJSONString());
             m_fileToWrite.flush();
             m_fileToWrite.close();
