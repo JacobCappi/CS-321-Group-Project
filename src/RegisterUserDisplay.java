@@ -13,7 +13,10 @@ import java.util.ArrayList;
 
 public class RegisterUserDisplay extends JPanel{
 
-    final JPanel registerDisplay = new JPanel();
+    FileManager m_fileManager = new FileManager();
+    User m_tmpUser = new User();
+
+    final JPanel m_registerDisplay = new JPanel();
     final JLabel l_createUser = new JLabel("<html><B>Create User</B>");
     final JLabel l_userNameLabel = new JLabel("Create UserName:");
     final JTextField l_userNameBlank = new JTextField(30);
@@ -29,12 +32,12 @@ public class RegisterUserDisplay extends JPanel{
 
     final ArrayList<ChangeListener> listeners = new ArrayList<>();
     final ArrayList<ChangeListener> returnToLoginListener = new ArrayList<>();
-    public RegisterUserDisplay(User user){
-        if(user.getName() == null || user.getName().equals("")){
+    public RegisterUserDisplay(){
+        if(m_tmpUser.getName() == null || m_tmpUser.getName().equals("")){
             l_userNameLabel.setText("Create Username: ");
         }
 
-        if(user.getPassword() == null || user.getPassword().equals("")){
+        if(m_tmpUser.getPassword() == null || m_tmpUser.getPassword().equals("")){
             l_passwordLabel.setText("Create Password:  ");
         }
         l_userNameBlank.setPreferredSize(new Dimension(150, 20));
@@ -49,19 +52,19 @@ public class RegisterUserDisplay extends JPanel{
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-        registerDisplay.add(l_createUser);
-        registerDisplay.add(l_spaceField);
-        registerDisplay.add(l_userNameLabel);
-        registerDisplay.add(l_userNameBlank);
-        registerDisplay.add(l_spaceField);
-        registerDisplay.add(l_passwordLabel);
-        registerDisplay.add(l_passwordBlank);
-        registerDisplay.add(l_spaceField);
-        registerDisplay.add(l_submitButton);
-        registerDisplay.add(l_returnToLogin);
-        registerDisplay.add(l_errorMessage);
+        m_registerDisplay.add(l_createUser);
+        m_registerDisplay.add(l_spaceField);
+        m_registerDisplay.add(l_userNameLabel);
+        m_registerDisplay.add(l_userNameBlank);
+        m_registerDisplay.add(l_spaceField);
+        m_registerDisplay.add(l_passwordLabel);
+        m_registerDisplay.add(l_passwordBlank);
+        m_registerDisplay.add(l_spaceField);
+        m_registerDisplay.add(l_submitButton);
+        m_registerDisplay.add(l_returnToLogin);
+        m_registerDisplay.add(l_errorMessage);
 
-        registerDisplay.setAlignmentX(Component.CENTER_ALIGNMENT);
+        m_registerDisplay.setAlignmentX(Component.CENTER_ALIGNMENT);
         l_createUser.setAlignmentX(Component.CENTER_ALIGNMENT);
         l_userNameLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         l_userNameBlank.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -81,8 +84,18 @@ public class RegisterUserDisplay extends JPanel{
                 m_inputStringUserName = l_userNameBlank.getText();
                 m_inputStringPassword = l_passwordBlank.getText();
 
-                if(!(user.setInfo(m_inputStringUserName, m_inputStringPassword))){
-                    l_errorMessage.setText("Could not set username and password");
+                m_tmpUser.setInfo(m_inputStringUserName, m_inputStringPassword);
+                try {
+                    m_fileManager.addUser(m_tmpUser);
+
+                    ChangeEvent event = new ChangeEvent(this);
+                    for(ChangeListener listener : returnToLoginListener){
+                        listener.stateChanged(event);
+                    }
+                } catch (IOException e) {
+                    JOptionPane.showMessageDialog(null, "Issue", "ERROR", JOptionPane.ERROR_MESSAGE);
+                } catch (ParseException e) {
+                    JOptionPane.showMessageDialog(null, "Issue", "ERROR", JOptionPane.ERROR_MESSAGE);
                 }
 
 
@@ -103,7 +116,7 @@ public class RegisterUserDisplay extends JPanel{
     }
 
     public JPanel getRegisterDisplay(){
-        return registerDisplay;
+        return m_registerDisplay;
     }
 
     public void addListenerReturntoLogin(ChangeListener listener) {

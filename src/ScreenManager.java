@@ -17,15 +17,19 @@ import java.io.IOException;
 import java.nio.file.Paths;
 
 public class ScreenManager {
-    public ScreenManager() throws FileNotFoundException{
+
+    public ScreenManager(){}
+
+    public static void main(String[] args) throws FileNotFoundException {
         JFrame testFrame = new JFrame(); //creates a new Jframe
+        FileManager fileManager = new FileManager();
 
         User m_newUser = new User();
 
         testFrame.setSize(500,500); //sets the Jframe size
         testFrame.setLocationRelativeTo(null); // sets the location to null so that the Jframe does not open in the top left corner of the screen
         final LoginScreenDisplay userLogin = new LoginScreenDisplay(); //creates a new loginDisplay for the card Layout
-        final RegisterUserDisplay userRegister = new RegisterUserDisplay(m_newUser); // creates a new Register user display for the card Layout;
+        final RegisterUserDisplay userRegister = new RegisterUserDisplay(); // creates a new Register user display for the card Layout;
         final userpage userListPage = new userpage();
         final JPanel cardSet= new JPanel(new CardLayout());       //creates a card set which will accept Jpanels into its cardset;
 
@@ -75,4 +79,7 @@ public class ScreenManager {
         });
 
     }
+
+    // Unsure but on exit(), I want to just run save
+
 }

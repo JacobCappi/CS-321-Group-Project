@@ -18,9 +18,6 @@ public class User {
     public void setPassword(String password){m_Password = password;}
     public void setName(String name){m_Name = name;}
     public boolean setInfo(String name, String password){
-        if(m_Name.equals("") || m_Password.equals("")){
-            return false;
-        }
         m_Name = name;
         m_Password = password;
         return true;
@@ -36,6 +33,7 @@ public class User {
                 ", m_Password='" + m_Password + '\'' +
                 '}';
     }
+
 
     public void createGameList(GameList gameList){
         m_GameLists.add(gameList);

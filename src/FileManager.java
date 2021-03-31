@@ -3,44 +3,52 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class FileManager {
 
-    private final JSONParser parser = new JSONParser();
+    private String m_loginFiles = "login.json";
+    private String m_userFiles = "users.json";
 
-    public boolean loginUser(User insertUser) throws IOException, ParseException {
-        Object obj = parser.parse(new FileReader(String.valueOf(Paths.get("test.json")))); // Object that will parse the JSON file for its information
-        JSONArray jsonArray = (JSONArray) obj;
-
-        for (Object o : jsonArray) {
-            JSONObject currentOBJ = (JSONObject) o;
-            if (insertUser.getName().equals((String) currentOBJ.get("username")) && insertUser.getPassword().equals((String) currentOBJ.get("password"))) {
-                return true;
-            }
-        }
+    public boolean isRegisteredUser(User insertUser) throws IOException, ParseException, FileNotFoundException {
+        JSONParser m_parser = new JSONParser();
+        Reader m_reader = new FileReader(m_loginFiles);
+        JSONObject m_objJSON = (JSONObject)m_parser.parse(m_reader);
         return false;
-
 
     }
 
     public boolean addUser(User user) throws IOException, ParseException {
-        Object obj = parser.parse(new FileReader(String.valueOf(Paths.get("test.json")))); // Object that will parse the JSON file for its information
-        JSONArray addUserJSONArray = (JSONArray) obj;
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("username", user.getName());
-        jsonObject.put("password", user.getPassword());
-        addUserJSONArray.add(jsonObject);
-        FileWriter jsonFileWriter = new FileWriter(String.valueOf(Paths.get("test.json")));
-        jsonFileWriter.write(addUserJSONArray.toJSONString());
-        jsonFileWriter.flush();
-        jsonFileWriter.close();
+        JSONObject m_jsonObject = new JSONObject();
+        m_jsonObject.put("UserName", user.getName());
+        m_jsonObject.put("Password", user.getPassword());
+        m_jsonObject.put("ID", user.toString());
+
+        try {
+            FileWriter m_fileToWrite = new FileWriter(m_loginFiles);
+            m_fileToWrite.write(m_jsonObject.toJSONString());
+            m_fileToWrite.flush();
+            m_fileToWrite.close();
+        } catch (IOException e) {
+            createLoginFile();
+            e.printStackTrace();
+        }
         return true;
+    }
 
-
+    public boolean createLoginFile(){
+        File m_loginFile = new File(m_loginFiles);
+        try{
+            if (!m_loginFile.createNewFile()) {
+                System.out.println("File already exists.");
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 }
