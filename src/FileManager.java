@@ -28,7 +28,8 @@ public class FileManager {
 
         while(m_jsonArrayIterator.hasNext()){
             String m_tmpCheck = m_jsonArrayIterator.next();
-            if(m_jsonArrayIterator.next().equals(insertUser.toString())){
+            String m_tmpCheck2 = insertUser.toJSON();
+            if(m_jsonArrayIterator.next().equals(insertUser.toJSON())){
                 return true;
             }
         }
