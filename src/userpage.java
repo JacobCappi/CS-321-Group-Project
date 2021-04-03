@@ -24,7 +24,7 @@ public class userpage {
                 String getText = searchBox.getText();
                 try {
                     if(test.searchGame(searchBox.getText())){
-                        System.out.println("LETS GOOOOOOOOOO");
+                        System.out.println("Working!");
                     }
                 } catch (IOException | ParseException ioException) {
                     ioException.printStackTrace();
