@@ -4,15 +4,13 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.io.*;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Iterator;
 
 public class FileManager {
 
     private String m_loginFiles = "login.json";
     private String m_userFiles = "users.json";
-
+    private String m_gameFile = "dataFile.json";
     public boolean isRegisteredUser(User insertUser) throws IOException, ParseException, FileNotFoundException {
         JSONParser m_parser = new JSONParser();
         Reader m_reader = new FileReader(m_loginFiles);
@@ -37,7 +35,7 @@ public class FileManager {
 
     }
 
-    public boolean addUser(User user) throws IOException, ParseException {
+    public void addUser(User user) throws IOException, ParseException {
         JSONObject m_topLevelJson = new JSONObject();
         JSONArray m_jsonArray;
 
@@ -67,7 +65,22 @@ public class FileManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return true;
+    }
+
+    public boolean searchGame(String gameName) throws IOException, ParseException {
+        JSONParser m_gameParser = new JSONParser();
+        Reader gameReader = new FileReader(m_gameFile);
+        JSONObject m_gameobjJSON = (JSONObject) m_gameParser.parse(gameReader);
+        File testFile = new File("dataFile.json");
+        if(testFile.length()== 0){return false;}
+        JSONArray gameArray = (JSONArray)  m_gameobjJSON.get("Name");
+
+
+       for (Object o: gameArray){
+           JSONObject currentGame = (JSONObject) o;
+           if(gameName.equals((String) currentGame.get("Title"))){return true;}
+       }
+       return false;
     }
 
 }

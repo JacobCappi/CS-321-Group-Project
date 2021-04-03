@@ -54,10 +54,8 @@ public class LoginScreenDisplay  extends JPanel{
                     else{
                         JOptionPane.showMessageDialog(null, "USER NOT FOUND", "ERROR", JOptionPane.ERROR_MESSAGE);
                     }
-                } catch (IOException ioException) {
+                } catch (IOException | ParseException ioException) {
                     ioException.printStackTrace();
-                } catch (ParseException parseException) {
-                    parseException.printStackTrace();
                 }
 
 

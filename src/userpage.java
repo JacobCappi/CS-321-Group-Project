@@ -1,17 +1,36 @@
+import org.json.simple.parser.ParseException;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class userpage {
     private JPanel rootPanel;
     private JTable gameTable;
     private JComboBox typeCombo;
     private JComboBox genreCombo;
-    private JButton button1;
-
+    private JTextField searchBox;
+    private JButton searchButton;
+    FileManager test = new FileManager();
     public userpage() {
         createTable();
+        searchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String getText = searchBox.getText();
+                try {
+                    if(test.searchGame(searchBox.getText())){
+                        System.out.println("LETS GOOOOOOOOOO");
+                    }
+                } catch (IOException | ParseException ioException) {
+                    ioException.printStackTrace();
+                }
+            }
+        });
     }
 
     public JPanel getRootPanel() {
@@ -35,4 +54,7 @@ public class userpage {
         columns.getColumn(0).setMinWidth(0);
 
     }
+
+
+
 }
