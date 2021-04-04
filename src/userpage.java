@@ -1,5 +1,6 @@
 import org.json.simple.parser.ParseException;
 
+import javax.sound.midi.SysexMessage;
 import javax.swing.*;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
@@ -26,6 +27,10 @@ public class userpage {
                     if(test.searchGame(searchBox.getText())){
                         System.out.println("Working!");
                     }
+                        else{
+                        System.out.println("Game not Found!");
+                    }
+
                 } catch (IOException | ParseException ioException) {
                     ioException.printStackTrace();
                 }
