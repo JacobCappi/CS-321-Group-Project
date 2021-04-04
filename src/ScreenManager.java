@@ -37,7 +37,7 @@ public class ScreenManager {
         cardSet.add(userLogin.getLoginPanel(), "LoginView"); //adds the login display Panel
         cardSet.add(userRegister.getRegisterDisplay(), "RegisterView"); //adds the Test display Panel
         cardSet.add(userListPage.getRootPanel(),"UserView");
-        cardSet.add(test.getTest()," PLEASE WORK");
+        cardSet.add(test.getTest(),"PLEASE WORK");
         testFrame.add(cardSet);  //adds  cardset to the JFrame
 
 
@@ -79,7 +79,12 @@ public class ScreenManager {
                 cl.show(cardSet, "UserView");
             }
         });
-
+        userListPage.addSearchListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                cl.show(cardSet, "PLEASE WORK");
+            }
+        });
     }
 
 
