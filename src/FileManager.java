@@ -10,7 +10,7 @@ public class FileManager {
 
     private String m_loginFiles = "login.json";
     private String m_userFiles = "users.json";
-    private String m_gameFile = "dataFile.json";
+    private String m_gameFile = "gameFile.json";
     public boolean isRegisteredUser(User insertUser) throws IOException, ParseException, FileNotFoundException {
         JSONParser m_parser = new JSONParser();
         Reader m_reader = new FileReader(m_loginFiles);
@@ -73,7 +73,7 @@ public class FileManager {
         JSONObject m_gameobjJSON = (JSONObject) m_gameParser.parse(gameReader);
         File testFile = new File("dataFile.json");
         if(testFile.length()== 0){return false;}
-        JSONArray gameArray = (JSONArray)  m_gameobjJSON.get("Name");
+        JSONArray gameArray = (JSONArray)  m_gameobjJSON.get("Games");
 
 
        for (Object o: gameArray){
