@@ -2,12 +2,15 @@ import org.json.simple.parser.ParseException;
 
 import javax.sound.midi.SysexMessage;
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class userpage {
     private JPanel rootPanel;
@@ -16,6 +19,8 @@ public class userpage {
     private JComboBox genreCombo;
     private JTextField searchBox;
     private JButton searchButton;
+    ArrayList<ChangeListener> searchListener = new ArrayList<>();
+    Game testGame = new Game();
     FileManager test = new FileManager();
     public userpage() {
         createTable();
@@ -25,10 +30,15 @@ public class userpage {
                 String getText = searchBox.getText();
                 try {
                     if(test.searchGame(searchBox.getText())){
-                        System.out.println("Working!");
-                    }
-                        else{
-                        System.out.println("Game not Found!");
+                        searchButton.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                ChangeEvent event = new ChangeEvent(this);
+                                for (ChangeListener listener : searchListener ) {
+                                    listener.stateChanged(event);
+                                }
+                            }
+                        });
                     }
 
                 } catch (IOException | ParseException ioException) {
@@ -60,6 +70,8 @@ public class userpage {
 
     }
 
-
+    public void addSearchListener(ChangeListener listener) {
+        searchListener.add(listener);
+    }
 
 }

@@ -11,6 +11,7 @@ public class FileManager {
     private String m_loginFiles = "login.json";
     private String m_userFiles = "users.json";
     private String m_gameFile = "gameFile.json";
+    Game tempGame = new Game();
     public boolean isRegisteredUser(User insertUser) throws IOException, ParseException, FileNotFoundException {
         JSONParser m_parser = new JSONParser();
         Reader m_reader = new FileReader(m_loginFiles);
@@ -78,9 +79,20 @@ public class FileManager {
 
        for (Object o: gameArray){
            JSONObject currentGame = (JSONObject) o;
-           if(gameName.equals((String) currentGame.get("Title"))){return true;}
+           if(gameName.equals((String) currentGame.get("Title"))){
+                tempGame.setGenre((String) currentGame.get("Genre"));
+               tempGame.setPublisher((String) currentGame.get("Publisher"));
+
+               tempGame.setTitle((String) currentGame.get("Title"));
+
+
+               return true;
+           }
        }
        return false;
     }
+
+    public Game getTempGame(){return tempGame;}
+
 
 }

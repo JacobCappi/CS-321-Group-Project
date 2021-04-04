@@ -23,21 +23,31 @@ public class Game {
 
       m_PathToPic = "./gamePictures/"; // Will determine layout later
    }
-   public Game(String id, String title, String highlights, String optimized, String url, String publisher, String genre, String status, String filePath){
-      m_ID = id;
+   public Game( String title,String publisher, String genre){
+
       m_Title = title;
-      m_highlights = highlights;
-      m_optimized = optimized;
-      m_SteamUrl = url;
+
+
       m_Publisher= publisher;
       m_Genre= genre;
-      m_Status= status;
 
-      m_PathToPic = filePath; // Will determine layout later
+
+
    }
    // Easiest way to initiallize will probably pass a parser to gamelist, and let it go through constructor
 
    public String getGenre(){return m_Genre;}
    public String getTitle(){return m_Title;}
-   public String getID(){return m_ID;}
+   public String getPublisher(){return m_Publisher;}
+ public String getID(){return m_ID;}
+
+   public void setGenre(String inputGenre){
+      m_Genre = inputGenre;
+   }
+   public void setPublisher(String inputPublisher){
+      m_Publisher = inputPublisher;
+   }
+   public void setTitle(String inputTitle){
+      m_Title = inputTitle;
+   }
 }

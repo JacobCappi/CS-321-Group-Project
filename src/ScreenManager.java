@@ -30,12 +30,14 @@ public class ScreenManager {
         testFrame.setLocationRelativeTo(null); // sets the location to null so that the Jframe does not open in the top left corner of the screen
         final LoginScreenDisplay userLogin = new LoginScreenDisplay(); //creates a new loginDisplay for the card Layout
         final RegisterUserDisplay userRegister = new RegisterUserDisplay(); // creates a new Register user display for the card Layout;
+        final testDisplay test = new testDisplay();
         final userpage userListPage = new userpage();
         final JPanel cardSet= new JPanel(new CardLayout());       //creates a card set which will accept Jpanels into its cardset;
 
         cardSet.add(userLogin.getLoginPanel(), "LoginView"); //adds the login display Panel
         cardSet.add(userRegister.getRegisterDisplay(), "RegisterView"); //adds the Test display Panel
         cardSet.add(userListPage.getRootPanel(),"UserView");
+        cardSet.add(test.getTest()," PLEASE WORK");
         testFrame.add(cardSet);  //adds  cardset to the JFrame
 
 
@@ -79,6 +81,7 @@ public class ScreenManager {
         });
 
     }
+
 
     // Unsure but on exit(), I want to just run save
 
