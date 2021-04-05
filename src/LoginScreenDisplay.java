@@ -25,7 +25,7 @@ public class LoginScreenDisplay  extends JPanel{
     private JButton registerButton;
     ArrayList<ChangeListener> listeners = new ArrayList<>();
     ArrayList<ChangeListener> listeners2 = new ArrayList<>();
-    JSONParser parser = new JSONParser();
+
     UserList tempUserList  = new UserList();
     User tempUser = new User();
 

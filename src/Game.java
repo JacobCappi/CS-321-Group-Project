@@ -8,7 +8,7 @@ public class Game {
    String m_Publisher;
    String m_Genre;
    String m_Status;
-
+   String m_rating;
    String m_PathToPic;
 
    public Game(){
@@ -20,6 +20,7 @@ public class Game {
       m_Publisher= "N/A";
       m_Genre= "N/A";
       m_Status= "N/A";
+      m_rating= "N/A";
 
       m_PathToPic = "./gamePictures/"; // Will determine layout later
    }
@@ -50,4 +51,5 @@ public class Game {
    public void setTitle(String inputTitle){
       m_Title = inputTitle;
    }
+
 }

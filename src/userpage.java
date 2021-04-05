@@ -20,25 +20,25 @@ public class userpage {
     private JTextField searchBox;
     private JButton searchButton;
     ArrayList<ChangeListener> searchListener = new ArrayList<>();
-    Game testGame = new Game();
+     Game testGame = new Game();
     FileManager test = new FileManager();
+
     public userpage() {
         createTable();
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String getText = searchBox.getText();
                 try {
                     if(test.searchGame(searchBox.getText())){
-                        searchButton.addActionListener(new ActionListener() {
-                            @Override
-                            public void actionPerformed(ActionEvent e) {
-                                ChangeEvent event = new ChangeEvent(this);
-                                for (ChangeListener listener : searchListener ) {
-                                    listener.stateChanged(event);
-                                }
-                            }
-                        });
+                        testGame  = test.getTempGame();
+                        System.out.println(testGame.getTitle()+ " "+ testGame.getGenre()+ " "+ testGame.getPublisher());
+                        ChangeEvent event = new ChangeEvent(this);
+                        for (ChangeListener listener : searchListener ) {
+                            listener.stateChanged(event);
+
+                        }
+
+
                     }
 
                 } catch (IOException | ParseException ioException) {
@@ -74,4 +74,8 @@ public class userpage {
         searchListener.add(listener);
     }
 
+
+   public String  getSearchGamePublishser(){return testGame.getPublisher();}
+    public String  getSearchGameTitle(){return testGame.getGenre();}
+    public String  getSearchGameGenre(){return testGame.getTitle();}
 }

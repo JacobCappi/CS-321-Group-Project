@@ -82,6 +82,7 @@ public class ScreenManager {
         userListPage.addSearchListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
+                test.setGameDisplay(userListPage.getSearchGameTitle(),userListPage.getSearchGameGenre(),userListPage.getSearchGamePublishser());
                 cl.show(cardSet, "PLEASE WORK");
             }
         });
