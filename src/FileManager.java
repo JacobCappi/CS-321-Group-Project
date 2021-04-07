@@ -122,8 +122,7 @@ public class FileManager {
 
     /**
      * Method: getTempGame
-     * Description: returns the value of the tempGame so that other classes may use it
-     * @return the values within the tempGame object
+     * Description: returns the value of the tempGame so that userpage can use it to display the gameInformation
      */
     public Game getTempGame(){return tempGame;}
 
