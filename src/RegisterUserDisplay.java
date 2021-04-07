@@ -92,10 +92,7 @@ public class RegisterUserDisplay extends JPanel{
                     for(ChangeListener listener : returnToLoginListener){
                         listener.stateChanged(event);
                     }
-                } catch (IOException e) {
-                    JOptionPane.showMessageDialog(null, "Issue", "ERROR", JOptionPane.ERROR_MESSAGE);
-                    e.printStackTrace();
-                } catch (ParseException e) {
+                } catch (IOException | ParseException e) {
                     JOptionPane.showMessageDialog(null, "Issue", "ERROR", JOptionPane.ERROR_MESSAGE);
                     e.printStackTrace();
                 }

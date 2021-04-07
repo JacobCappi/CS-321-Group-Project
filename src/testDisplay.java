@@ -9,9 +9,9 @@ public class testDisplay extends JPanel{
     Game Gabe = new Game();
 
  public void setGameDisplay(String title, String  genre, String publisher){
-    test1.setText(title);
-    test2.setText(genre);
-    test3.setText(publisher);
+    test1.setText("Title: " + title);
+    test2.setText("Genre: " + genre);
+    test3.setText("Publisher: " + publisher);
  }
 
 

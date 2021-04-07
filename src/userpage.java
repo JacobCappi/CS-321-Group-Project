@@ -39,7 +39,7 @@ public class userpage {
                         }
 
 
-                    }
+                    }else{JOptionPane.showMessageDialog(null, "GAME NOT FOUND", "ERROR", JOptionPane.ERROR_MESSAGE);}
 
                 } catch (IOException | ParseException ioException) {
                     ioException.printStackTrace();
@@ -75,7 +75,7 @@ public class userpage {
     }
 
 
-   public String  getSearchGamePublishser(){return testGame.getPublisher();}
+    public String  getSearchGamePublishser(){return testGame.getPublisher();}
     public String  getSearchGameTitle(){return testGame.getGenre();}
     public String  getSearchGameGenre(){return testGame.getTitle();}
 }

@@ -11,7 +11,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Documents/School Stuff/Computer Science/321 Java/Lecture Code/json-simple-1.1.1.jar!/" />
+          <root url="jar://$JSON_SIMPLE$!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -26,5 +26,6 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="json-simple-1.1.1" level="project" />
   </component>
 </module>
