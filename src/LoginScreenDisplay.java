@@ -62,7 +62,7 @@ public class LoginScreenDisplay  extends JPanel{
             }
         });
 
-        //yesttt
+
         registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

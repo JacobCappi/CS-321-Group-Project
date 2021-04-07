@@ -30,14 +30,14 @@ public class ScreenManager {
         testFrame.setLocationRelativeTo(null); // sets the location to null so that the Jframe does not open in the top left corner of the screen
         final LoginScreenDisplay userLogin = new LoginScreenDisplay(); //creates a new loginDisplay for the card Layout
         final RegisterUserDisplay userRegister = new RegisterUserDisplay(); // creates a new Register user display for the card Layout;
-        final testDisplay test = new testDisplay();
-        final userpage userListPage = new userpage();
+        final testDisplay test = new testDisplay(); //   creates a new testDisplay (CAN  BE CHANGED TO WHATEVER YOU ARE USING TO ADD THE GAME )
+        final userpage userListPage = new userpage(); // Creates a new userpage display
         final JPanel cardSet= new JPanel(new CardLayout());       //creates a card set which will accept Jpanels into its cardset;
 
         cardSet.add(userLogin.getLoginPanel(), "LoginView"); //adds the login display Panel
-        cardSet.add(userRegister.getRegisterDisplay(), "RegisterView"); //adds the Test display Panel
-        cardSet.add(userListPage.getRootPanel(),"UserView");
-        cardSet.add(test.getTest(),"PLEASE WORK");
+        cardSet.add(userRegister.getRegisterDisplay(), "RegisterView"); //adds the Regiser Display
+        cardSet.add(userListPage.getRootPanel(),"UserView"); //adds the userpage display
+        cardSet.add(test.getTest(),"PLEASE WORK"); //adds the testDisplay (CAN BE  CHANGED TO WHATEVER YOU ARE USING TO ADD THE GAME)
         testFrame.add(cardSet);  //adds  cardset to the JFrame
 
 
@@ -51,7 +51,7 @@ public class ScreenManager {
         userLogin.addChangeListener(new ChangeListener(){
             @Override
             public void stateChanged(ChangeEvent e){
-                cl.show(cardSet,  "UserView"); //shows the the testing card
+                cl.show(cardSet,  "UserView");// shows the userpage card
             }
 
         });
@@ -59,20 +59,20 @@ public class ScreenManager {
         userLogin.addChangeListener2(new ChangeListener(){
             @Override
             public void stateChanged(ChangeEvent  e2){
-                cl.show(cardSet,  "RegisterView"); //shows the the testing card
+                cl.show(cardSet,  "RegisterView"); //shows the the registerUser Card
             }
 
         });
 
-        // Can't seem to get different buttons to do different things
+
         userRegister.addListenerReturntoLogin(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent changeEvent) {
                 String event = changeEvent.getSource().toString();
-                cl.show(cardSet, "LoginView");
+                cl.show(cardSet, "LoginView"); //  shows the login card once the user finishes registering
             }
         });
-        // Needs error Checking :: will work on soon
+        // don't really now what this does yet
         userRegister.addListenerLogin(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
@@ -82,8 +82,10 @@ public class ScreenManager {
         userListPage.addSearchListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
+                //sets the testDisplay with the information from searching the game ( CAN BE CLEANED UP )
                 test.setGameDisplay(userListPage.getSearchGameTitle(),userListPage.getSearchGameGenre(),userListPage.getSearchGamePublishser());
-                cl.show(cardSet, "PLEASE WORK");
+
+                cl.show(cardSet, "PLEASE WORK"); //dispays the Testdisplay with the game information (CAN BE CHANGED TO WHAT YOU NEED)
             }
         });
     }
