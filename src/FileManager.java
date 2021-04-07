@@ -80,30 +80,38 @@ public class FileManager {
 
         try {
             FileWriter m_fileToWrite = new FileWriter(m_loginFiles); // creates a new FileWriter Object that uses the loginfiles as the filepath
-            m_fileToWrite.write(m_topLevelJson.toJSONString());
-            m_fileToWrite.flush();
-            m_fileToWrite.close();
+            m_fileToWrite.write(m_topLevelJson.toJSONString()); //writes a JSON object to the file
+            m_fileToWrite.flush(); //flushes the file stream
+            m_fileToWrite.close();//closes the filestream
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * Method: searchGame
+     * Description:  Iterates through a JSON file of games to verify that the game is in the file.
+     * @param gameName: Passes in a game name that will be the game to search through
+     * @return Returns TRUE if the game is in the JSON file, returns false otherwise
+     * @throws IOException
+     * @throws ParseException
+     */
     public boolean searchGame(String gameName) throws IOException, ParseException {
-        JSONParser m_gameParser = new JSONParser();
-        Reader gameReader = new FileReader(m_gameFile);
-        JSONObject m_gameobjJSON = (JSONObject) m_gameParser.parse(gameReader);
+        JSONParser m_gameParser = new JSONParser(); //creates a new JSON parser
+        Reader gameReader = new FileReader(m_gameFile);// Creates  a new reader object that takes  in the JSON file as its fis
+        JSONObject m_gameobjJSON = (JSONObject) m_gameParser.parse(gameReader); //creates a new JSONObject whose information is the parsed informaiton in the JSON file
         File testFile = new File("dataFile.json");
-        if(testFile.length()== 0){return false;}
-        JSONArray gameArray = (JSONArray)  m_gameobjJSON.get("Games");
+        if(testFile.length()== 0){return false;} // if the data file is empty, return false
+        JSONArray gameArray = (JSONArray)  m_gameobjJSON.get("Games"); //Creates a new JSON array object that takes in the array of games
 
 
-       for (Object o: gameArray){
-           JSONObject currentGame = (JSONObject) o;
-           if(gameName.equals((String) currentGame.get("Title"))){
-                tempGame.setGenre((String) currentGame.get("Genre"));
-               tempGame.setPublisher((String) currentGame.get("Publisher"));
+       for (Object o: gameArray){ //for loop that iterates through each Game in the gameArray
+           JSONObject currentGame = (JSONObject) o; // JSON object whose current object is current iterator in the for loop
+           if(gameName.equals((String) currentGame.get("Title"))){ // if the gameName is equal to the current objects game Title
+                tempGame.setGenre((String) currentGame.get("Genre")); // sets the Genre to the found games Genre
+               tempGame.setPublisher((String) currentGame.get("Publisher")); // sets the Genre to the found games Publisher
 
-               tempGame.setTitle((String) currentGame.get("Title"));
+               tempGame.setTitle((String) currentGame.get("Title"));// sets the Genre to the found games Title
 
 
                return true;
@@ -112,6 +120,11 @@ public class FileManager {
        return false;
     }
 
+    /**
+     * Method: getTempGame
+     * Description: returns the value of the tempGame so that other classes may use it
+     * @return the values within the tempGame object
+     */
     public Game getTempGame(){return tempGame;}
 
 
