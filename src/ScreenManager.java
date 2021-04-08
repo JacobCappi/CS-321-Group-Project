@@ -20,11 +20,9 @@ public class ScreenManager {
 
     public ScreenManager(){}
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws IOException, ParseException {
         JFrame testFrame = new JFrame(); //creates a new Jframe
         FileManager fileManager = new FileManager();
-
-        User m_newUser = new User();
 
         testFrame.setSize(500,500); //sets the Jframe size
         testFrame.setLocationRelativeTo(null); // sets the location to null so that the Jframe does not open in the top left corner of the screen
@@ -83,7 +81,7 @@ public class ScreenManager {
             @Override
             public void stateChanged(ChangeEvent e) {
                 //sets the testDisplay with the information from searching the game ( CAN BE CLEANED UP )
-                test.setGameDisplay(userListPage.getSearchGameTitle(),userListPage.getSearchGameGenre(),userListPage.getSearchGamePublishser());
+                test.setGameDisplay(userListPage.m_searchResult);
 
                 cl.show(cardSet, "PLEASE WORK"); //dispays the Testdisplay with the game information (CAN BE CHANGED TO WHAT YOU NEED)
             }

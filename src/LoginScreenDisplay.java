@@ -32,7 +32,7 @@ public class LoginScreenDisplay  extends JPanel{
     FileManager m_fileManager = new FileManager();
 
 
-    public  LoginScreenDisplay() throws FileNotFoundException {;
+    public  LoginScreenDisplay() throws IOException, ParseException {;
 
         /**
          * Action Button Listener that will search a JSON file for a username and try  and match it with the inputted username and passowrd on the login button lick

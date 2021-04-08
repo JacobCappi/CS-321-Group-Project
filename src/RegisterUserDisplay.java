@@ -32,7 +32,7 @@ public class RegisterUserDisplay extends JPanel{
 
     final ArrayList<ChangeListener> listeners = new ArrayList<>();
     final ArrayList<ChangeListener> returnToLoginListener = new ArrayList<>();
-    public RegisterUserDisplay(){
+    public RegisterUserDisplay() throws IOException, ParseException {
         if(m_tmpUser.getName() == null || m_tmpUser.getName().equals("")){
             l_userNameLabel.setText("Create Username: ");
         }

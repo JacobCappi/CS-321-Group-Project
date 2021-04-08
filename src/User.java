@@ -34,13 +34,13 @@ public class User {
                 '}';
     }
 
+
     public String toJSON(){
         return "{\"ID\":\""+ "User{" +
                 "m_Name='" + m_Name + '\'' +
                 ", m_Password='" + m_Password + '\'' +
                 "}\"}";
     }
-
 
 
     public void createGameList(GameList gameList){

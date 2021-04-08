@@ -1,8 +1,11 @@
+import org.json.simple.parser.ParseException;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.*;
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class UserPageDisplay {
 
@@ -10,7 +13,13 @@ public class UserPageDisplay {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                createGui();
+                try {
+                    createGui();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
 
         });
@@ -18,7 +27,7 @@ public class UserPageDisplay {
 
     }
 
-    private static void createGui(){
+    private static void createGui() throws IOException, ParseException {
         userpage ui = new userpage();
         JPanel root = ui.getRootPanel();
         JFrame frame = new JFrame();

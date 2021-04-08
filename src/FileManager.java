@@ -14,8 +14,15 @@ public class FileManager {
 
     private String m_loginFiles = "login.json";
     private String m_userFiles = "users.json";
-    private String m_gameFile = "gameFile.json";
-    Game tempGame = new Game();//Creates a new Game object so that data can be sent to another class
+    private String m_gameFile = "gameFile.json"; // changed per naming convention (?)
+    GameList m_gameListFromFile = new GameList();
+    GameList m_SearchResult = new GameList();
+
+    FileManager() throws IOException, ParseException {
+        this.fillGameList();
+    }
+
+
 
     /**
      * Method: isRegisteredUser:
@@ -31,7 +38,7 @@ public class FileManager {
         Reader m_reader = new FileReader(m_loginFiles);// creates a new Reader Object that allows the parser to read the information
         JSONObject m_objJSON = (JSONObject)m_parser.parse(m_reader); // JSON object that allows the parser to take in the information from the parser
 
-        File m_testFile = new File("login.json");
+        File m_testFile = new File(m_loginFiles);
         if(m_testFile.length() == 0) { // if the file is empty, returns false.
             return false;
         }
@@ -88,43 +95,60 @@ public class FileManager {
         }
     }
 
-    /**
-     * Method: searchGame
-     * Description:  Iterates through a JSON file of games to verify that the game is in the file.
-     * @param gameName: Passes in a game name that will be the game to search through
-     * @return Returns TRUE if the game is in the JSON file, returns false otherwise
-     * @throws IOException
-     * @throws ParseException
-     */
-    public boolean searchGame(String gameName) throws IOException, ParseException {
-        JSONParser m_gameParser = new JSONParser(); //creates a new JSON parser
-        Reader gameReader = new FileReader(m_gameFile);// Creates  a new reader object that takes  in the JSON file as its fis
-        JSONObject m_gameobjJSON = (JSONObject) m_gameParser.parse(gameReader); //creates a new JSONObject whose information is the parsed informaiton in the JSON file
-        File testFile = new File("dataFile.json");
-        if(testFile.length()== 0){return false;} // if the data file is empty, return false
-        JSONArray gameArray = (JSONArray)  m_gameobjJSON.get("Games"); //Creates a new JSON array object that takes in the array of games
-
-
-       for (Object o: gameArray){ //for loop that iterates through each Game in the gameArray
-           JSONObject currentGame = (JSONObject) o; // JSON object whose current object is current iterator in the for loop
-           if(gameName.equals((String) currentGame.get("Title"))){ // if the gameName is equal to the current objects game Title
-                tempGame.setGenre((String) currentGame.get("Genre")); // sets the Genre to the found games Genre
-               tempGame.setPublisher((String) currentGame.get("Publisher")); // sets the Genre to the found games Publisher
-
-               tempGame.setTitle((String) currentGame.get("Title"));// sets the Genre to the found games Title
-
-
-               return true;
-           }
-       }
-       return false;
+    public boolean isGameInList(Game game) throws IOException, ParseException {
+        for (Game g : (Iterable<Game>) m_gameListFromFile) {  // For loop that loops through each item in a JSON Array
+            if (g.compareNames(game) > 0) { // If the current iterator equals the information in the JSON file, returns true.
+                return true;
+            }
+        }
+        return false;
     }
 
-    /**
-     * Method: getTempGame
-     * Description: returns the value of the tempGame so that userpage can use it to display the gameInformation
-     */
-    public Game getTempGame(){return tempGame;}
+    public GameList gamesSearchResult(Game game) throws IOException, ParseException {
+        GameList m_gameList = new GameList();
 
+        for (Game g : (Iterable<Game>) m_gameListFromFile) {  // For loop that loops through each item in a JSON Array
+            if (g.compareNames(game) > 0) { // If the current iterator equals the information in the JSON file, returns true.
+                m_gameList.addGame(g);
+            }
+        }
+        return m_gameList;
+    }
+
+    public void fillGameList() throws IOException, ParseException {
+        if(m_gameListFromFile.getLength() != 0) {
+            System.err.println("gameList populated");
+            return;
+        }
+        JSONParser m_parser = new JSONParser(); //creates a new JSON parser that allows the function to parse through the JSON file
+        Reader m_reader = new FileReader(m_gameFile);// creates a new Reader Object that allows the parser to read the information
+        JSONObject m_objJSON = (JSONObject)m_parser.parse(m_reader); // JSON object that allows the parser to take in the information from the parser
+
+        File m_testFile = new File(m_gameFile);
+        if(m_testFile.length() == 0) { // if the file is empty, returns false.
+            System.err.println("file not found");
+            return;
+        }
+
+        JSONArray m_jsonArray = (JSONArray) m_objJSON.get("Games"); //JSON Array that holds the array of users within the file.
+
+        // maybe a better way, works... look into later
+        for(int i =0; i<m_jsonArray.size(); i++){
+            JSONObject jsonObject = (JSONObject) m_jsonArray.get(i);
+            Game m_tmpGame = new Game();//Creates a new Game object so that data can be sent to another class
+            m_tmpGame.setId((String) jsonObject.get("ID"));
+            m_tmpGame.setTitle((String) jsonObject.get("Title"));
+            m_tmpGame.setHighlights((String) jsonObject.get("Highlights Supported?"));
+            m_tmpGame.setOptimized((String) jsonObject.get("Stream Url"));
+            m_tmpGame.setURL((String) jsonObject.get("URL"));
+            m_tmpGame.setPublisher((String) jsonObject.get("Publisher"));
+            m_tmpGame.setGenre((String) jsonObject.get("Genre"));
+            m_tmpGame.setStatus((String) jsonObject.get("Status"));
+
+            m_gameListFromFile.addGame(m_tmpGame);
+        }
+
+
+    }
 
 }

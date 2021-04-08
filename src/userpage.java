@@ -20,27 +20,33 @@ public class userpage {
     private JTextField searchBox;
     private JButton searchButton;
     ArrayList<ChangeListener> searchListener = new ArrayList<>();
-     Game testGame = new Game();
-    FileManager test = new FileManager();
+    Game m_testGame = new Game();
+    GameList m_searchResult = new GameList();
+    FileManager m_fileManager = new FileManager();
 
-    public userpage() {
+    public userpage() throws IOException, ParseException {
         createTable();
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    if(test.searchGame(searchBox.getText())){
-                        testGame  = test.getTempGame();
-                        System.out.println(testGame.getTitle()+ " "+ testGame.getGenre()+ " "+ testGame.getPublisher());
+                    m_testGame.setTitle(searchBox.getText());
+                    if(m_fileManager.isGameInList(m_testGame)){
+                        m_searchResult = m_fileManager.gamesSearchResult(m_testGame);
+
+                        for (Game g : (Iterable<Game>) m_searchResult) {  // For loop that loops through each item in a JSON Array
+                            System.out.println(g.toString());
+                        }
+
                         ChangeEvent event = new ChangeEvent(this);
                         for (ChangeListener listener : searchListener ) {
                             listener.stateChanged(event);
-
                         }
 
-
-                    }else{JOptionPane.showMessageDialog(null, "GAME NOT FOUND", "ERROR", JOptionPane.ERROR_MESSAGE);}
-
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "GAME NOT FOUND", "ERROR", JOptionPane.ERROR_MESSAGE);
+                    }
                 } catch (IOException | ParseException ioException) {
                     ioException.printStackTrace();
                 }
@@ -74,8 +80,4 @@ public class userpage {
         searchListener.add(listener);
     }
 
-
-    public String  getSearchGamePublishser(){return testGame.getPublisher();}
-    public String  getSearchGameTitle(){return testGame.getGenre();}
-    public String  getSearchGameGenre(){return testGame.getTitle();}
 }
