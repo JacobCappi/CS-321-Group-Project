@@ -5,24 +5,32 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class searchResultsDisplay extends JPanel{
     private JPanel test;
     private JTable m_gameTable;
-    private JButton returntoUserPage;
+    private JButton returntoUserPageButton;
     private JButton searchButton;
-    private JButton addGameButton;
+    private JButton m_addGameButton;
     private JTextField searchGameText;
-    FileManager manager = new FileManager();
-    Game Gabe = new Game();
-    ArrayList  <ChangeListener> returntoUser = new ArrayList<>();
+    private FileManager m_fileManager;
 
-    public searchResultsDisplay() throws IOException, ParseException {
-        returntoUserPage.addActionListener(new ActionListener() {
+    private int m_row = 0;
+    private int m_column = 0;
+    ArrayList <Game> m_searchResult = new ArrayList<>(); // lazy coding, already annoyed
+
+    ArrayList  <ChangeListener> returntoUser = new ArrayList<>();
+    ArrayList <ChangeListener> m_addGame = new ArrayList<>();
+
+    public searchResultsDisplay(User user) throws IOException, ParseException {
+        returntoUserPageButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ChangeEvent event = new ChangeEvent(this);
@@ -31,6 +39,26 @@ public class searchResultsDisplay extends JPanel{
                 }
             }
         });
+        m_addGameButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                try {
+                    m_fileManager = new FileManager();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                m_row = m_gameTable.getSelectedRow();
+                String m_title = (String) m_gameTable.getValueAt(m_row, 0);
+                for(Game g : (Iterable<Game>) m_searchResult ){
+                    if(g.getTitle().equals(m_title)){
+                        user.getGameLists().get(0).addGame(g);
+                    }
+                }
+            }
+        });
+
     }
 
     public void setGameDisplay(GameList gameList){
@@ -41,6 +69,10 @@ public class searchResultsDisplay extends JPanel{
              m_data[m_counter][0] = g.getTitle();
              m_data[m_counter][1] = g.getGenre();
              m_data[m_counter++][2] = g.getPublisher();
+
+             Game m_tmpGame = new Game();
+             m_tmpGame = g;
+             m_searchResult.add(g);
          }
 
          m_gameTable.setModel( new DefaultTableModel(
@@ -55,8 +87,10 @@ public class searchResultsDisplay extends JPanel{
 
 
     public JPanel getTest(){return test;}
+
     public void addReturntoUserPage(ChangeListener listener) {
         returntoUser.add(listener);
     }
+
 }
 

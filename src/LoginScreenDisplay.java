@@ -26,13 +26,10 @@ public class LoginScreenDisplay  extends JPanel{
     ArrayList<ChangeListener> listeners = new ArrayList<>();
     ArrayList<ChangeListener> listeners2 = new ArrayList<>();
 
-    UserList tempUserList  = new UserList();
-    User tempUser = new User();
-
     FileManager m_fileManager = new FileManager();
 
 
-    public  LoginScreenDisplay() throws IOException, ParseException {;
+    public LoginScreenDisplay(User user) throws IOException, ParseException {;
 
         /**
          * Action Button Listener that will search a JSON file for a username and try  and match it with the inputted username and passowrd on the login button lick
@@ -41,13 +38,14 @@ public class LoginScreenDisplay  extends JPanel{
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                tempUser.setName(usernameTextField.getText());
-                tempUser.setPassword(passwordTextField.getText());
+                user.setName(usernameTextField.getText());
+                user.setPassword(passwordTextField.getText());
 
                 //if the the login function is true.
                 try{
-                    if(m_fileManager.isRegisteredUser(tempUser)){
+                    if(m_fileManager.isRegisteredUser(user)){
                         ChangeEvent event = new ChangeEvent(this);
+
                         for (ChangeListener listener : listeners)
                             listener.stateChanged(event);
                     }

@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class userpage {
     private JPanel rootPanel;
-    private JTable gameTable;
+    private JTable m_gameTable;
     private JComboBox typeCombo;
     private JComboBox genreCombo;
     private JTextField searchBox;
@@ -29,8 +29,8 @@ public class userpage {
     GameList m_searchResult = new GameList();
     FileManager m_fileManager = new FileManager();
 
-    public userpage() throws IOException, ParseException {
-        createTable();
+    public userpage(User user) throws IOException, ParseException {
+        createTable(user);
         createGenreCombo();
         createTypeCombo();
         searchButton.addActionListener(new ActionListener() {
@@ -74,30 +74,26 @@ public class userpage {
         return rootPanel;
     }
 
-    private void createTable() {
-        Object[][] data = {
-                {"Yakuza: Like a Dragon", "2020", "Role-playing", "7.8", "Playstation 4, Xbox One, Playstation 5, Xbox Series X, PC"},
-                {"Prey", "2017", "First-person shooter", "8.9", "Playstation 4, Xbox One, PC"},
-                {"Red Dead Redemption II", "2018", "Action-adventure", "9.0", "Playstation 4, Xbox One, Google Stadia, PC"},
-                {"Animal Crossing: New Horizons", "2020", "Life simulation", "10", "Nintendo Switch"},
-                {"Death Stranding", "2019", "Action", "9.0", "Playstation 4, PC"},
+    private void createTable(User user) {
+        // will make it look better later
+        String[][] m_data = new String[user.getGameLists().get(0).getLength()][3];
+        int m_counter = 0;
 
-        };
-        gameTable.setModel( new DefaultTableModel(
-                data,
-                new String[]{"Title", "Year", "Genre", "Rating", "Platforms"}
-        ));
-        TableColumnModel columns = gameTable.getColumnModel();
-        columns.getColumn(0).setMinWidth(100);
-
-        //center columns
-        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-        for(int i = 0; i < data.length; i++){
-            columns.getColumn(i).setCellRenderer(centerRenderer);
+        for (Game g : (Iterable<Game>)user.getGameLists().get(0)) {
+            m_data[m_counter][0] = g.getTitle();
+            m_data[m_counter][1] = g.getGenre();
+            m_data[m_counter++][2] = g.getPublisher();
         }
 
+        m_gameTable.setModel( new DefaultTableModel(
+                m_data,
+                new String[]{"Title", "Genre", "Publisher"}
+        ));
+        TableColumnModel columns = m_gameTable.getColumnModel();
+        columns.getColumn(0).setMinWidth(0);
+
     }
+
 
     //here you will need to get an Array list of genres from json
 

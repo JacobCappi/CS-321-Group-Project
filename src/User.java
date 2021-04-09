@@ -1,19 +1,24 @@
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class User implements Iterable{
+public class User implements Iterable, Cloneable{
     ArrayList<GameList> m_GameLists = new ArrayList<>(); // Game list placeholder
+    GameList m_activeGameList;
     String m_Name;
     String m_Password;
 
     public User(){
         m_Name = "";
         m_Password = "";
+        m_activeGameList = new GameList();
+        m_GameLists.add(m_activeGameList);
     }
 
     public User(String name, String password){
         m_Name = name;
         m_Password = password;
+        m_activeGameList = new GameList();
+        m_GameLists.add(m_activeGameList);
     }
 
     public ArrayList<GameList> getGameLists() {
@@ -55,15 +60,17 @@ public class User implements Iterable{
     public void removeGameList(String gameListName){
     }
 
-    public boolean addGame(Integer gameList, Integer game){
-        // assuming .add(), from game object from gamelist object must be created to add();
-        return false;
+    public void addGame(String gameListName, Game game){
+
     }
 
     public Iterator<GameList> iterator() {
         return this.m_GameLists.iterator();
     }
 
-
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 }
 

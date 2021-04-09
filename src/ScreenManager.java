@@ -12,14 +12,15 @@ public class ScreenManager {
 
     public static void main(String[] args) throws IOException, ParseException {
         JFrame testFrame = new JFrame(); //creates a new Jframe
-        FileManager fileManager = new FileManager();
+        FileManager m_fileManager = new FileManager();
+        User m_user = new User();
 
         testFrame.setSize(500,500); //sets the Jframe size
         testFrame.setLocationRelativeTo(null); // sets the location to null so that the Jframe does not open in the top left corner of the screen
-        final LoginScreenDisplay userLogin = new LoginScreenDisplay(); //creates a new loginDisplay for the card Layout
+        final LoginScreenDisplay userLogin = new LoginScreenDisplay(m_user); //creates a new loginDisplay for the card Layout
         final RegisterUserDisplay userRegister = new RegisterUserDisplay(); // creates a new Register user display for the card Layout;
-        final searchResultsDisplay searchResults = new searchResultsDisplay(); //   creates a new testDisplay (CAN  BE CHANGED TO WHATEVER YOU ARE USING TO ADD THE GAME )
-        final userpage userListPage = new userpage(); // Creates a new userpage display
+        final searchResultsDisplay searchResults = new searchResultsDisplay(m_user); //   creates a new testDisplay (CAN  BE CHANGED TO WHATEVER YOU ARE USING TO ADD THE GAME )
+        final userpage userListPage = new userpage(m_user); // Creates a new userpage display
         final JPanel cardSet= new JPanel(new CardLayout());       //creates a card set which will accept Jpanels into its cardset;
 
         cardSet.add(userLogin.getLoginPanel(), "LoginView"); //adds the login display Panel
