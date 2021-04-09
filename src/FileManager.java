@@ -14,7 +14,7 @@ public class FileManager {
 
     private String m_loginFiles = "login.json";
     private String m_gameFile = "gameFile.json"; // changed per naming convention (?)
-    private String m_currentUser = "Users/";
+    private String m_currentUser = "users.json";
     GameList m_gameListFromFile = new GameList();
     GameList m_SearchResult = new GameList();
 

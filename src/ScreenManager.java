@@ -78,15 +78,21 @@ public class ScreenManager {
             }
         });
 
+
+
         userListPage.addlogoutListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
                 cl.show(cardSet,  "LoginView");
             }
         });
+
+
         searchResults.addReturntoUserPage(new ChangeListener() {
             @Override
+
             public void stateChanged(ChangeEvent e) {
+                userListPage.createTable(m_user);
                 cl.show(cardSet,"UserView");
             }
         });

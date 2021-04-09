@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class userpage {
+
     private JPanel rootPanel;
     private JTable m_gameTable;
     private JComboBox genreCombo;
@@ -40,9 +41,7 @@ public class userpage {
                     if(m_fileManager.isGameInList(m_testGame)){
                         m_searchResult = m_fileManager.gamesSearchResult(m_testGame);
 
-                        for (Game g : (Iterable<Game>) m_searchResult) {  // For loop that loops through each item in a JSON Array
-                            System.out.println(g.toString());
-                        }
+
 
                         ChangeEvent event = new ChangeEvent(this);
                         for (ChangeListener listener : searchListener ) {
@@ -73,7 +72,7 @@ public class userpage {
         return rootPanel;
     }
 
-    private void createTable(User user) {
+    public void createTable(User user) {
         // will make it look better later
         String[][] m_data = new String[user.getGameLists().get(0).getLength()][3];
         int m_counter = 0;

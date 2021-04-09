@@ -29,6 +29,7 @@ public class searchResultsDisplay extends JPanel{
     ArrayList  <ChangeListener> returntoUser = new ArrayList<>();
     ArrayList <ChangeListener> m_addGame = new ArrayList<>();
 
+
     public searchResultsDisplay(User user) throws IOException, ParseException {
         returntoUserPageButton.addActionListener(new ActionListener() {
             @Override
@@ -44,9 +45,7 @@ public class searchResultsDisplay extends JPanel{
             public void actionPerformed(ActionEvent actionEvent) {
                 try {
                     m_fileManager = new FileManager();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (ParseException e) {
+                } catch (IOException | ParseException e) {
                     e.printStackTrace();
                 }
                 m_row = m_gameTable.getSelectedRow();
@@ -56,15 +55,18 @@ public class searchResultsDisplay extends JPanel{
                         user.getGameLists().get(0).addGame(g);
                         try {
                             m_fileManager.saveUserData(user);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        } catch (ParseException e) {
+                            ChangeEvent event = new ChangeEvent(this);
+                            for (ChangeListener listener : m_addGame) {
+                                listener.stateChanged(event);
+                            }
+                        } catch (IOException | ParseException e) {
                             e.printStackTrace();
                         }
                     }
                 }
             }
         });
+
 
     }
 
@@ -97,6 +99,9 @@ public class searchResultsDisplay extends JPanel{
 
     public void addReturntoUserPage(ChangeListener listener) {
         returntoUser.add(listener);
+    }
+    public void displayNewList(ChangeListener listener){
+        m_addGame.add(listener);
     }
 
 }
