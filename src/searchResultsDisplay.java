@@ -20,14 +20,18 @@ public class searchResultsDisplay extends JPanel{
     private JButton searchButton;
     private JButton m_addGameButton;
     private JTextField searchGameText;
+    private JLabel searchResultLabel;
     private FileManager m_fileManager;
 
     private int m_row = 0;
     private int m_column = 0;
     ArrayList <Game> m_searchResult = new ArrayList<>(); // lazy coding, already annoyed
-
+    Game testgame= new Game();
+    GameList searchResult = new GameList();
+    FileManager fileManager = new FileManager();
     ArrayList  <ChangeListener> returntoUser = new ArrayList<>();
     ArrayList <ChangeListener> m_addGame = new ArrayList<>();
+    ArrayList <ChangeListener> m_addAnotherGame = new ArrayList<>();
 
 
     public searchResultsDisplay(User user) throws IOException, ParseException {
@@ -55,6 +59,7 @@ public class searchResultsDisplay extends JPanel{
                         user.getGameLists().get(0).addGame(g);
                         try {
                             m_fileManager.saveUserData(user);
+                            JOptionPane.showMessageDialog(null, "Game Added!", "Success!", JOptionPane.INFORMATION_MESSAGE);
                             ChangeEvent event = new ChangeEvent(this);
                             for (ChangeListener listener : m_addGame) {
                                 listener.stateChanged(event);
@@ -68,7 +73,26 @@ public class searchResultsDisplay extends JPanel{
         });
 
 
+        searchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                testgame.setTitle(searchGameText.getText());
+                try {
+                    if(fileManager.isGameInList(testgame)){
+                       searchResult = fileManager.gamesSearchResult(testgame);
+                        ChangeEvent event = new ChangeEvent(this);
+                        for (ChangeListener listener : m_addAnotherGame) {
+                            listener.stateChanged(event);
+                        }
+                    }
+                } catch (IOException | ParseException ioException) {
+                    ioException.printStackTrace();
+                }
+            }
+        });
     }
+
+
 
     public void setGameDisplay(GameList gameList){
          String[][] m_data = new String[gameList.getLength()][3];
@@ -103,6 +127,8 @@ public class searchResultsDisplay extends JPanel{
     public void displayNewList(ChangeListener listener){
         m_addGame.add(listener);
     }
-
+    public void addAnotherGame(ChangeListener listener){
+        m_addAnotherGame.add(listener);
+    }
 }
 

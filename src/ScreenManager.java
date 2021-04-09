@@ -15,7 +15,7 @@ public class ScreenManager {
         FileManager m_fileManager = new FileManager();
         User m_user = new User();
 
-        testFrame.setSize(500,500); //sets the Jframe size
+        testFrame.setSize(1250,750); //sets the Jframe size
         testFrame.setLocationRelativeTo(null); // sets the location to null so that the Jframe does not open in the top left corner of the screen
         final LoginScreenDisplay userLogin = new LoginScreenDisplay(m_user); //creates a new loginDisplay for the card Layout
         final RegisterUserDisplay userRegister = new RegisterUserDisplay(); // creates a new Register user display for the card Layout;
@@ -72,6 +72,7 @@ public class ScreenManager {
             @Override
             public void stateChanged(ChangeEvent e) {
                 //sets the testDisplay with the information from searching the game ( CAN BE CLEANED UP )
+
                 searchResults.setGameDisplay(userListPage.m_searchResult);
 
                 cl.show(cardSet, "PLEASE WORK"); //dispays the Testdisplay with the game information (CAN BE CHANGED TO WHAT YOU NEED)
@@ -94,6 +95,12 @@ public class ScreenManager {
             public void stateChanged(ChangeEvent e) {
                 userListPage.createTable(m_user);
                 cl.show(cardSet,"UserView");
+            }
+        });
+        searchResults.addAnotherGame(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                searchResults.setGameDisplay(searchResults.searchResult);
             }
         });
 
