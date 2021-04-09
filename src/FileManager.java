@@ -13,13 +13,13 @@ import java.util.Iterator;
 public class FileManager {
 
     private String m_loginFiles = "login.json";
-    private String m_userFiles = "users.json";
     private String m_gameFile = "gameFile.json"; // changed per naming convention (?)
+    private String m_currentUser = "Users/";
     GameList m_gameListFromFile = new GameList();
     GameList m_SearchResult = new GameList();
 
     FileManager() throws IOException, ParseException {
-        this.fillGameList();
+        this.fillGameList(m_gameListFromFile, m_gameFile);
     }
 
 
@@ -63,11 +63,13 @@ public class FileManager {
      * @throws IOException
      * @throws ParseException
      */
-    public void addUser(User user) throws IOException, ParseException {
+    public int addUser(User user) throws IOException, ParseException {
+        // deleted some of the comments b/c they were not correct and was confusing me
+
         JSONObject m_topLevelJson = new JSONObject(); //creates a new JSON object
         JSONArray m_jsonArray; //intializes a new JSONArray
 
-        File m_testFile = new File("login.json");
+        File m_testFile = new File(m_loginFiles);
         if(m_testFile.length() == 0) { //if the file is empty
             m_jsonArray = new JSONArray(); //Creates the new JSON array
         }
@@ -78,11 +80,17 @@ public class FileManager {
             m_jsonArray = (JSONArray) m_objJSON.get("Users"); // takes the JSON array and puts the User information within
         }
 
-        JSONObject m_jsonObject = new JSONObject(); //creates another JSON object that  allows the information to be put in another JSON file
-        m_jsonObject.put("ID", user.toString()); //puts the ID of the user in the JSON object
+        JSONObject m_jsonObject = new JSONObject();
+        m_jsonObject.put("ID", user.toString());
 
-        m_jsonArray.add(m_jsonObject.toJSONString()); // puts the JSON object, with the  username and password in the JSON object
-
+        // error checking to see if user already exists in file
+        for(int i =0; i<m_jsonArray.size(); i++){
+            String jsonObject = (String) m_jsonArray.get(i);
+            if(m_jsonObject.toJSONString().equals(jsonObject)){
+                return 1;
+            }
+        }
+        m_jsonArray.add(m_jsonObject.toJSONString());
         m_topLevelJson.put("Users", m_jsonArray); // puts the JSON array within the JSON Object
 
         try {
@@ -90,14 +98,17 @@ public class FileManager {
             m_fileToWrite.write(m_topLevelJson.toJSONString()); //writes a JSON object to the file
             m_fileToWrite.flush(); //flushes the file stream
             m_fileToWrite.close();//closes the filestream
+            this.createUserInFile(user);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return 0;
     }
 
     public boolean isGameInList(Game game) throws IOException, ParseException {
         for (Game g : (Iterable<Game>) m_gameListFromFile) {  // For loop that loops through each item in a JSON Array
-            if (g.compareNames(game) > 0) { // If the current iterator equals the information in the JSON file, returns true.
+            if (g.compareNames(game)) { // If the current iterator equals the information in the JSON file, returns true.
                 return true;
             }
         }
@@ -108,23 +119,23 @@ public class FileManager {
         GameList m_gameList = new GameList();
 
         for (Game g : (Iterable<Game>) m_gameListFromFile) {  // For loop that loops through each item in a JSON Array
-            if (g.compareNames(game) > 0) { // If the current iterator equals the information in the JSON file, returns true.
+            if (g.compareNames(game)) { // If the current iterator equals the information in the JSON file, returns true.
                 m_gameList.addGame(g);
             }
         }
         return m_gameList;
     }
 
-    public void fillGameList() throws IOException, ParseException {
-        if(m_gameListFromFile.getLength() != 0) {
+    public void fillGameList(GameList g, String fileName) throws IOException, ParseException {
+        if(g.getLength() != 0) {
             System.err.println("gameList populated");
             return;
         }
         JSONParser m_parser = new JSONParser(); //creates a new JSON parser that allows the function to parse through the JSON file
-        Reader m_reader = new FileReader(m_gameFile);// creates a new Reader Object that allows the parser to read the information
+        Reader m_reader = new FileReader(fileName);// creates a new Reader Object that allows the parser to read the information
         JSONObject m_objJSON = (JSONObject)m_parser.parse(m_reader); // JSON object that allows the parser to take in the information from the parser
 
-        File m_testFile = new File(m_gameFile);
+        File m_testFile = new File(fileName);
         if(m_testFile.length() == 0) { // if the file is empty, returns false.
             System.err.println("file not found");
             return;
@@ -139,15 +150,102 @@ public class FileManager {
             m_tmpGame.setId((String) jsonObject.get("ID"));
             m_tmpGame.setTitle((String) jsonObject.get("Title"));
             m_tmpGame.setHighlights((String) jsonObject.get("Highlights Supported?"));
-            m_tmpGame.setOptimized((String) jsonObject.get("Stream Url"));
-            m_tmpGame.setURL((String) jsonObject.get("URL"));
+            m_tmpGame.setOptimized((String) jsonObject.get("Fully Optimized?"));
+            m_tmpGame.setURL((String) jsonObject.get("Steam Url"));
             m_tmpGame.setPublisher((String) jsonObject.get("Publisher"));
             m_tmpGame.setGenre((String) jsonObject.get("Genre"));
             m_tmpGame.setStatus((String) jsonObject.get("Status"));
 
-            m_gameListFromFile.addGame(m_tmpGame);
+            g.addGame(m_tmpGame);
         }
 
+
+    }
+
+    public void createUserInFile(User user) throws IOException, ParseException {
+        String m_userFile = m_currentUser.concat(user.getName());
+        // deleted some of the comments b/c they were not correct and was confusing me
+
+        JSONObject m_topLevelJson = new JSONObject(); // top level is the main object to push
+
+        JSONObject m_jsonObjectUser = new JSONObject(); // stores username
+        JSONObject m_jsonObjectUserGames = new JSONObject();
+        JSONArray m_jsonArrayGameLists; // stores gameLists
+        JSONArray m_jsonArrayGames;
+
+        File m_testFile = new File(m_userFile);
+        if(m_testFile.length() == 0) { //if the file is empty
+            m_jsonArrayGames = new JSONArray();
+            m_jsonArrayGameLists = new JSONArray();
+        }
+        else{
+            return; // exists
+        }
+        for (GameList gl : (Iterable<GameList>) user) {  // For loop that loops through each item in a JSON Array
+            for (Game g : (Iterable<Game>) gl){
+                m_jsonArrayGames.add(g.toString());
+            }
+            m_jsonObjectUser.put("GameListName", gl.getListName());
+            m_jsonObjectUser.put("Games", m_jsonArrayGames);
+            m_jsonArrayGameLists.add(m_jsonObjectUser.toJSONString());
+        }
+
+        m_jsonObjectUserGames.put("GameLists", m_jsonArrayGameLists);
+        m_topLevelJson.put("Name", user.getName());
+
+        m_topLevelJson.put("GameLists",m_jsonObjectUserGames); // puts the JSON array within the JSON Object
+
+        try {
+            FileWriter m_fileToWrite = new FileWriter(m_userFile); // creates a new FileWriter Object that uses the loginfiles as the filepath
+            m_fileToWrite.write(m_topLevelJson.toJSONString()); //writes a JSON object to the file
+            m_fileToWrite.flush(); //flushes the file stream
+            m_fileToWrite.close();//closes the filestream
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void addGameToUser(User user, Game game) throws IOException, ParseException {
+        String m_userFile = m_currentUser.concat(user.getName());
+        // deleted some of the comments b/c they were not correct and was confusing me
+
+        JSONObject m_topLevelJson = new JSONObject(); // top level is the main object to push
+        JSONObject m_jsonObjectUser = new JSONObject(); // stores username
+        JSONObject m_jsonObjectUserGames = new JSONObject();
+        JSONArray m_jsonArrayGameLists; // stores gameLists
+        JSONArray m_jsonArrayGames;
+
+        File m_testFile = new File(m_userFile);
+        if(m_testFile.length() == 0) { //if the file is empty
+            m_jsonArrayGames = new JSONArray();
+            m_jsonArrayGameLists = new JSONArray();
+        }
+        else{
+            return; // exists // WILL FINISH SOON
+        }
+        for (GameList gl : (Iterable<GameList>) user) {  // For loop that loops through each item in a JSON Array
+            for (Game g : (Iterable<Game>) gl){
+                m_jsonArrayGames.add(g.toString());
+            }
+            m_jsonObjectUser.put("GameListName", gl.getListName());
+            m_jsonObjectUser.put("Games", m_jsonArrayGames);
+            m_jsonArrayGameLists.add(m_jsonObjectUser.toJSONString());
+        }
+
+        m_jsonObjectUserGames.put("GameLists", m_jsonArrayGameLists);
+        m_topLevelJson.put("Name", user.getName());
+
+        m_topLevelJson.put("GameLists",m_jsonObjectUserGames); // puts the JSON array within the JSON Object
+
+        try {
+            FileWriter m_fileToWrite = new FileWriter(m_userFile); // creates a new FileWriter Object that uses the loginfiles as the filepath
+            m_fileToWrite.write(m_topLevelJson.toJSONString()); //writes a JSON object to the file
+            m_fileToWrite.flush(); //flushes the file stream
+            m_fileToWrite.close();//closes the filestream
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 

@@ -1,6 +1,7 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 
-public class User {
+public class User implements Iterable{
     ArrayList<GameList> m_GameLists = new ArrayList<>(); // Game list placeholder
     String m_Name;
     String m_Password;
@@ -13,6 +14,10 @@ public class User {
     public User(String name, String password){
         m_Name = name;
         m_Password = password;
+    }
+
+    public ArrayList<GameList> getGameLists() {
+        return m_GameLists;
     }
 
     public void setPassword(String password){m_Password = password;}
@@ -53,6 +58,10 @@ public class User {
     public boolean addGame(Integer gameList, Integer game){
         // assuming .add(), from game object from gamelist object must be created to add();
         return false;
+    }
+
+    public Iterator<GameList> iterator() {
+        return this.m_GameLists.iterator();
     }
 
 

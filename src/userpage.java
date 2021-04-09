@@ -4,6 +4,7 @@ import javax.sound.midi.SysexMessage;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
@@ -22,12 +23,16 @@ public class userpage {
     private JButton Logout;
     ArrayList<ChangeListener> searchListener = new ArrayList<>();
     ArrayList< ChangeListener> logoutListener = new ArrayList<>();
+
+    User m_currentUser = new User();
     Game m_testGame = new Game();
     GameList m_searchResult = new GameList();
     FileManager m_fileManager = new FileManager();
 
     public userpage() throws IOException, ParseException {
         createTable();
+        createGenreCombo();
+        createTypeCombo();
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -83,10 +88,26 @@ public class userpage {
                 new String[]{"Title", "Year", "Genre", "Rating", "Platforms"}
         ));
         TableColumnModel columns = gameTable.getColumnModel();
-        columns.getColumn(0).setMinWidth(0);
+        columns.getColumn(0).setMinWidth(100);
+
+        //center columns
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        for(int i = 0; i < data.length; i++){
+            columns.getColumn(i).setCellRenderer(centerRenderer);
+        }
 
     }
 
+    //here you will need to get an Array list of genres from json
+
+    public void createGenreCombo(){
+        genreCombo.setModel(new DefaultComboBoxModel(new String[]{"yeah"})); //need to add action listener to work
+    }
+
+    public void createTypeCombo(){
+        genreCombo.setModel(new DefaultComboBoxModel(new String[]{"yeah"}));
+    }
     public void addSearchListener(ChangeListener listener) {
         searchListener.add(listener);
     }
