@@ -16,7 +16,6 @@ import java.util.ArrayList;
 public class userpage {
     private JPanel rootPanel;
     private JTable m_gameTable;
-    private JComboBox typeCombo;
     private JComboBox genreCombo;
     private JTextField searchBox;
     private JButton searchButton;
@@ -98,11 +97,11 @@ public class userpage {
     //here you will need to get an Array list of genres from json
 
     public void createGenreCombo(){
-        genreCombo.setModel(new DefaultComboBoxModel(new String[]{"yeah"})); //need to add action listener to work
+        genreCombo.setModel(new DefaultComboBoxModel(new String[]{"Genre"})); //need to add action listener to work
     }
 
     public void createTypeCombo(){
-        genreCombo.setModel(new DefaultComboBoxModel(new String[]{"yeah"}));
+        genreCombo.setModel(new DefaultComboBoxModel(new String[]{"Genre"}));
     }
     public void addSearchListener(ChangeListener listener) {
         searchListener.add(listener);
