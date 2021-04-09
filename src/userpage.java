@@ -19,7 +19,9 @@ public class userpage {
     private JComboBox genreCombo;
     private JTextField searchBox;
     private JButton searchButton;
+    private JButton Logout;
     ArrayList<ChangeListener> searchListener = new ArrayList<>();
+    ArrayList< ChangeListener> logoutListener = new ArrayList<>();
     Game m_testGame = new Game();
     GameList m_searchResult = new GameList();
     FileManager m_fileManager = new FileManager();
@@ -52,6 +54,15 @@ public class userpage {
                 }
             }
         });
+        Logout.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ChangeEvent event = new ChangeEvent(this);
+                for (ChangeListener listener : logoutListener ) {
+                    listener.stateChanged(event);
+                }
+            }
+        });
     }
 
     public JPanel getRootPanel() {
@@ -79,5 +90,5 @@ public class userpage {
     public void addSearchListener(ChangeListener listener) {
         searchListener.add(listener);
     }
-
+    public void addlogoutListener(ChangeListener listener) {logoutListener.add(listener);}
 }

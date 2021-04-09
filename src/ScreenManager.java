@@ -1,20 +1,10 @@
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
-import java.io.FileNotFoundException;
-import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import java.awt.*;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Paths;
 
 public class ScreenManager {
 
@@ -28,14 +18,14 @@ public class ScreenManager {
         testFrame.setLocationRelativeTo(null); // sets the location to null so that the Jframe does not open in the top left corner of the screen
         final LoginScreenDisplay userLogin = new LoginScreenDisplay(); //creates a new loginDisplay for the card Layout
         final RegisterUserDisplay userRegister = new RegisterUserDisplay(); // creates a new Register user display for the card Layout;
-        final testDisplay test = new testDisplay(); //   creates a new testDisplay (CAN  BE CHANGED TO WHATEVER YOU ARE USING TO ADD THE GAME )
+        final searchResultsDisplay searchResults = new searchResultsDisplay(); //   creates a new testDisplay (CAN  BE CHANGED TO WHATEVER YOU ARE USING TO ADD THE GAME )
         final userpage userListPage = new userpage(); // Creates a new userpage display
         final JPanel cardSet= new JPanel(new CardLayout());       //creates a card set which will accept Jpanels into its cardset;
 
         cardSet.add(userLogin.getLoginPanel(), "LoginView"); //adds the login display Panel
         cardSet.add(userRegister.getRegisterDisplay(), "RegisterView"); //adds the Regiser Display
         cardSet.add(userListPage.getRootPanel(),"UserView"); //adds the userpage display
-        cardSet.add(test.getTest(),"PLEASE WORK"); //adds the testDisplay (CAN BE  CHANGED TO WHATEVER YOU ARE USING TO ADD THE GAME)
+        cardSet.add(searchResults.getTest(),"PLEASE WORK"); //adds the testDisplay (CAN BE  CHANGED TO WHATEVER YOU ARE USING TO ADD THE GAME)
         testFrame.add(cardSet);  //adds  cardset to the JFrame
 
 
@@ -81,14 +71,28 @@ public class ScreenManager {
             @Override
             public void stateChanged(ChangeEvent e) {
                 //sets the testDisplay with the information from searching the game ( CAN BE CLEANED UP )
-                test.setGameDisplay(userListPage.m_searchResult);
+                searchResults.setGameDisplay(userListPage.m_searchResult);
 
                 cl.show(cardSet, "PLEASE WORK"); //dispays the Testdisplay with the game information (CAN BE CHANGED TO WHAT YOU NEED)
             }
         });
+
+        userListPage.addlogoutListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                cl.show(cardSet,  "LoginView");
+            }
+        });
+        searchResults.addReturntoUserPage(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                cl.show(cardSet,"UserView");
+            }
+        });
+
     }
 
+    }
 
     // Unsure but on exit(), I want to just run save
 
-}

@@ -1,20 +1,36 @@
 import org.json.simple.parser.ParseException;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
 
-public class testDisplay extends JPanel{
+public class searchResultsDisplay extends JPanel{
     private JPanel test;
-    private JLabel test1;
-    private JLabel test2;
-    private JLabel test3;
-    private JTable m_gameTable = new JTable();
+    private JTable m_gameTable;
+    private JButton returntoUserPage;
+    private JButton searchButton;
+    private JButton addGameButton;
+    private JTextField searchGameText;
     FileManager manager = new FileManager();
     Game Gabe = new Game();
+    ArrayList  <ChangeListener> returntoUser = new ArrayList<>();
 
-    public testDisplay() throws IOException, ParseException {
+    public searchResultsDisplay() throws IOException, ParseException {
+        returntoUserPage.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ChangeEvent event = new ChangeEvent(this);
+                for (ChangeListener listener : returntoUser) {
+                    listener.stateChanged(event);
+                }
+            }
+        });
     }
 
     public void setGameDisplay(GameList gameList){
@@ -40,5 +56,8 @@ public class testDisplay extends JPanel{
 
 
     public JPanel getTest(){return test;}
+    public void addReturntoUserPage(ChangeListener listener) {
+        returntoUser.add(listener);
+    }
 }
 
