@@ -23,6 +23,8 @@ public class userpage {
     private JButton Logout;
     ArrayList<ChangeListener> searchListener = new ArrayList<>();
     ArrayList< ChangeListener> logoutListener = new ArrayList<>();
+
+    User m_currentUser = new User();
     Game m_testGame = new Game();
     GameList m_searchResult = new GameList();
     FileManager m_fileManager = new FileManager();

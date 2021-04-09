@@ -78,8 +78,24 @@ public class Game {
       return m_Status;
    }
 
-   public int compareNames(Game game){
-      return this.getTitle().toLowerCase().indexOf(game.getTitle().toLowerCase()); // .indexof() returns -1 if non existance, and postive numbers if contains
+   public boolean compareNames(Game game){// dumb code, but it could have looked a lot messier.
+       // this is handling spaces through recurrsion: it's a mess, don't ask
+      if(game.getTitle().indexOf(" ") > -1){
+         int m_tmpInt0 = game.getTitle().indexOf(" ");
+
+         Game game2 = new Game();
+         Game game3 = new Game();
+         game2.setTitle(game.getTitle().substring(0,m_tmpInt0));
+         game3.setTitle(game.getTitle().substring(m_tmpInt0+1));
+
+         boolean m_tmpRetVal1 = compareNames(game2);
+         boolean m_tmpRetVal2 = compareNames(game3);
+
+         return (m_tmpRetVal1 && m_tmpRetVal2);
+      }
+      else{
+         return (this.getTitle().toLowerCase().indexOf(game.getTitle().toLowerCase()) > -1);
+      }
    }
 
    @Override

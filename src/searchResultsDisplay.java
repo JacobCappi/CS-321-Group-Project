@@ -34,19 +34,18 @@ public class searchResultsDisplay extends JPanel{
     }
 
     public void setGameDisplay(GameList gameList){
-         String[][] m_data = new String[gameList.getLength()][4];
+         String[][] m_data = new String[gameList.getLength()][3];
          int m_counter = 0;
 
          for (Game g : (Iterable<Game>)gameList) {
              m_data[m_counter][0] = g.getTitle();
-             m_data[m_counter][1]= g.getPublisher();
-             m_data[m_counter][2] = g.getGenre();
-             m_data[m_counter++][3] = g.getStatus();
+             m_data[m_counter][1] = g.getGenre();
+             m_data[m_counter++][2] = g.getPublisher();
          }
 
          m_gameTable.setModel( new DefaultTableModel(
                  m_data,
-                 new String[]{"Title", "Publisher", "Genre", "Status"}
+                 new String[]{"Title", "Genre", "Publisher"}
          ));
          TableColumnModel columns = m_gameTable.getColumnModel();
          columns.getColumn(0).setMinWidth(0);
