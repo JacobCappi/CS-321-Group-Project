@@ -70,7 +70,7 @@
             <properties/>
             <border type="none"/>
             <children>
-              <component id="f4c6c" class="javax.swing.JTable" binding="gameTable">
+              <component id="f4c6c" class="javax.swing.JTable" binding="m_gameTable">
                 <constraints/>
                 <properties>
                   <preferredScrollableViewportSize width="600" height="200"/>

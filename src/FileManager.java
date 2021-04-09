@@ -98,7 +98,7 @@ public class FileManager {
             m_fileToWrite.write(m_topLevelJson.toJSONString()); //writes a JSON object to the file
             m_fileToWrite.flush(); //flushes the file stream
             m_fileToWrite.close();//closes the filestream
-            this.createUserInFile(user);
+            this.saveUserData(user);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -162,8 +162,9 @@ public class FileManager {
 
     }
 
-    public void createUserInFile(User user) throws IOException, ParseException {
+    public void saveUserData(User user) throws IOException, ParseException {
         String m_userFile = m_currentUser.concat(user.getName());
+        m_userFile = m_userFile.concat(".json");
         // deleted some of the comments b/c they were not correct and was confusing me
 
         JSONObject m_topLevelJson = new JSONObject(); // top level is the main object to push
@@ -174,13 +175,9 @@ public class FileManager {
         JSONArray m_jsonArrayGames;
 
         File m_testFile = new File(m_userFile);
-        if(m_testFile.length() == 0) { //if the file is empty
-            m_jsonArrayGames = new JSONArray();
-            m_jsonArrayGameLists = new JSONArray();
-        }
-        else{
-            return; // exists
-        }
+        m_jsonArrayGames = new JSONArray();
+        m_jsonArrayGameLists = new JSONArray();
+
         for (GameList gl : (Iterable<GameList>) user) {  // For loop that loops through each item in a JSON Array
             for (Game g : (Iterable<Game>) gl){
                 m_jsonArrayGames.add(g.toString());
@@ -190,53 +187,10 @@ public class FileManager {
             m_jsonArrayGameLists.add(m_jsonObjectUser.toJSONString());
         }
 
-        m_jsonObjectUserGames.put("GameLists", m_jsonArrayGameLists);
         m_topLevelJson.put("Name", user.getName());
-
-        m_topLevelJson.put("GameLists",m_jsonObjectUserGames); // puts the JSON array within the JSON Object
-
-        try {
-            FileWriter m_fileToWrite = new FileWriter(m_userFile); // creates a new FileWriter Object that uses the loginfiles as the filepath
-            m_fileToWrite.write(m_topLevelJson.toJSONString()); //writes a JSON object to the file
-            m_fileToWrite.flush(); //flushes the file stream
-            m_fileToWrite.close();//closes the filestream
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    public void addGameToUser(User user, Game game) throws IOException, ParseException {
-        String m_userFile = m_currentUser.concat(user.getName());
-        // deleted some of the comments b/c they were not correct and was confusing me
-
-        JSONObject m_topLevelJson = new JSONObject(); // top level is the main object to push
-        JSONObject m_jsonObjectUser = new JSONObject(); // stores username
-        JSONObject m_jsonObjectUserGames = new JSONObject();
-        JSONArray m_jsonArrayGameLists; // stores gameLists
-        JSONArray m_jsonArrayGames;
-
-        File m_testFile = new File(m_userFile);
-        if(m_testFile.length() == 0) { //if the file is empty
-            m_jsonArrayGames = new JSONArray();
-            m_jsonArrayGameLists = new JSONArray();
-        }
-        else{
-            return; // exists // WILL FINISH SOON
-        }
-        for (GameList gl : (Iterable<GameList>) user) {  // For loop that loops through each item in a JSON Array
-            for (Game g : (Iterable<Game>) gl){
-                m_jsonArrayGames.add(g.toString());
-            }
-            m_jsonObjectUser.put("GameListName", gl.getListName());
-            m_jsonObjectUser.put("Games", m_jsonArrayGames);
-            m_jsonArrayGameLists.add(m_jsonObjectUser.toJSONString());
-        }
-
         m_jsonObjectUserGames.put("GameLists", m_jsonArrayGameLists);
-        m_topLevelJson.put("Name", user.getName());
 
-        m_topLevelJson.put("GameLists",m_jsonObjectUserGames); // puts the JSON array within the JSON Object
+        m_topLevelJson.put("Data",m_jsonObjectUserGames); // puts the JSON array within the JSON Object
 
         try {
             FileWriter m_fileToWrite = new FileWriter(m_userFile); // creates a new FileWriter Object that uses the loginfiles as the filepath

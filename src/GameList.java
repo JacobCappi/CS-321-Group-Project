@@ -8,6 +8,7 @@ public class GameList implements Cloneable, Iterable{
 
     public GameList(){
         m_length = 0;
+        setListName("Default");
     }
 
     public void setListName(String listName){m_listName = listName;}
