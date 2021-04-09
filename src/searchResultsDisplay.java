@@ -54,6 +54,13 @@ public class searchResultsDisplay extends JPanel{
                 for(Game g : (Iterable<Game>) m_searchResult ){
                     if(g.getTitle().equals(m_title)){
                         user.getGameLists().get(0).addGame(g);
+                        try {
+                            m_fileManager.saveUserData(user);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             }
