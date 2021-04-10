@@ -4,6 +4,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
@@ -14,7 +15,7 @@ public class FileManager {
 
     private String m_loginFiles = "login.json";
     private String m_gameFile = "gameFile.json"; // changed per naming convention (?)
-    private String m_currentUser = "users.json";
+    private String m_currentUser = "Users/";
     GameList m_gameListFromFile = new GameList();
     GameList m_SearchResult = new GameList();
 
@@ -34,14 +35,14 @@ public class FileManager {
      * @throws FileNotFoundException
      */
     public boolean isRegisteredUser(User insertUser) throws IOException, ParseException, FileNotFoundException {
-        JSONParser m_parser = new JSONParser(); //creates a new JSON parser that allows the function to parse through the JSON file
-        Reader m_reader = new FileReader(m_loginFiles);// creates a new Reader Object that allows the parser to read the information
-        JSONObject m_objJSON = (JSONObject)m_parser.parse(m_reader); // JSON object that allows the parser to take in the information from the parser
-
         File m_testFile = new File(m_loginFiles);
         if(m_testFile.length() == 0) { // if the file is empty, returns false.
             return false;
         }
+        JSONParser m_parser = new JSONParser(); //creates a new JSON parser that allows the function to parse through the JSON file
+        Reader m_reader = new FileReader(m_loginFiles);// creates a new Reader Object that allows the parser to read the information
+        JSONObject m_objJSON = (JSONObject)m_parser.parse(m_reader); // JSON object that allows the parser to take in the information from the parser
+
         JSONArray m_jsonArray = (JSONArray) m_objJSON.get("Users"); //JSON Array that holds the array of users within the file.
 
         //Creates a String iterator that takes  the JSON iterator to go through the JSON array
@@ -145,16 +146,16 @@ public class FileManager {
 
         // maybe a better way, works... look into later
         for(int i =0; i<m_jsonArray.size(); i++){
-            JSONObject jsonObject = (JSONObject) m_jsonArray.get(i);
+            JSONObject m_jsonObject = (JSONObject) m_jsonArray.get(i);
             Game m_tmpGame = new Game();//Creates a new Game object so that data can be sent to another class
-            m_tmpGame.setId((String) jsonObject.get("ID"));
-            m_tmpGame.setTitle((String) jsonObject.get("Title"));
-            m_tmpGame.setHighlights((String) jsonObject.get("Highlights Supported?"));
-            m_tmpGame.setOptimized((String) jsonObject.get("Fully Optimized?"));
-            m_tmpGame.setURL((String) jsonObject.get("Steam Url"));
-            m_tmpGame.setPublisher((String) jsonObject.get("Publisher"));
-            m_tmpGame.setGenre((String) jsonObject.get("Genre"));
-            m_tmpGame.setStatus((String) jsonObject.get("Status"));
+            m_tmpGame.setId((String) m_jsonObject.get("ID"));
+            m_tmpGame.setTitle((String) m_jsonObject.get("Title"));
+            m_tmpGame.setHighlights((String) m_jsonObject.get("Highlights Supported?"));
+            m_tmpGame.setOptimized((String) m_jsonObject.get("Fully Optimized?"));
+            m_tmpGame.setURL((String) m_jsonObject.get("Steam Url"));
+            m_tmpGame.setPublisher((String) m_jsonObject.get("Publisher"));
+            m_tmpGame.setGenre((String) m_jsonObject.get("Genre"));
+            m_tmpGame.setStatus((String) m_jsonObject.get("Status"));
 
             g.addGame(m_tmpGame);
         }
@@ -174,17 +175,25 @@ public class FileManager {
         JSONArray m_jsonArrayGameLists; // stores gameLists
         JSONArray m_jsonArrayGames;
 
-        File m_testFile = new File(m_userFile);
         m_jsonArrayGames = new JSONArray();
         m_jsonArrayGameLists = new JSONArray();
 
         for (GameList gl : (Iterable<GameList>) user) {  // For loop that loops through each item in a JSON Array
             for (Game g : (Iterable<Game>) gl){
-                m_jsonArrayGames.add(g.toString());
+                JSONObject m_jsonObjectGame = new JSONObject();
+                m_jsonObjectGame.put("ID", g.getID());
+                m_jsonObjectGame.put("Title", g.getTitle());
+                m_jsonObjectGame.put("Highlights Supported?", g.getHighlights());
+                m_jsonObjectGame.put("Fully Optimized?", g.getOptimized());
+                m_jsonObjectGame.put("Steam Url", g.getSteamUrl());
+                m_jsonObjectGame.put("Publisher", g.getPublisher());
+                m_jsonObjectGame.put("Genre", g.getGenre());
+                m_jsonObjectGame.put("Status", g.getStatus());
+                m_jsonArrayGames.add(m_jsonObjectGame);
             }
             m_jsonObjectUser.put("GameListName", gl.getListName());
             m_jsonObjectUser.put("Games", m_jsonArrayGames);
-            m_jsonArrayGameLists.add(m_jsonObjectUser.toJSONString());
+            m_jsonArrayGameLists.add(m_jsonObjectUser);
         }
 
         m_topLevelJson.put("Name", user.getName());
@@ -201,6 +210,44 @@ public class FileManager {
             e.printStackTrace();
         }
 
+    }
+
+    public void loadUser(User user) throws IOException, ParseException {
+        String m_userFile = m_currentUser.concat(user.getName());
+        m_userFile = m_userFile.concat(".json");
+        // deleted some of the comments b/c they were not correct and was confusing me
+
+        File m_testFile = new File(m_userFile);
+
+        if(m_testFile.length() == 0) { // if the file is empty, returns false.
+            System.err.println("file not found");
+            return;
+        }
+        JSONParser m_parser = new JSONParser(); //creates a new JSON parser that allows the function to parse through the JSON file
+        Reader m_reader = new FileReader(m_userFile);// creates a new Reader Object that allows the parser to read the information
+        JSONObject m_objJSON = (JSONObject)m_parser.parse(m_reader); // JSON object that allows the parser to take in the information from the parser
+
+        JSONObject m_objJSONData = (JSONObject) m_objJSON.get("Data");
+        JSONArray m_objJSONGameLists = (JSONArray) m_objJSONData.get("GameLists");
+
+        for(int i=0;i<m_objJSONGameLists.size();i++){
+            JSONObject m_objJSONGame = (JSONObject) m_objJSONGameLists.get(i);
+            JSONArray m_jsonArrayData = (JSONArray) m_objJSONGame.get("Games");
+
+            for(int j =0; j<m_jsonArrayData.size(); j++){
+                JSONObject m_jsonObject = (JSONObject) m_jsonArrayData.get(j);
+                Game m_tmpGame = new Game();//Creates a new Game object so that data can be sent to another class
+                m_tmpGame.setId((String) m_jsonObject.get("ID"));
+                m_tmpGame.setTitle((String) m_jsonObject.get("Title"));
+                m_tmpGame.setHighlights((String) m_jsonObject.get("Highlights Supported?"));
+                m_tmpGame.setOptimized((String) m_jsonObject.get("Fully Optimized?"));
+                m_tmpGame.setURL((String) m_jsonObject.get("Steam Url"));
+                m_tmpGame.setPublisher((String) m_jsonObject.get("Publisher"));
+                m_tmpGame.setGenre((String) m_jsonObject.get("Genre"));
+                m_tmpGame.setStatus((String) m_jsonObject.get("Status"));
+                user.getGameLists().get(0).addGame(m_tmpGame);
+            }
+        }
     }
 
 }

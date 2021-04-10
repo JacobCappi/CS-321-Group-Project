@@ -13,7 +13,6 @@ public class GameList implements Cloneable, Iterable{
 
     public void setListName(String listName){m_listName = listName;}
     public String getListName(){return m_listName;}
-    public ArrayList getGameList(){ return m_gameList;}
 
     public void addGame(Game game){
         m_gameList.add(game);

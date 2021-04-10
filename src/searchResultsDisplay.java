@@ -20,16 +20,14 @@ public class searchResultsDisplay extends JPanel{
     private JButton searchButton;
     private JButton m_addGameButton;
     private JTextField searchGameText;
-    private JLabel searchResultLabel;
     private FileManager m_fileManager;
+    private JLabel searchResultLabel;
 
     private int m_row = 0;
     private int m_column = 0;
-    ArrayList <Game> m_searchResult = new ArrayList<>(); // lazy coding, already annoyed
-    Game testgame= new Game();
-    GameList searchResult = new GameList();
-    FileManager fileManager = new FileManager();
-    ArrayList  <ChangeListener> returntoUser = new ArrayList<>();
+    GameList m_searchResult = new GameList();
+
+    ArrayList <ChangeListener> returntoUser = new ArrayList<>();
     ArrayList <ChangeListener> m_addGame = new ArrayList<>();
     ArrayList <ChangeListener> m_addAnotherGame = new ArrayList<>();
 
@@ -54,7 +52,8 @@ public class searchResultsDisplay extends JPanel{
                 }
                 m_row = m_gameTable.getSelectedRow();
                 String m_title = (String) m_gameTable.getValueAt(m_row, 0);
-                for(Game g : (Iterable<Game>) m_searchResult ){
+
+                for(Game g : (Iterable<Game>) m_searchResult){
                     if(g.getTitle().equals(m_title)){
                         user.getGameLists().get(0).addGame(g);
                         try {
@@ -64,6 +63,7 @@ public class searchResultsDisplay extends JPanel{
                             for (ChangeListener listener : m_addGame) {
                                 listener.stateChanged(event);
                             }
+                            break;
                         } catch (IOException | ParseException e) {
                             e.printStackTrace();
                         }
@@ -76,10 +76,11 @@ public class searchResultsDisplay extends JPanel{
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                testgame.setTitle(searchGameText.getText());
+                Game m_testGame = new Game();
+                m_testGame.setTitle(searchGameText.getText());
                 try {
-                    if(fileManager.isGameInList(testgame)){
-                       searchResult = fileManager.gamesSearchResult(testgame);
+                    if(m_fileManager.isGameInList(m_testGame)){
+                        m_searchResult = m_fileManager.gamesSearchResult(m_testGame);
                         ChangeEvent event = new ChangeEvent(this);
                         for (ChangeListener listener : m_addAnotherGame) {
                             listener.stateChanged(event);
@@ -92,8 +93,6 @@ public class searchResultsDisplay extends JPanel{
         });
     }
 
-
-
     public void setGameDisplay(GameList gameList){
          String[][] m_data = new String[gameList.getLength()][3];
          int m_counter = 0;
@@ -105,7 +104,7 @@ public class searchResultsDisplay extends JPanel{
 
              Game m_tmpGame = new Game();
              m_tmpGame = g;
-             m_searchResult.add(g);
+             m_searchResult.addGame(g);
          }
 
          m_gameTable.setModel( new DefaultTableModel(
@@ -123,9 +122,6 @@ public class searchResultsDisplay extends JPanel{
 
     public void addReturntoUserPage(ChangeListener listener) {
         returntoUser.add(listener);
-    }
-    public void displayNewList(ChangeListener listener){
-        m_addGame.add(listener);
     }
     public void addAnotherGame(ChangeListener listener){
         m_addAnotherGame.add(listener);

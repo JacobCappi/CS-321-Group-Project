@@ -45,7 +45,7 @@ public class LoginScreenDisplay  extends JPanel{
                 try{
                     if(m_fileManager.isRegisteredUser(user)){
                         ChangeEvent event = new ChangeEvent(this);
-
+                        m_fileManager.loadUser(user);
                         for (ChangeListener listener : listeners)
                             listener.stateChanged(event);
                     }

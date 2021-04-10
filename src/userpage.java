@@ -41,8 +41,6 @@ public class userpage {
                     if(m_fileManager.isGameInList(m_testGame)){
                         m_searchResult = m_fileManager.gamesSearchResult(m_testGame);
 
-
-
                         ChangeEvent event = new ChangeEvent(this);
                         for (ChangeListener listener : searchListener ) {
                             listener.stateChanged(event);

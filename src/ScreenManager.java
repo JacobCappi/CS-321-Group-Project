@@ -40,6 +40,7 @@ public class ScreenManager {
         userLogin.addChangeListener(new ChangeListener(){
             @Override
             public void stateChanged(ChangeEvent e){
+                userListPage.createTable(m_user);
                 cl.show(cardSet,  "UserView");// shows the userpage card
             }
 
@@ -72,9 +73,7 @@ public class ScreenManager {
             @Override
             public void stateChanged(ChangeEvent e) {
                 //sets the testDisplay with the information from searching the game ( CAN BE CLEANED UP )
-
                 searchResults.setGameDisplay(userListPage.m_searchResult);
-
                 cl.show(cardSet, "PLEASE WORK"); //dispays the Testdisplay with the game information (CAN BE CHANGED TO WHAT YOU NEED)
             }
         });
@@ -100,7 +99,7 @@ public class ScreenManager {
         searchResults.addAnotherGame(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                searchResults.setGameDisplay(searchResults.searchResult);
+                searchResults.setGameDisplay(searchResults.m_searchResult);
             }
         });
 
