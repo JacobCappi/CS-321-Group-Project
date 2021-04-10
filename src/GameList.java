@@ -10,6 +10,9 @@ public class GameList implements Cloneable, Iterable{
         m_length = 0;
         setListName("Default");
     }
+    public void clearList(){
+        m_gameList.clear();
+    }
 
     public void setListName(String listName){m_listName = listName;}
     public String getListName(){return m_listName;}

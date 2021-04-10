@@ -213,6 +213,7 @@ public class FileManager {
     }
 
     public void loadUser(User user) throws IOException, ParseException {
+        user.getGameLists().get(0).clearList();
         String m_userFile = m_currentUser.concat(user.getName());
         m_userFile = m_userFile.concat(".json");
         // deleted some of the comments b/c they were not correct and was confusing me
