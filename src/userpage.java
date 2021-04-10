@@ -21,9 +21,11 @@ public class userpage {
     private JTextField searchBox;
     private JButton searchButton;
     private JButton Logout;
+    private JButton deleteButton;
+    private JLabel titleLabel;
     ArrayList<ChangeListener> searchListener = new ArrayList<>();
     ArrayList< ChangeListener> logoutListener = new ArrayList<>();
-
+    ArrayList<ChangeListener> deleteListener  = new ArrayList<>();
     User m_currentUser = new User();
     Game m_testGame = new Game();
     GameList m_searchResult = new GameList();
@@ -60,6 +62,15 @@ public class userpage {
             public void actionPerformed(ActionEvent e) {
                 ChangeEvent event = new ChangeEvent(this);
                 for (ChangeListener listener : logoutListener ) {
+                    listener.stateChanged(event);
+                }
+            }
+        });
+        deleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ChangeEvent event = new ChangeEvent(this);
+                for (ChangeListener listener : deleteListener ) {
                     listener.stateChanged(event);
                 }
             }
@@ -104,4 +115,8 @@ public class userpage {
         searchListener.add(listener);
     }
     public void addlogoutListener(ChangeListener listener) {logoutListener.add(listener);}
+    public void deleteGameListener(ChangeListener listener){ deleteListener.add(listener);}
+    public void setUserTitle(String Name){
+        titleLabel.setText(Name);
+    }
 }

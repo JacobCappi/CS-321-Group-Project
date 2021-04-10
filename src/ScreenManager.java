@@ -26,7 +26,7 @@ public class ScreenManager {
         cardSet.add(userLogin.getLoginPanel(), "LoginView"); //adds the login display Panel
         cardSet.add(userRegister.getRegisterDisplay(), "RegisterView"); //adds the Regiser Display
         cardSet.add(userListPage.getRootPanel(),"UserView"); //adds the userpage display
-        cardSet.add(searchResults.getTest(),"PLEASE WORK"); //adds the testDisplay (CAN BE  CHANGED TO WHATEVER YOU ARE USING TO ADD THE GAME)
+        cardSet.add(searchResults.getTest(),"Search Results"); //adds the testDisplay (CAN BE  CHANGED TO WHATEVER YOU ARE USING TO ADD THE GAME)
         testFrame.add(cardSet);  //adds  cardset to the JFrame
 
 
@@ -41,6 +41,7 @@ public class ScreenManager {
             @Override
             public void stateChanged(ChangeEvent e){
                 userListPage.createTable(m_user);
+                userListPage.setUserTitle(m_user.m_Name + "'s Game Diary");
                 cl.show(cardSet,  "UserView");// shows the userpage card
             }
 
@@ -69,15 +70,22 @@ public class ScreenManager {
                 cl.show(cardSet, "UserView");
             }
         });
+
+
         userListPage.addSearchListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
                 //sets the testDisplay with the information from searching the game ( CAN BE CLEANED UP )
                 searchResults.setGameDisplay(userListPage.m_searchResult);
-                cl.show(cardSet, "PLEASE WORK"); //dispays the Testdisplay with the game information (CAN BE CHANGED TO WHAT YOU NEED)
+                cl.show(cardSet, "Search Results"); //dispays the Testdisplay with the game information (CAN BE CHANGED TO WHAT YOU NEED)
             }
         });
-
+        userListPage.deleteGameListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+             userListPage.createTable(m_user);
+            }
+        });
 
 
         userListPage.addlogoutListener(new ChangeListener() {
