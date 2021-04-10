@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class userpage {
 
@@ -103,9 +104,15 @@ public class userpage {
 
 
     //here you will need to get an Array list of genres from json
+    //ended up hardcoding genres bc there weren't that many
+    ArrayList<String> genres  = new ArrayList<>(Arrays.asList("Role Playing", "Action", "Indie", "Active", "Sports", "Massively Multiplayer Online", "Multiplayer Online Battle Arena", "Adventure", "Strategy", "Simulation", "Racing", "First-Person Shooter", "Free To Play", "Puzzle", "Casual", "Platformer", "Arcade", "Family"));
+
+    //here we will add a sort function
+    // m_data.sort(function(a,b) { return parseFloat(b.score) - parseFloat(a.score) } not this exactly but similar
 
     public void createGenreCombo(){
         genreCombo.setModel(new DefaultComboBoxModel(new String[]{"Genre"})); //need to add action listener to work
+       // m_data.sort(function(a,b) { return parseFloat(b.score) - parseFloat(a.score) }
     }
 
     public void createTypeCombo(){

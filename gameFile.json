@@ -584,7 +584,7 @@
       "Fully Optimized?": "Y",
       "Steam Url": "https://store.steampowered.com/app/582660",
       "Publisher": "Kakao Games Europe B.V.",
-      "Genre": "Action,Adventure,Massively Multiplayer Online,Role PlayingSimulation,Strategy,",
+      "Genre": "Action,Adventure,Massively Multiplayer Online,Role Playing,Simulation,Strategy,",
       "Status": "AVAILABLE"
     },
     {
@@ -840,7 +840,7 @@
       "Fully Optimized?": "N",
       "Steam Url": "https://store.steampowered.com/app/920690",
       "Publisher": "Freejam",
-      "Genre": "Action,Adventure,Massively Multiplayer Online,IndieRole Playing,",
+      "Genre": "Action,Adventure,Massively Multiplayer Online,Indie,Role Playing,",
       "Status": "AVAILABLE"
     },
     {
@@ -870,7 +870,7 @@
       "Fully Optimized?": "N",
       "Steam Url": "https://store.steampowered.com/app/1016800",
       "Publisher": "The Farm 51",
-      "Genre": "Action,Adventure,Indie,Role PlayingSimulation,",
+      "Genre": "Action,Adventure,Indie,Role Playing,Simulation,",
       "Status": "AVAILABLE"
     },
     {
@@ -1238,7 +1238,7 @@
       "Fully Optimized?": "N",
       "Steam Url": "https://store.steampowered.com/app/221100",
       "Publisher": "Bohemia Interactive",
-      "Genre": "Action,Adventure,First-Person Shooter,Massively Multiplayer OnlineRole Playing,Simulation,",
+      "Genre": "Action,Adventure,First-Person Shooter,Massively Multiplayer Online,Role Playing,Simulation,",
       "Status": "AVAILABLE"
     },
     {
@@ -1278,7 +1278,7 @@
       "Fully Optimized?": "N",
       "Steam Url": "https://store.steampowered.com/app/573120",
       "Publisher": "Playdius, Plug In Digital",
-      "Genre": "Adventure,Indie,Role Playing,SimulationStrategy,",
+      "Genre": "Adventure,Indie,Role Playing,Simulation,Strategy,",
       "Status": "AVAILABLE"
     },
     {
@@ -1318,7 +1318,7 @@
       "Fully Optimized?": "N",
       "Steam Url": "https://store.steampowered.com/app/428660",
       "Publisher": "Wired Productions",
-      "Genre": "Action,Adventure,Indie,PuzzleSimulation,",
+      "Genre": "Action,Adventure,Indie,Puzzle,Simulation,",
       "Status": "AVAILABLE"
     },
     {
@@ -1358,7 +1358,7 @@
       "Fully Optimized?": "Y",
       "Steam Url": "https://store.steampowered.com/app/1085660",
       "Publisher": "Bungie",
-      "Genre": "Action,Adventure,First-Person Shooter,Free To PlayMassively Multiplayer Online,Role Playing,",
+      "Genre": "Action,Adventure,First-Person Shooter,Free To Play,Massively Multiplayer Online,Role Playing,",
       "Status": "AVAILABLE"
     },
     {
@@ -1636,7 +1636,7 @@
       "Fully Optimized?": "N",
       "Steam Url": "https://store.steampowered.com/app/359320",
       "Publisher": "Frontier Developments",
-      "Genre": "Action,Adventure,Massively Multiplayer Online,Role PlayingSimulation,Strategy,",
+      "Genre": "Action,Adventure,Massively Multiplayer Online,Role Playing,Simulation,Strategy,",
       "Status": "AVAILABLE"
     },
     {
@@ -1695,7 +1695,7 @@
       "Highlights Supported?": "N",
       "Fully Optimized?": "N",
       "Publisher": "CCP",
-      "Genre": "Action,Free To Play,Massively Multiplayer Online,Role PlayingStrategy,",
+      "Genre": "Action,Free To Play,Massively Multiplayer Online,Role Playing,Strategy,",
       "Status": "AVAILABLE"
     },
     {
