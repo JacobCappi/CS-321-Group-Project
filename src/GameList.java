@@ -1,9 +1,12 @@
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class GameList implements Cloneable, Iterable{
     String m_listName;
     ArrayList<Game> m_gameList = new ArrayList<>();
+
     int m_length;
 
     public GameList(){
@@ -61,5 +64,15 @@ public class GameList implements Cloneable, Iterable{
 
     public Iterator<Game> iterator() {
         return this.m_gameList.iterator();
+    }
+
+    public void sortByTitle()
+    {
+        Collections.sort(m_gameList,new GameComparator());
+    }
+
+    public void sortByDev()
+    {
+        Collections.sort(m_gameList, new DevComparator());
     }
 }
