@@ -4,12 +4,16 @@ import javax.sound.midi.SysexMessage;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableColumnModel;
+import javax.swing.table.*;
+import javax.swing.text.TableView;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumnModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,10 +36,12 @@ public class userpage {
     GameList m_searchResult = new GameList();
     FileManager m_fileManager = new FileManager();
 
+
     public userpage(User user) throws IOException, ParseException {
+
         createTable(user);
         createGenreCombo();
-        createTypeCombo();
+
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -88,8 +94,11 @@ public class userpage {
         int m_counter = 0;
 
         for (Game g : (Iterable<Game>)user.getGameLists().get(0)) {
+
+            //temporarily replacing commas with spaces to test sorting genres
+            String genreL = g.getGenre().replace(",", " ");
             m_data[m_counter][0] = g.getTitle();
-            m_data[m_counter][1] = g.getGenre();
+            m_data[m_counter][1] = genreL; //TEMPORARY
             m_data[m_counter++][2] = g.getPublisher();
         }
 
@@ -99,25 +108,46 @@ public class userpage {
         ));
         TableColumnModel columns = m_gameTable.getColumnModel();
         columns.getColumn(0).setMinWidth(0);
+       // m_gameTable.setAutoCreateRowSorter(true); // THIS WILL SORT ALPHABETICALLY
+
+
 
     }
 
-
-    //here you will need to get an Array list of genres from json
-    //ended up hardcoding genres bc there weren't that many
-    ArrayList<String> genres  = new ArrayList<>(Arrays.asList("Role Playing", "Action", "Indie", "Active", "Sports", "Massively Multiplayer Online", "Multiplayer Online Battle Arena", "Adventure", "Strategy", "Simulation", "Racing", "First-Person Shooter", "Free To Play", "Puzzle", "Casual", "Platformer", "Arcade", "Family"));
-
-    //here we will add a sort function
-    // m_data.sort(function(a,b) { return parseFloat(b.score) - parseFloat(a.score) } not this exactly but similar
 
     public void createGenreCombo(){
-        genreCombo.setModel(new DefaultComboBoxModel(new String[]{"Genre"})); //need to add action listener to work
-       // m_data.sort(function(a,b) { return parseFloat(b.score) - parseFloat(a.score) }
+
+        ArrayList<String> genres  = new ArrayList<>(Arrays.asList("Role Playing", "Action", "Indie", "Active", "Sports", "Massively Multiplayer Online", "Multiplayer Online Battle Arena", "Adventure", "Strategy", "Simulation", "Racing", "First-Person Shooter", "Free To Play", "Puzzle", "Casual", "Platformer", "Arcade", "Family"));
+        String genreSelect = (String)genreCombo.getSelectedItem();
+        TableRowSorter<TableModel> rowSorter
+                = new TableRowSorter<>(m_gameTable.getModel());
+
+        genreCombo.setModel(new DefaultComboBoxModel<String>(genres.toArray(new String[0]))); //sets comboBox labels
+
+        genreCombo.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if(e.getStateChange() == ItemEvent.SELECTED){
+                    String genreSelect = (String)genreCombo.getSelectedItem(); //grab genre selection
+                    m_gameTable.setRowSorter(rowSorter);
+
+
+                    if(genreSelect.trim().length() == 0){
+
+                        rowSorter.setRowFilter(null);
+                    } else {
+                        rowSorter.setRowFilter(RowFilter.regexFilter(genreSelect)); //this line isn't doing what its supposed to
+                        System.out.print(genreSelect);
+
+                    }
+                }
+            }
+        });
+
+
     }
 
-    public void createTypeCombo(){
-        genreCombo.setModel(new DefaultComboBoxModel(new String[]{"Genre"}));
-    }
+
     public void addSearchListener(ChangeListener listener) {
         searchListener.add(listener);
     }
