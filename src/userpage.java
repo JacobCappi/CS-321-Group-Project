@@ -5,10 +5,7 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.table.*;
-import javax.swing.text.TableView;
-import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -34,7 +31,6 @@ public class userpage {
     Game m_testGame = new Game();
     GameList m_searchResult = new GameList();
     FileManager m_fileManager = new FileManager();
-    TableRowSorter<DefaultTableModel> rowSorter;
 
 
     public userpage(User user) throws IOException, ParseException {
@@ -109,13 +105,14 @@ public class userpage {
         ));
       TableColumnModel columns = m_gameTable.getColumnModel();
       columns.getColumn(0).setMinWidth(0);
-       // m_gameTable.setAutoCreateRowSorter(true); // THIS WILL SORT ALPHABETICALLY
+       m_gameTable.setAutoCreateRowSorter(true); // THIS WILL SORT ALPHABETICALLY AUTOMATICALLY
 
     }
 
 
     public void createGenreCombo(){
 
+        //this arraylist  populates the combobox; definitely needs a better solution
         ArrayList<String> genres  = new ArrayList<>(Arrays.asList("Role Playing", "Action", "Indie", "Active", "Sports", "Massively Multiplayer Online", "Multiplayer Online Battle Arena", "Adventure", "Strategy", "Simulation", "Racing", "First-Person Shooter", "Free To Play", "Puzzle", "Casual", "Platformer", "Arcade", "Family"));
         String genreSelect = (String)genreCombo.getSelectedItem();
 
@@ -128,22 +125,7 @@ public class userpage {
                 if(e.getStateChange() == ItemEvent.SELECTED){
                     String genreSelect = (String)genreCombo.getSelectedItem(); //grab genre selection
                     System.out.print(genreSelect);
-                    try{
-                        rowSorter.setRowFilter(RowFilter.regexFilter(genreSelect));
-                    } catch (java.util.regex.PatternSyntaxException f){
-                        return;
-                    }
-
-                   m_gameTable.setRowSorter(rowSorter);
-
-                   /* if(genreSelect.trim().length() == 0){
-
-                        rowSorter.setRowFilter(null);
-                    } else {
-                        rowSorter.setRowFilter(RowFilter.regexFilter(genreSelect)); //this line isn't doing what its supposed to
-                        System.out.print(genreSelect);
-
-                    }*/
+                        //sort here
                 }
             }
         });
