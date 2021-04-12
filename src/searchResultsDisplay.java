@@ -21,12 +21,13 @@ public class searchResultsDisplay extends JPanel{
     private JButton m_addGameButton;
     private JTextField searchGameText;
     private FileManager m_fileManager;
+    private FileManager m_fileManager1 = new FileManager();
     private JLabel searchResultLabel;
 
     private int m_row = 0;
     private int m_column = 0;
     GameList m_searchResult = new GameList();
-
+    GameList m_NewSearchResult = new GameList();
     ArrayList <ChangeListener> returntoUser = new ArrayList<>();
     ArrayList <ChangeListener> m_addGame = new ArrayList<>();
     ArrayList <ChangeListener> m_addAnotherGame = new ArrayList<>();
@@ -79,8 +80,8 @@ public class searchResultsDisplay extends JPanel{
                 Game m_testGame = new Game();
                 m_testGame.setTitle(searchGameText.getText());
                 try {
-                    if(m_fileManager.isGameInList(m_testGame)){
-                        m_searchResult = m_fileManager.gamesSearchResult(m_testGame);
+                    if(m_fileManager1.isGameInList(m_testGame)){
+                       m_NewSearchResult = m_fileManager1.gamesSearchResult(m_testGame);
                         ChangeEvent event = new ChangeEvent(this);
                         for (ChangeListener listener : m_addAnotherGame) {
                             listener.stateChanged(event);

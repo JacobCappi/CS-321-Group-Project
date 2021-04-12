@@ -26,7 +26,7 @@ public class ScreenManager {
         cardSet.add(userLogin.getLoginPanel(), "LoginView"); //adds the login display Panel
         cardSet.add(userRegister.getRegisterDisplay(), "RegisterView"); //adds the Regiser Display
         cardSet.add(userListPage.getRootPanel(),"UserView"); //adds the userpage display
-        cardSet.add(searchResults.getTest(),"Search Results"); //adds the testDisplay (CAN BE  CHANGED TO WHATEVER YOU ARE USING TO ADD THE GAME)
+        cardSet.add(searchResults.getTest(),"Search Results"); //adds the testDisplay
         testFrame.add(cardSet);  //adds  cardset to the JFrame
 
 
@@ -108,7 +108,7 @@ public class ScreenManager {
         searchResults.addAnotherGame(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                searchResults.setGameDisplay(searchResults.m_searchResult);
+                searchResults.setGameDisplay(searchResults.m_NewSearchResult);
             }
         });
 
