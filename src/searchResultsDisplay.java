@@ -23,7 +23,10 @@ public class searchResultsDisplay extends JPanel{
     private FileManager m_fileManager;
     private FileManager m_fileManager1 = new FileManager();
     private JLabel searchResultLabel;
-
+    private JTextField scoreTextField;
+    private JTextField textField1;
+    private JLabel StatusLabel;
+    Game m_testGame = new Game();
     private int m_row = 0;
     private int m_column = 0;
     GameList m_searchResult = new GameList();
@@ -77,7 +80,7 @@ public class searchResultsDisplay extends JPanel{
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Game m_testGame = new Game();
+
                 m_testGame.setTitle(searchGameText.getText());
                 try {
                     if(m_fileManager1.isGameInList(m_testGame)){
@@ -86,7 +89,7 @@ public class searchResultsDisplay extends JPanel{
                         for (ChangeListener listener : m_addAnotherGame) {
                             listener.stateChanged(event);
                         }
-                    }
+                    }else { JOptionPane.showMessageDialog(null, "GAME NOT FOUND", "ERROR", JOptionPane.ERROR_MESSAGE);}
                 } catch (IOException | ParseException ioException) {
                     ioException.printStackTrace();
                 }
@@ -127,5 +130,6 @@ public class searchResultsDisplay extends JPanel{
     public void addAnotherGame(ChangeListener listener){
         m_addAnotherGame.add(listener);
     }
+    public void setSearchResultLabel(String resultLabel){ searchResultLabel.setText(resultLabel);}
 }
 

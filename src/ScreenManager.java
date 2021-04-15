@@ -77,6 +77,7 @@ public class ScreenManager {
             public void stateChanged(ChangeEvent e) {
                 //sets the testDisplay with the information from searching the game ( CAN BE CLEANED UP )
                 searchResults.setGameDisplay(userListPage.m_searchResult);
+                searchResults.setSearchResultLabel("Search Results for:  " + userListPage.m_testGame.m_Title);
                 cl.show(cardSet, "Search Results"); //dispays the Testdisplay with the game information (CAN BE CHANGED TO WHAT YOU NEED)
             }
         });
@@ -108,6 +109,7 @@ public class ScreenManager {
         searchResults.addAnotherGame(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
+                searchResults.setSearchResultLabel("Search Results for:  " + searchResults.m_testGame.m_Title);
                 searchResults.setGameDisplay(searchResults.m_NewSearchResult);
             }
         });

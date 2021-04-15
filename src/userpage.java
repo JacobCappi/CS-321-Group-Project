@@ -52,9 +52,7 @@ public class userpage {
                         }
 
                     }
-                    else{
-                        JOptionPane.showMessageDialog(null, "GAME NOT FOUND", "ERROR", JOptionPane.ERROR_MESSAGE);
-                    }
+                    else{ JOptionPane.showMessageDialog(null, "GAME NOT FOUND", "ERROR", JOptionPane.ERROR_MESSAGE);}
                 } catch (IOException | ParseException ioException) {
                     ioException.printStackTrace();
                 }
@@ -101,7 +99,7 @@ public class userpage {
 
         m_gameTable.setModel( new DefaultTableModel(
                 m_data,
-                new String[]{"Title", "Genre", "Publisher"}
+                new String[]{"Title", "Genre", "Publisher", "Status", "Rating" }
         ));
       TableColumnModel columns = m_gameTable.getColumnModel();
       columns.getColumn(0).setMinWidth(0);
