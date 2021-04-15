@@ -114,7 +114,7 @@ public class searchResultsDisplay extends JPanel{
          ));
          TableColumnModel columns = m_gameTable.getColumnModel();
          columns.getColumn(0).setMinWidth(0);
-
+        m_gameTable.setAutoCreateRowSorter(true);
     }
 
 
