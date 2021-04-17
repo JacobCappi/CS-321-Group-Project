@@ -55,9 +55,16 @@ public class searchResultsDisplay extends JPanel{
                 }
                 m_row = m_gameTable.getSelectedRow();
                 String m_title = (String) m_gameTable.getValueAt(m_row, 0);
+                String m_rating = scoreTextField.getText();
 
                 for(Game g : (Iterable<Game>) m_searchResult){
                     if(g.getTitle().equals(m_title)){
+                        if(!(m_rating.equals("") || m_rating == null)){
+                            g.setRating(m_rating);
+                        }
+                        else{
+                            g.setRating("N/A");
+                        }
                         user.getGameLists().get(0).addGame(g);
                         try {
                             m_fileManager.saveUserData(user);

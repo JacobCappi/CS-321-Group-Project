@@ -189,6 +189,7 @@ public class FileManager {
                 m_jsonObjectGame.put("Publisher", g.getPublisher());
                 m_jsonObjectGame.put("Genre", g.getGenre());
                 m_jsonObjectGame.put("Status", g.getStatus());
+                m_jsonObjectGame.put("Rating", g.getRating());
                 m_jsonArrayGames.add(m_jsonObjectGame);
             }
             m_jsonObjectUser.put("GameListName", gl.getListName());
@@ -246,6 +247,7 @@ public class FileManager {
                 m_tmpGame.setPublisher((String) m_jsonObject.get("Publisher"));
                 m_tmpGame.setGenre((String) m_jsonObject.get("Genre"));
                 m_tmpGame.setStatus((String) m_jsonObject.get("Status"));
+                m_tmpGame.setRating((String) m_jsonObject.get("Rating"));
                 user.getGameLists().get(0).addGame(m_tmpGame);
             }
         }

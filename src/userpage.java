@@ -99,7 +99,7 @@ public class userpage {
 
     public void createTable(User user) {
         // will make it look better later
-        String[][] m_data = new String[user.getGameLists().get(0).getLength()][3];
+        String[][] m_data = new String[user.getGameLists().get(0).getLength()][4];
 
         int m_counter = 0;
 
@@ -111,7 +111,8 @@ public class userpage {
             String genreL = g.getGenre().replace(",", " ");
             m_data[m_counter][0] = g.getTitle();
             m_data[m_counter][1] = genreL; //TEMPORARY
-            m_data[m_counter++][2] = g.getPublisher();
+            m_data[m_counter][2] = g.getPublisher();
+            m_data[m_counter++][3] = g.getRating();
         }
 
         m_gameTable.setModel( new DefaultTableModel(

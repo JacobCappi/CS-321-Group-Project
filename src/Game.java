@@ -78,6 +78,8 @@ public class Game {
       return m_Status;
    }
 
+   public String getRating() {return m_rating;}
+
    public boolean compareNames(Game game){// dumb code, but it could have looked a lot messier.
        // this is handling spaces through recurrsion: it's a mess, don't ask
       if(game.getTitle().indexOf(" ") > -1){
