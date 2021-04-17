@@ -36,7 +36,7 @@ public class userpage {
     public userpage(User user) throws IOException, ParseException {
 
         createTable(user);
-        createGenreCombo();
+        createGenreCombo(user);
 
         searchButton.addActionListener(new ActionListener() {
             @Override
@@ -69,6 +69,7 @@ public class userpage {
                     parseException.printStackTrace();
                 }
                 user.getGameLists().get(0).clear();
+
                 ChangeEvent event = new ChangeEvent(this);
                 for (ChangeListener listener : logoutListener ) {
                     listener.stateChanged(event);
@@ -124,13 +125,9 @@ public class userpage {
     }
 
 
-    public void createGenreCombo(){
-
+    public void createGenreCombo(User user){
         //this arraylist  populates the combobox; definitely needs a better solution
-        ArrayList<String> genres  = new ArrayList<>(Arrays.asList("Role Playing", "Action", "Indie", "Active", "Sports", "Massively Multiplayer Online", "Multiplayer Online Battle Arena", "Adventure", "Strategy", "Simulation", "Racing", "First-Person Shooter", "Free To Play", "Puzzle", "Casual", "Platformer", "Arcade", "Family"));
-        String genreSelect = (String)genreCombo.getSelectedItem();
-
-
+        ArrayList<String> genres  = new ArrayList<>(Arrays.asList("Default", "Role Playing", "Action", "Indie", "Active", "Sports", "Massively Multiplayer Online", "Multiplayer Online Battle Arena", "Adventure", "Strategy", "Simulation", "Racing", "First-Person Shooter", "Free To Play", "Puzzle", "Casual", "Platformer", "Arcade", "Family"));
         genreCombo.setModel(new DefaultComboBoxModel<String>(genres.toArray(new String[0]))); //sets comboBox labels
 
         genreCombo.addItemListener(new ItemListener() {
@@ -138,8 +135,21 @@ public class userpage {
             public void itemStateChanged(ItemEvent e) {
                 if(e.getStateChange() == ItemEvent.SELECTED){
                     String genreSelect = (String)genreCombo.getSelectedItem(); //grab genre selection
-                    System.out.print(genreSelect);
-                        //sort here
+                    if(genreSelect.equals("Default")){
+                        createTable(user);
+                    }
+                    else{
+                        Game m_testGame = new Game();
+                        m_testGame.setGenre(genreSelect);
+                        User m_testUser = new User();
+                        for (Game g : (Iterable<Game>)user.getGameLists().get(0)) {
+                            if(g.compareGenre(m_testGame)){
+                                m_testUser.getGameLists().get(0).addGame(g);
+                            }
+                        }
+                        createTable(m_testUser);
+
+                    }
                 }
             }
         });

@@ -98,6 +98,25 @@ public class Game {
       }
    }
 
+   public boolean compareGenre(Game game){// dumb code, but it could have looked a lot messier.
+      // this is handling spaces through recurrsion: it's a mess, don't ask
+      if(game.getTitle().indexOf(" ") > -1){
+         int m_tmpInt0 = game.getGenre().indexOf(" ");
+
+         Game game2 = new Game();
+         Game game3 = new Game();
+         game2.setTitle(game.getGenre().substring(0,m_tmpInt0));
+         game3.setTitle(game.getGenre().substring(m_tmpInt0+1));
+
+         boolean m_tmpRetVal1 = compareGenre(game2);
+         boolean m_tmpRetVal2 = compareGenre(game3);
+
+         return (m_tmpRetVal1 && m_tmpRetVal2);
+      }
+      else{
+         return (this.getGenre().toLowerCase().indexOf(game.getGenre().toLowerCase()) > -1);
+      }
+   }
    @Override
    public String toString() {
       return "Game{" +
