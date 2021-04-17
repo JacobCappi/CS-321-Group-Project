@@ -25,8 +25,6 @@ public class searchResultsDisplay extends JPanel{
     private FileManager m_fileManager1 = new FileManager();
     private JLabel searchResultLabel;
     private JTextField scoreTextField;
-    private JLabel StatusLabel;
-    private JComboBox gameStatusBox;
     Game m_testGame = new Game();
     private int m_row = 0;
     private int m_column = 0;
