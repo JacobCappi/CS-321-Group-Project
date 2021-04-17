@@ -12,6 +12,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class searchResultsDisplay extends JPanel{
     private JPanel test;
@@ -24,8 +25,8 @@ public class searchResultsDisplay extends JPanel{
     private FileManager m_fileManager1 = new FileManager();
     private JLabel searchResultLabel;
     private JTextField scoreTextField;
-    private JTextField textField1;
     private JLabel StatusLabel;
+    private JComboBox gameStatusBox;
     Game m_testGame = new Game();
     private int m_row = 0;
     private int m_column = 0;
@@ -131,5 +132,8 @@ public class searchResultsDisplay extends JPanel{
         m_addAnotherGame.add(listener);
     }
     public void setSearchResultLabel(String resultLabel){ searchResultLabel.setText(resultLabel);}
+
+
+
 }
 

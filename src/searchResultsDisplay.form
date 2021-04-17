@@ -100,22 +100,24 @@
         </constraints>
         <properties/>
       </component>
-      <component id="9d477" class="javax.swing.JTextField" binding="textField1" default-binding="true">
-        <constraints>
-          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="4" fill="0" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties>
-          <text value=""/>
-        </properties>
-      </component>
       <component id="3a108" class="javax.swing.JLabel" binding="StatusLabel">
         <constraints>
           <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Add Status Here (Playing, Plan to Play, Completed)"/>
+        </properties>
+      </component>
+      <component id="ee366" class="javax.swing.JComboBox" binding="gameStatusBox">
+        <constraints>
+          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <model>
+            <item value="Plan to Play"/>
+            <item value="Playing"/>
+            <item value="Completed"/>
+          </model>
         </properties>
       </component>
     </children>
