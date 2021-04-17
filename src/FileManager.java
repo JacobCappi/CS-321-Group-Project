@@ -9,16 +9,24 @@ import java.util.Iterator;
 
 /**
  * Class:  FileManager
- * Description: This class handles all of the files that the project uses, and invokes methods that creates, modifies, and iterates through those files
+ * Description: Manager class that handles the entire File portion of the backend
+ *              File i/o for Users, File i/o for GameLists
+ *              Planned on Singleton Design Pattern, but unsure how in Java
  */
 public class FileManager {
 
     private String m_loginFiles = "login.json";
     private String m_gameFile = "gameFile.json"; // changed per naming convention (?)
-    private String m_currentUser = "Users/";
+    private String m_currentUser = "Users/"; // User dir
     GameList m_gameListFromFile = new GameList();
     GameList m_SearchResult = new GameList();
 
+    /**
+     * constructor: FileManager()
+     *              Upon creation, loads all games from the game file into memory
+     * @throws IOException
+     * @throws ParseException
+     */
     FileManager() throws IOException, ParseException {
         this.fillGameList(m_gameListFromFile, m_gameFile);
     }
@@ -27,8 +35,9 @@ public class FileManager {
 
     /**
      * Method: isRegisteredUser:
-     * Description: Searches a file of users to verify that the user info entered is within that file
-     * @param insertUser: Parameter that takes in a user object, that contains a username and password
+     * Description: Upon user creation, the user is stored in the login file. This method checks to
+     *              ensure no duplicate user is created (possible issue with duplicate user with different passwords)
+     * @param insertUser: User to check duplicates
      * @return returns TRUE if  the user is found within the file, returns FALSE otherwise.
      * @throws IOException
      * @throws ParseException
@@ -48,7 +57,6 @@ public class FileManager {
         //Creates a String iterator that takes  the JSON iterator to go through the JSON array
 
         for (String s : (Iterable<String>) m_jsonArray) {  // For loop that loops through each item in a JSON Array
-
             if (s.equals(insertUser.toJSON())) { // If the current iterator equals the information in the JSON file, returns true.
                 return true;
             }
@@ -59,8 +67,9 @@ public class FileManager {
 
     /**
      * Method: addUser
-     * Description: Adds a user object to a JSON file
-     * @param user :  User object that is passed in so that they can be added to a JSON file
+     * Description: Loads login file uses into json array if it exists. Then adds user to store back into
+     *              this array to store additional user into login file.
+     * @param user :  User to add to file
      * @throws IOException
      * @throws ParseException
      */
@@ -107,6 +116,14 @@ public class FileManager {
         return 0;
     }
 
+    /**
+     * Method: isGameinList
+     *          Uses the Game list that was loaded from the big game file to check if game exists
+     * @param game
+     * @return true is exists, false if it doesn't
+     * @throws IOException
+     * @throws ParseException
+     */
     public boolean isGameInList(Game game) throws IOException, ParseException {
         for (Game g : (Iterable<Game>) m_gameListFromFile) {  // For loop that loops through each item in a JSON Array
             if (g.compareNames(game)) { // If the current iterator equals the information in the JSON file, returns true.
@@ -116,6 +133,15 @@ public class FileManager {
         return false;
     }
 
+    /**
+     * method: gamesSearchResult()
+     *         method that handles game searching. Creates a Gamelist of all the games that match the serach
+     *         results, then returns it. Searching is done through compareNames() method from Game class
+     * @param game A game that contains the string from the user's search as the game title to compare
+     * @return Gamelist that holds all games with the search string somewhere in the game
+     * @throws IOException
+     * @throws ParseException
+     */
     public GameList gamesSearchResult(Game game) throws IOException, ParseException {
         GameList m_gameList = new GameList();
 
@@ -127,6 +153,14 @@ public class FileManager {
         return m_gameList;
     }
 
+    /**
+     * method: fillGameList()
+     *          gets the games that are from the gamefile.json are loads into memory
+     * @param g Gamelist to populate
+     * @param fileName name of the gamefile
+     * @throws IOException
+     * @throws ParseException
+     */
     public void fillGameList(GameList g, String fileName) throws IOException, ParseException {
         if(g.getLength() != 0) {
             System.err.println("gameList populated");
@@ -163,6 +197,14 @@ public class FileManager {
 
     }
 
+    /**
+     * method: saveUserData
+     *         saves the gamelist owned by the user into the respective user/[username].json file.
+     *         Stores games and users with JSON arrays and JSON objects
+     * @param user User that is stored into their file
+     * @throws IOException
+     * @throws ParseException
+     */
     public void saveUserData(User user) throws IOException, ParseException {
         String m_userFile = m_currentUser.concat(user.getName());
         m_userFile = m_userFile.concat(".json");
@@ -179,6 +221,7 @@ public class FileManager {
         m_jsonArrayGameLists = new JSONArray();
 
         for (GameList gl : (Iterable<GameList>) user) {  // For loop that loops through each item in a JSON Array
+            // went back to fix this. JSON needs these to be able to fetch later
             for (Game g : (Iterable<Game>) gl){
                 JSONObject m_jsonObjectGame = new JSONObject();
                 m_jsonObjectGame.put("ID", g.getID());
@@ -213,6 +256,14 @@ public class FileManager {
 
     }
 
+    /**
+     * method: loadUser
+     *          assumes that multiple gamelists are not implemented. Fetches the user
+     *          file to get each jsonObject.get(). Each is stored into gamelist(0)
+     * @param user User to load the gamelist into
+     * @throws IOException
+     * @throws ParseException
+     */
     public void loadUser(User user) throws IOException, ParseException {
         user.getGameLists().get(0).clear();
         String m_userFile = m_currentUser.concat(user.getName());

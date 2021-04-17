@@ -45,6 +45,7 @@ public class searchResultsDisplay extends JPanel{
                 }
             }
         });
+
         m_addGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
