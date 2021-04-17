@@ -92,7 +92,7 @@ public class ScreenManager {
         userListPage.addlogoutListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                m_user.getGameLists().get(0).clearList();
+                m_user.getGameLists().get(0).clear();
                 cl.show(cardSet,  "LoginView");
             }
         });

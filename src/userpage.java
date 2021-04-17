@@ -61,6 +61,14 @@ public class userpage {
         Logout.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                try {
+                    m_fileManager.saveUserData(user);
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                } catch (ParseException parseException) {
+                    parseException.printStackTrace();
+                }
+                user.getGameLists().get(0).clear();
                 ChangeEvent event = new ChangeEvent(this);
                 for (ChangeListener listener : logoutListener ) {
                     listener.stateChanged(event);
@@ -70,6 +78,12 @@ public class userpage {
         deleteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                Game m_remove = new Game();
+                int m_row = m_gameTable.getSelectedRow();
+                String m_title = (String) m_gameTable.getValueAt(m_row, 0);
+                m_remove.setTitle(m_title);
+
+                user.getGameLists().get(0).deleteGame(m_remove);
                 ChangeEvent event = new ChangeEvent(this);
                 for (ChangeListener listener : deleteListener ) {
                     listener.stateChanged(event);
@@ -89,7 +103,9 @@ public class userpage {
         int m_counter = 0;
 
         for (Game g : (Iterable<Game>)user.getGameLists().get(0)) {
-
+            if(m_counter == user.getGameLists().get(0).getLength()){
+                break;
+            }
             //temporarily replacing commas with spaces to test sorting genres
             String genreL = g.getGenre().replace(",", " ");
             m_data[m_counter][0] = g.getTitle();

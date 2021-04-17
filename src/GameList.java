@@ -13,9 +13,6 @@ public class GameList implements Cloneable, Iterable{
         m_length = 0;
         setListName("Default");
     }
-    public void clearList(){
-        m_gameList.clear();
-    }
 
     public void setListName(String listName){m_listName = listName;}
     public String getListName(){return m_listName;}
@@ -27,12 +24,18 @@ public class GameList implements Cloneable, Iterable{
 
     public boolean deleteGame(Game game){
         for(int i =0; i<m_length; i++){
-            if(m_gameList.get(i).getID().equals(game.getID())){
+            if(m_gameList.get(i).getTitle().equals(game.getTitle())){
                 m_gameList.remove(i);
+                m_length--;
                 return true;
             }
         }
         return false;
+    }
+
+    public void clear(){
+        m_gameList.clear();
+        m_length = 0;
     }
 
     public boolean ifExists(Game game){
@@ -66,13 +69,4 @@ public class GameList implements Cloneable, Iterable{
         return this.m_gameList.iterator();
     }
 
-    public void sortByTitle()
-    {
-        Collections.sort(m_gameList,new GameComparator());
-    }
-
-    public void sortByDev()
-    {
-        Collections.sort(m_gameList, new DevComparator());
-    }
 }
