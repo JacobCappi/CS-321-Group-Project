@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class userpage {
+public class UserpageDisplay {
 
     private JPanel rootPanel;
     private JTable m_gameTable;
@@ -33,7 +33,7 @@ public class userpage {
     FileManager m_fileManager = new FileManager();
 
 
-    public userpage(User user) throws IOException, ParseException {
+    public UserpageDisplay(User user) throws IOException, ParseException {
 
         createTable(user);
         createGenreCombo(user);
