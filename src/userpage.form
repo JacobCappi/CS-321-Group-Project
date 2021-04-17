@@ -43,7 +43,29 @@
             <constraints>
               <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
-            <properties/>
+            <properties>
+              <model>
+                <item value="Default"/>
+                <item value="Role Playing"/>
+                <item value="Action"/>
+                <item value="Indie"/>
+                <item value="Active"/>
+                <item value="Sports"/>
+                <item value="Massively Mutliplayer Online"/>
+                <item value="Multiplayer Online Battle Arena"/>
+                <item value="Adventure"/>
+                <item value="Strategy"/>
+                <item value="Simulation"/>
+                <item value="Racing"/>
+                <item value="First-Person Shooter"/>
+                <item value="Free To Play"/>
+                <item value="Puzzle"/>
+                <item value="Casual"/>
+                <item value="Platformer"/>
+                <item value="Arcade"/>
+                <item value="Family"/>
+              </model>
+            </properties>
           </component>
           <component id="7e773" class="javax.swing.JLabel">
             <constraints>

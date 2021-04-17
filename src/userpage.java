@@ -69,7 +69,7 @@ public class userpage {
                     parseException.printStackTrace();
                 }
                 user.getGameLists().get(0).clear();
-
+                genreCombo.setSelectedIndex(0);
                 ChangeEvent event = new ChangeEvent(this);
                 for (ChangeListener listener : logoutListener ) {
                     listener.stateChanged(event);
@@ -116,7 +116,7 @@ public class userpage {
 
         m_gameTable.setModel( new DefaultTableModel(
                 m_data,
-                new String[]{"Title", "Genre", "Publisher", "Status", "Rating" }
+                new String[]{"Title", "Genre", "Publisher" , "Rating" }
         ));
       TableColumnModel columns = m_gameTable.getColumnModel();
       columns.getColumn(0).setMinWidth(0);
@@ -126,9 +126,8 @@ public class userpage {
 
 
     public void createGenreCombo(User user){
-        //this arraylist  populates the combobox; definitely needs a better solution
-        ArrayList<String> genres  = new ArrayList<>(Arrays.asList("Default", "Role Playing", "Action", "Indie", "Active", "Sports", "Massively Multiplayer Online", "Multiplayer Online Battle Arena", "Adventure", "Strategy", "Simulation", "Racing", "First-Person Shooter", "Free To Play", "Puzzle", "Casual", "Platformer", "Arcade", "Family"));
-        genreCombo.setModel(new DefaultComboBoxModel<String>(genres.toArray(new String[0]))); //sets comboBox labels
+
+
 
         genreCombo.addItemListener(new ItemListener() {
             @Override
