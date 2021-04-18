@@ -21,7 +21,7 @@ public class ScreenManager {
         FileManager m_fileManager = new FileManager();
         User m_user = new User();
 
-        testFrame.setSize(1250,750); //sets the Jframe size
+        testFrame.setSize(1200,750); //sets the Jframe size
         testFrame.setLocationRelativeTo(null); // sets the location to null so that the Jframe does not open in the top left corner of the screen
         final LoginScreenDisplay userLogin = new LoginScreenDisplay(m_user); //creates a new loginDisplay for the card Layout
         final RegisterUserDisplay userRegister = new RegisterUserDisplay(); // creates a new Register user display for the card Layout;
@@ -53,9 +53,10 @@ public class ScreenManager {
 
         });
         //ChangeListener that listens for the registerButton to be clicked and switches the view to RegisterUserDisplay
-        userLogin.addToRegisterUserListener(new ChangeListener(){
+        userLogin.addRegisterUserListener(new ChangeListener(){
             @Override
             public void stateChanged(ChangeEvent  e2){
+                testFrame.setSize(500,500);
                 cl.show(cardSet,  "RegisterView"); //shows the the registerUser Card
             }
 
@@ -65,6 +66,7 @@ public class ScreenManager {
         userRegister.addListenerReturntoLogin(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent changeEvent) {
+                testFrame.setSize(1200,750);
                 String event = changeEvent.getSource().toString();
                 cl.show(cardSet, "LoginView"); //  shows the login card after logout button is clicked
             }

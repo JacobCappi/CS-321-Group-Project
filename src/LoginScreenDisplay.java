@@ -98,7 +98,7 @@ public class LoginScreenDisplay  extends JPanel{
      * Description: Adds the listener from registerButton to the RegisterListener ArrayList
      * @param listener takes in a changeListener so that it can be added to the arraylist
      */
-    public void addToRegisterUserListener(ChangeListener listener) {
+    public void addRegisterUserListener(ChangeListener listener) {
         RegisterListener.add(listener);
     }
 
