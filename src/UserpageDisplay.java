@@ -14,6 +14,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Class: UserpageDisplay
+ * Description: The panel for displaying the user's list. Creates table populated with User's game list. Also allows user's to delete games from their list.
+ *
+ */
 public class UserpageDisplay {
 
     private JPanel rootPanel;
@@ -32,13 +37,20 @@ public class UserpageDisplay {
     GameList m_searchResult = new GameList();
     FileManager m_fileManager = new FileManager();
 
-
+    /**
+     * Constructor: UserpageDisplay
+     * Description: Constructor that creates a table with the user's list displayed. Handles search, logout, and delete buttons/listeners, as well as sorting of the lists.
+     * Uses the Observer pattern
+     * @param user : Passes in a user whose list is displayed in the JTable.
+     * @throws IOException
+     * @throws ParseException
+     */
     public UserpageDisplay(User user) throws IOException, ParseException {
 
         createTable(user);
         createGenreCombo(user);
 
-        searchButton.addActionListener(new ActionListener() {
+        searchButton.addActionListener(new ActionListener() {      //search button listener, displays search results
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -58,7 +70,7 @@ public class UserpageDisplay {
                 }
             }
         });
-        Logout.addActionListener(new ActionListener() {
+        Logout.addActionListener(new ActionListener() {         //logout listener, brings user back to the login screen
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -76,7 +88,7 @@ public class UserpageDisplay {
                 }
             }
         });
-        deleteButton.addActionListener(new ActionListener() {
+        deleteButton.addActionListener(new ActionListener() {       //delete button listener, allows user to delete a game from their list by selecting its row
             @Override
             public void actionPerformed(ActionEvent e) {
                 Game m_remove = new Game();
@@ -97,6 +109,11 @@ public class UserpageDisplay {
         return rootPanel;
     }
 
+    /**
+     * Method: createTable
+     * Description: Populates JTable with user's gameList information. JTable sorted here.
+     * @param user: Passes in a user and accesses the user's gameList.
+     */
     public void createTable(User user) {
         // will make it look better later
         String[][] m_data = new String[user.getGameLists().get(0).getLength()][4];
@@ -125,11 +142,12 @@ public class UserpageDisplay {
 
     }
 
-
+    /**
+     * Method: createGenreCombo
+     * Description: Adds listener to genre combobox, which is used to display games that match the selected genre.
+     * @param user: Passes in a user and accesses the user's gameList.
+     */
     public void createGenreCombo(User user){
-
-
-
         genreCombo.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
@@ -158,13 +176,42 @@ public class UserpageDisplay {
     }
 
 
-
+    /**
+     * Method: addSearchListener
+     * Description: adds the listener to the searchButton to search the gameFile for searched criteria and display it
+     * @param listener Pass in a changeListener so that it can be added to the searchListener arrayList
+     */
     public void addSearchListener(ChangeListener listener) {
         searchListener.add(listener);
     }
+
+
+
+    /**
+     * Method: addLogoutListener
+     * Description: adds the listener to the logout button, which will take the user back to the login screen
+     * @param listener Pass in a changeListener so that it can be added to the logoutListener arrayList
+     */
     public void addlogoutListener(ChangeListener listener) {logoutListener.add(listener);}
+
+
+
+    /**
+     * Method: deleteGameListener
+     * Description: adds the listener to the delete button to remove the selected row's game from the gameList
+     * @param listener Pass in a changeListener so that it can be added to the deleteListener arrayList
+     */
     public void deleteGameListener(ChangeListener listener){ deleteListener.add(listener);}
+
+
+
+    /**
+     * Method: setUserTitle
+     * Description: sets titleLabel to the user's name, so "[User]'s Game Diary" appears as the title
+     * @param Name Pass in the user's name
+     */
     public void setUserTitle(String Name){
         titleLabel.setText(Name);
     }
 }
+

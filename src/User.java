@@ -3,7 +3,7 @@ import java.util.Iterator;
 
 /**
  * Class User
- *       The main data struct that is passed around through the panels
+ * Description: The main data struct that is passed around through the panels
  *       Contains every information the User needs to use the software
  */
 public class User implements Iterable, Cloneable{

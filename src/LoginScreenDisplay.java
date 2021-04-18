@@ -10,7 +10,7 @@ import org.json.simple.parser.ParseException;
 
 /**
  * Class: LoginScreenDisplay
- * Function: Creates the login ScreenDisplay so that the user can enter information and log in.
+ * Description: Creates the login ScreenDisplay so that the user can enter information and log in.
  */
 public class LoginScreenDisplay  extends JPanel{
     private JPanel loginPanel;

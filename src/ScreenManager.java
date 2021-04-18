@@ -8,7 +8,7 @@ import java.io.IOException;
 
 /**
  * Class: ScreenManager:
- * Function: Manages all of the screens, and uses a card dispay so that each screen can be shown with button clicks.
+ * Description: Manages all of the screens, and uses a card dispay so that each screen can be shown with button clicks.
  * This class uses the Observer pattern so that it can listen to any changes that occur throughout the panels, so that this class can be notified and the right switch can be made.
  *
  */
