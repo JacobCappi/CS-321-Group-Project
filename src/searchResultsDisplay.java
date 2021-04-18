@@ -12,8 +12,8 @@ import java.util.ArrayList;
 
 /**
  * Class: searchResultsDisplay
- * Description: The panel for displaying the results of the search from the UserpageDisplay. The class also handles the same search from within the class itself, and allows the user to add the game to their list
- *
+ * Description: The panel for displaying the results of the search from the UserpageDisplay.
+ *              The class also handles the same search from within the class itself, and allows the user to add the game to their list
  */
 public class searchResultsDisplay extends JPanel{
     private JPanel searchResultPanel;
@@ -146,7 +146,7 @@ public class searchResultsDisplay extends JPanel{
 
 
     /**
-     * Method: getTest
+     * Method: getSearchResultPanel
      * Description: Gets the searchResultPanel for ScreenManager
      * @return returns the searchResultPanel
      */

@@ -17,7 +17,7 @@ import java.util.Arrays;
 /**
  * Class: UserpageDisplay
  * Description: The panel for displaying the user's list. Creates table populated with User's game list. Also allows user's to delete games from their list.
- *
+ * Uses the Observer pattern
  */
 public class UserpageDisplay {
 
@@ -40,7 +40,7 @@ public class UserpageDisplay {
     /**
      * Constructor: UserpageDisplay
      * Description: Constructor that creates a table with the user's list displayed. Handles search, logout, and delete buttons/listeners, as well as sorting of the lists.
-     * Uses the Observer pattern
+     *
      * @param user : Passes in a user whose list is displayed in the JTable.
      * @throws IOException
      * @throws ParseException
@@ -105,6 +105,11 @@ public class UserpageDisplay {
         });
     }
 
+    /**
+     * Method: getRootPanel
+     * Description: Gets the rootPanel for ScreenManager
+     * @return returns the rootPanel
+     */
     public JPanel getRootPanel() {
         return rootPanel;
     }
