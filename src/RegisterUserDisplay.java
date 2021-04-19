@@ -99,7 +99,7 @@ public class RegisterUserDisplay extends JPanel{
                 m_tmpUser.setInfo(m_inputStringUserName, m_inputStringPassword);
                 try {
                     if(m_fileManager.addUser(m_tmpUser) == 1){
-                        JOptionPane.showMessageDialog(null, "Error: User with that name already exists...", "ERROR", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Error: User with that name already exists", "ERROR", JOptionPane.ERROR_MESSAGE);
                     }
 
                     ChangeEvent event = new ChangeEvent(this);
