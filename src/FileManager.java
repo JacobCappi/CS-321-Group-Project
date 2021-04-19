@@ -36,7 +36,7 @@ public class FileManager {
     /**
      * Method: isRegisteredUser:
      * Description: Upon user creation, the user is stored in the login file. This method checks to
-     *              ensure no duplicate user is created (possible issue with duplicate user with different passwords)
+     *              ensure no duplicate user is created
      * @param insertUser: User to check duplicates
      * @return returns TRUE if  the user is found within the file, returns FALSE otherwise.
      * @throws IOException
@@ -56,10 +56,15 @@ public class FileManager {
 
         //Creates a String iterator that takes  the JSON iterator to go through the JSON array
 
-        for (String s : (Iterable<String>) m_jsonArray) {  // For loop that loops through each item in a JSON Array
-            if (s.equals(insertUser.toJSON())) { // If the current iterator equals the information in the JSON file, returns true.
+        for( int i=0; i<m_jsonArray.size(); i++){
+            JSONObject m_jsonObject = new JSONObject();
+            m_jsonObject = (JSONObject) m_jsonArray.get(i);
+            String m_name = (String) m_jsonObject.get("ID");
+            String m_pass = (String) m_jsonObject.get("Password");
+            if(m_name.equals(insertUser.getName()) && m_pass.equals(insertUser.getPassword())){
                 return true;
             }
+
         }
         return false;
 
@@ -90,17 +95,21 @@ public class FileManager {
             m_jsonArray = (JSONArray) m_objJSON.get("Users"); // takes the JSON array and puts the User information within
         }
 
-        JSONObject m_jsonObject = new JSONObject();
-        m_jsonObject.put("ID", user.toString());
-
         // error checking to see if user already exists in file
-        for(int i =0; i<m_jsonArray.size(); i++){
-            String jsonObject = (String) m_jsonArray.get(i);
-            if(m_jsonObject.toJSONString().equals(jsonObject)){
+        for( int i=0; i<m_jsonArray.size(); i++){
+            JSONObject jsonObject = new JSONObject();
+            jsonObject = (JSONObject) m_jsonArray.get(i);
+            String m_name = (String) jsonObject.get("ID");
+            if(m_name.equals(user.getName())){
                 return 1;
             }
         }
-        m_jsonArray.add(m_jsonObject.toJSONString());
+
+        JSONObject m_jsonObject = new JSONObject();
+        m_jsonObject.put("ID", user.getName());
+        m_jsonObject.put("Password", user.getPassword());
+
+        m_jsonArray.add(m_jsonObject);
         m_topLevelJson.put("Users", m_jsonArray); // puts the JSON array within the JSON Object
 
         try {

@@ -50,7 +50,7 @@ public class LoginScreenDisplay  extends JPanel{
                             listener.stateChanged(event);
                     }
                     else{
-                        JOptionPane.showMessageDialog(null, "USER NOT FOUND", "ERROR", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Login Failed\nUsername or Password may be incorrect", "ERROR", JOptionPane.ERROR_MESSAGE);
                     }
                 } catch (IOException | ParseException ioException) {
                     ioException.printStackTrace();
