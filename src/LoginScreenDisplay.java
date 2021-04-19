@@ -3,15 +3,15 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.ArrayList;
-import org.json.simple.*;
-import org.json.simple.parser.JSONParser;
+
 import org.json.simple.parser.ParseException;
 
+/**
+ * Class: LoginScreenDisplay
+ * Description: Creates the login ScreenDisplay so that the user can enter information and log in.
+ */
 public class LoginScreenDisplay  extends JPanel{
     private JPanel loginPanel;
     private JLabel WelcomeLabel;
@@ -23,21 +23,24 @@ public class LoginScreenDisplay  extends JPanel{
     private JLabel loginLabel;
     private JLabel registerLabel;
     private JButton registerButton;
-    ArrayList<ChangeListener> listeners = new ArrayList<>();
-    ArrayList<ChangeListener> listeners2 = new ArrayList<>();
+    ArrayList<ChangeListener> Loginlistener = new ArrayList<>();
+    ArrayList<ChangeListener> RegisterListener = new ArrayList<>();
 
     FileManager m_fileManager = new FileManager();
 
-
+    /**
+     * Constructor: Login Screen Display
+     * @param user : user Parameter that the panel can use the login information given by the user into a new user Class  to attempt to log them in
+     * @throws IOException
+     * @throws ParseException
+     */
     public LoginScreenDisplay(User user) throws IOException, ParseException {;
 
-        /**
-         * Action Button Listener that will search a JSON file for a username and try  and match it with the inputted username and passowrd on the login button lick
-         *
-         */
+        //ActionListener the gets the information from the panel and sets the user information on Login button click
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //sets the user Information
                 user.setName(usernameTextField.getText());
                 user.setPassword(passwordTextField.getText());
 
@@ -45,11 +48,12 @@ public class LoginScreenDisplay  extends JPanel{
                 try{
                     if(m_fileManager.isRegisteredUser(user)){
                         ChangeEvent event = new ChangeEvent(this);
-                        m_fileManager.loadUser(user);
-                        for (ChangeListener listener : listeners)
+                        m_fileManager.loadUser(user); //loads the user's Lists
+                        for (ChangeListener listener : Loginlistener)
                             listener.stateChanged(event);
                     }
                     else{
+                        //prints an error message
                         JOptionPane.showMessageDialog(null, "Login Failed\nUsername or Password may be incorrect", "ERROR", JOptionPane.ERROR_MESSAGE);
                     }
                 } catch (IOException | ParseException ioException) {
@@ -60,19 +64,19 @@ public class LoginScreenDisplay  extends JPanel{
             }
         });
 
-
+        //actionListener that will take the user to the RegisterUser Screen
         registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ChangeEvent event = new ChangeEvent(this);
-                for (ChangeListener listener : listeners2)
+                for (ChangeListener listener : RegisterListener)
                     listener.stateChanged(event);
             }
         });
     }
 
     /**
-     * Function: getLoginPanel
+     * Method: getLoginPanel
      * Description: function that returns the Jpanel of the Login view
      * @return the Jpanel of the LoginView
      */
@@ -80,13 +84,22 @@ public class LoginScreenDisplay  extends JPanel{
         return loginPanel;
     }
 
-
-    public void addChangeListener(ChangeListener listener) {
-        listeners.add(listener);
+    /**
+     * Method: addLoginUserListener
+     * Description: Adds the listener from loginButton to the LoginListener ArrayList
+     * @param listener takes in a changeListener so that it can be added to the arraylist
+     */
+    public void addLoginUserListener(ChangeListener listener) {
+        Loginlistener.add(listener);
     }
 
-    public void addChangeListener2(ChangeListener listener) {
-        listeners2.add(listener);
+    /**
+     * Method: addToRegisterUserListener
+     * Description: Adds the listener from registerButton to the RegisterListener ArrayList
+     * @param listener takes in a changeListener so that it can be added to the arraylist
+     */
+    public void addRegisterUserListener(ChangeListener listener) {
+        RegisterListener.add(listener);
     }
 
 }

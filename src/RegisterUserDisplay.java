@@ -11,6 +11,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Class: RegisterUserDisplay
+ * Description: Display screen for creating new users; Adds new users to the file manager by taking user input.
+ * Uses the Strategy pattern.
+ */
+
 public class RegisterUserDisplay extends JPanel{
 
     FileManager m_fileManager = new FileManager();
@@ -32,6 +38,12 @@ public class RegisterUserDisplay extends JPanel{
 
     final ArrayList<ChangeListener> listeners = new ArrayList<>();
     final ArrayList<ChangeListener> returnToLoginListener = new ArrayList<>();
+
+    /**
+     * Constructor: Register User Display
+     * @throws IOException
+     * @throws ParseException
+     */
     public RegisterUserDisplay() throws IOException, ParseException {
         if(m_tmpUser.getName() == null || m_tmpUser.getName().equals("")){
             l_userNameLabel.setText("Create Username: ");
@@ -116,15 +128,22 @@ public class RegisterUserDisplay extends JPanel{
 
     }
 
+    /**
+     * Method: getRegisterDisplay
+     * Description: Gets the register user display for the screen manager
+     * @return returns the register display panel
+     */
     public JPanel getRegisterDisplay(){
         return m_registerDisplay;
     }
 
+    /**
+     * Method: addListenerReturntoLogin
+     * Description: Returns to login screen
+     * @param listener
+     */
     public void addListenerReturntoLogin(ChangeListener listener) {
         returnToLoginListener.add(listener);
     }
 
-    public void addListenerLogin(ChangeListener listener) {
-        listeners.add(listener);
-    }
 }

@@ -5,7 +5,7 @@ import java.util.Comparator;
 
 /**
  * Class: GameList
- *        Data Type that stores multiple Games and the name of the List itself
+ * Description: Data Type that stores multiple Games and the name of the List itself
  */
 public class GameList implements Cloneable, Iterable{
     String m_listName;

@@ -1,6 +1,6 @@
 /**
- * class: Game
- *        Datafile that holds is used to store instances of Games. Modelled after the gameFile
+ * Class: Game
+ * Description: Datafile that holds is used to store instances of Games. Modelled after the gameFile
  */
 public class Game {
    String m_ID;
