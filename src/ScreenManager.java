@@ -31,7 +31,7 @@ public class ScreenManager {
 
         cardSet.add(userLogin.getLoginPanel(), "LoginView"); //adds the login display Panel
         cardSet.add(userRegister.getRegisterDisplay(), "RegisterView"); //adds the Regiser Display
-        cardSet.add(userListPage.getRootPanel(),"UserView"); //adds the userpage display
+        cardSet.add(userListPage.getUserListPanel(),"UserView"); //adds the userpage display
         cardSet.add(searchResults.getSearchResultPanel(),"Search Results"); //adds the testDisplay
         testFrame.add(cardSet);  //adds  cardset to the JFrame
 

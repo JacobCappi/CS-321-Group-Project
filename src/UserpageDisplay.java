@@ -1,6 +1,5 @@
 import org.json.simple.parser.ParseException;
 
-import javax.sound.midi.SysexMessage;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -12,7 +11,6 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Class: UserpageDisplay
@@ -21,7 +19,7 @@ import java.util.Arrays;
  */
 public class UserpageDisplay {
 
-    private JPanel rootPanel;
+    private JPanel userListPanel;
     private JTable m_gameTable;
     private JComboBox genreCombo;
     private JTextField searchBox;
@@ -110,8 +108,8 @@ public class UserpageDisplay {
      * Description: Gets the rootPanel for ScreenManager
      * @return returns the rootPanel
      */
-    public JPanel getRootPanel() {
-        return rootPanel;
+    public JPanel getUserListPanel() {
+        return userListPanel;
     }
 
     /**
