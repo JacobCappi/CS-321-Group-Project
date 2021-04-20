@@ -1,3 +1,5 @@
+package com.cs_group.panels;
+
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -6,6 +8,8 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import com.cs_group.managers.FileManager;
+import com.cs_group.objects.User;
 import org.json.simple.parser.ParseException;
 
 /**

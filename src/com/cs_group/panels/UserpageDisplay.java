@@ -1,3 +1,9 @@
+package com.cs_group.panels;
+
+import com.cs_group.managers.FileManager;
+import com.cs_group.objects.Game;
+import com.cs_group.objects.GameList;
+import com.cs_group.objects.User;
 import org.json.simple.parser.ParseException;
 
 import javax.swing.*;
@@ -14,7 +20,7 @@ import java.util.ArrayList;
 
 /**
  * Class: UserpageDisplay
- * Description: The panel for displaying the user's list. Creates table populated with User's game list. Also allows user's to delete games from their list.
+ * Description: The panel for displaying the user's list. Creates table populated with com.cs_group.objects.User's game list. Also allows user's to delete games from their list.
  * Uses the Observer pattern
  */
 public class UserpageDisplay {
@@ -105,7 +111,7 @@ public class UserpageDisplay {
 
     /**
      * Method: getRootPanel
-     * Description: Gets the rootPanel for ScreenManager
+     * Description: Gets the rootPanel for com.cs_group.managers.ScreenManager
      * @return returns the rootPanel
      */
     public JPanel getUserListPanel() {
@@ -210,11 +216,16 @@ public class UserpageDisplay {
 
     /**
      * Method: setUserTitle
-     * Description: sets titleLabel to the user's name, so "[User]'s Game Diary" appears as the title
+     * Description: sets titleLabel to the user's name, so "[com.cs_group.objects.User]'s com.cs_group.objects.Game Diary" appears as the title
      * @param Name Pass in the user's name
      */
     public void setUserTitle(String Name){
         titleLabel.setText(Name);
+    }
+
+    public GameList getSearchResult(){ return m_searchResult;}
+    public Game getTestGame(){
+        return m_testGame;
     }
 }
 

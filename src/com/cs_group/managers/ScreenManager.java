@@ -1,3 +1,8 @@
+package com.cs_group.managers;
+
+import com.cs_group.objects.*;
+import com.cs_group.panels.*;
+import com.cs_group.managers.FileManager;
 import org.json.simple.parser.ParseException;
 
 import javax.swing.*;
@@ -6,8 +11,9 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.io.IOException;
 
+
 /**
- * Class: ScreenManager:
+ * Class: com.cs_group.managers.ScreenManager:
  * Description: Manages all of the screens, and uses a card dispay so that each screen can be shown with button clicks.
  * This class uses the Observer pattern so that it can listen to any changes that occur throughout the panels, so that this class can be notified and the right switch can be made.
  *
@@ -47,7 +53,7 @@ public class ScreenManager {
             @Override
             public void stateChanged(ChangeEvent e){
                 userListPage.createTable(m_user);
-                userListPage.setUserTitle(m_user.m_Name + "'s Game Diary");
+                userListPage.setUserTitle(m_user.getName() + "'s Game Diary");
                 cl.show(cardSet,  "UserView");// shows the userpage card
             }
 
@@ -78,8 +84,8 @@ public class ScreenManager {
             @Override
             public void stateChanged(ChangeEvent e) {
                 //sets the testDisplay with the information from searching the game
-                searchResults.setGameDisplay(userListPage.m_searchResult);
-                searchResults.setSearchResultLabel("Search Results for:  " + userListPage.m_testGame.m_Title);
+                searchResults.setGameDisplay(userListPage.getSearchResult());
+                searchResults.setSearchResultLabel("Search Results for:  " + userListPage.getTestGame().getTitle());
                 cl.show(cardSet, "Search Results"); //shows the Search Result card
             }
         });
@@ -113,8 +119,8 @@ public class ScreenManager {
         searchResults.addAnotherGame(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                searchResults.setSearchResultLabel("Search Results for:  " + searchResults.m_testGame.m_Title); //sets the label for the new game
-                searchResults.setGameDisplay(searchResults.m_NewSearchResult); //refreshes the display
+                searchResults.setSearchResultLabel("Search Results for:  " + searchResults.getTestGame().getTitle()); //sets the label for the new game
+                searchResults.setGameDisplay(searchResults.getSearchResult()); //refreshes the display
             }
         });
 

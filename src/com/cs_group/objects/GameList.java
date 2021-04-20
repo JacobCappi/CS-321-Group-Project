@@ -1,10 +1,10 @@
+package com.cs_group.objects;
+
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Collections;
-import java.util.Comparator;
 
 /**
- * Class: GameList
+ * Class: com.cs_group.objects.GameList
  * Description: Data Type that stores multiple Games and the name of the List itself
  */
 public class GameList implements Cloneable, Iterable{
@@ -43,7 +43,7 @@ public class GameList implements Cloneable, Iterable{
     }
 
     /**
-     * method: delete Game
+     * method: delete com.cs_group.objects.Game
      *         bug(duplicate game names aren't handled, the first one found is deleted)
      *         out of time, and not a huge issue
      * @param game game to delete
@@ -96,7 +96,7 @@ public class GameList implements Cloneable, Iterable{
      */
     @Override
     public String toString() {
-        return "GameList{" +
+        return "com.cs_group.objects.GameList{" +
                 "m_listName='" + m_listName + '\'' +
                 ", m_gameList=" + m_gameList +
                 ", m_length=" + m_length +

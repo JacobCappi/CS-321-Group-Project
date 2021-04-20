@@ -1,3 +1,8 @@
+package com.cs_group.panels;
+
+
+import com.cs_group.managers.FileManager;
+import com.cs_group.objects.User;
 import org.json.simple.parser.ParseException;
 
 import javax.swing.*;
@@ -6,8 +11,6 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -40,7 +43,7 @@ public class RegisterUserDisplay extends JPanel{
     final ArrayList<ChangeListener> returnToLoginListener = new ArrayList<>();
 
     /**
-     * Constructor: Register User Display
+     * Constructor: Register com.cs_group.objects.User Display
      * @throws IOException
      * @throws ParseException
      */

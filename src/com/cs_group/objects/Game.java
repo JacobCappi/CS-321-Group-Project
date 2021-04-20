@@ -1,5 +1,7 @@
+package com.cs_group.objects;
+
 /**
- * Class: Game
+ * Class: com.cs_group.objects.Game
  * Description: Datafile that holds is used to store instances of Games. Modelled after the gameFile
  */
 public class Game {
@@ -182,7 +184,7 @@ public class Game {
     * method: compareName
     *          Compares titles of the two games. To handle spaces, every word split by space
  *          is search individually with recursion. If every word exists, return true.
-    * @param game Game holding the title from the user's search
+    * @param game com.cs_group.objects.Game holding the title from the user's search
     * @return
     */
    public boolean compareNames(Game game){// dumb code, but it could have looked a lot messier.
@@ -238,7 +240,7 @@ public class Game {
     */
    @Override
    public String toString() {
-      return "Game{" +
+      return "com.cs_group.objects.Game{" +
               "m_ID='" + m_ID + '\'' +
               ", m_Title='" + m_Title + '\'' +
               ", m_highlights='" + m_highlights + '\'' +

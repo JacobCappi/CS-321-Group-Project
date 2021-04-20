@@ -1,14 +1,16 @@
+package com.cs_group.managers;
+
+import com.cs_group.objects.*;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
- * Class:  FileManager
+ * Class:  com.cs_group.managers.FileManager
  * Description: Manager class that handles the entire File portion of the backend
  *              File i/o for Users, File i/o for GameLists
  *              Planned on Singleton Design Pattern, but unsure how in Java
@@ -17,17 +19,17 @@ public class FileManager {
 
     private String m_loginFiles = "login.json";
     private String m_gameFile = "gameFile.json"; // changed per naming convention (?)
-    private String m_currentUser = "Users/"; // User dir
+    private String m_currentUser = "Users/"; // com.cs_group.objects.User dir
     GameList m_gameListFromFile = new GameList();
     GameList m_SearchResult = new GameList();
 
     /**
-     * constructor: FileManager()
+     * constructor: com.cs_group.managers.FileManager()
      *              Upon creation, loads all games from the game file into memory
      * @throws IOException
      * @throws ParseException
      */
-    FileManager() throws IOException, ParseException {
+    public FileManager() throws IOException, ParseException {
         this.fillGameList(m_gameListFromFile, m_gameFile);
     }
 
@@ -37,7 +39,7 @@ public class FileManager {
      * Method: isRegisteredUser:
      * Description: Upon user creation, the user is stored in the login file. This method checks to
      *              ensure no duplicate user is created
-     * @param insertUser: User to check duplicates
+     * @param insertUser: com.cs_group.objects.User to check duplicates
      * @return returns TRUE if  the user is found within the file, returns FALSE otherwise.
      * @throws IOException
      * @throws ParseException
@@ -74,7 +76,7 @@ public class FileManager {
      * Method: addUser
      * Description: Loads login file uses into json array if it exists. Then adds user to store back into
      *              this array to store additional user into login file.
-     * @param user :  User to add to file
+     * @param user :  com.cs_group.objects.User to add to file
      * @throws IOException
      * @throws ParseException
      */
@@ -92,7 +94,7 @@ public class FileManager {
             JSONParser m_parser = new JSONParser(); //creates a new JSONparser that allows the JSON file to be parsed through for information
             Reader m_reader = new FileReader(m_loginFiles); //creates a new Reader Object that reads in the JSON file
             JSONObject m_objJSON = (JSONObject)m_parser.parse(m_reader); // parses the JSON file and puts the information in a JSONObject
-            m_jsonArray = (JSONArray) m_objJSON.get("Users"); // takes the JSON array and puts the User information within
+            m_jsonArray = (JSONArray) m_objJSON.get("Users"); // takes the JSON array and puts the com.cs_group.objects.User information within
         }
 
         // error checking to see if user already exists in file
@@ -127,7 +129,7 @@ public class FileManager {
 
     /**
      * Method: isGameinList
-     *          Uses the Game list that was loaded from the big game file to check if game exists
+     *          Uses the com.cs_group.objects.Game list that was loaded from the big game file to check if game exists
      * @param game
      * @return true is exists, false if it doesn't
      * @throws IOException
@@ -145,7 +147,7 @@ public class FileManager {
     /**
      * method: gamesSearchResult()
      *         method that handles game searching. Creates a Gamelist of all the games that match the serach
-     *         results, then returns it. Searching is done through compareNames() method from Game class
+     *         results, then returns it. Searching is done through compareNames() method from com.cs_group.objects.Game class
      * @param game A game that contains the string from the user's search as the game title to compare
      * @return Gamelist that holds all games with the search string somewhere in the game
      * @throws IOException
@@ -190,7 +192,7 @@ public class FileManager {
         // maybe a better way, works... look into later
         for(int i =0; i<m_jsonArray.size(); i++){
             JSONObject m_jsonObject = (JSONObject) m_jsonArray.get(i);
-            Game m_tmpGame = new Game();//Creates a new Game object so that data can be sent to another class
+            Game m_tmpGame = new Game();//Creates a new com.cs_group.objects.Game object so that data can be sent to another class
             m_tmpGame.setId((String) m_jsonObject.get("ID"));
             m_tmpGame.setTitle((String) m_jsonObject.get("Title"));
             m_tmpGame.setHighlights((String) m_jsonObject.get("Highlights Supported?"));
@@ -210,7 +212,7 @@ public class FileManager {
      * method: saveUserData
      *         saves the gamelist owned by the user into the respective user/[username].json file.
      *         Stores games and users with JSON arrays and JSON objects
-     * @param user User that is stored into their file
+     * @param user com.cs_group.objects.User that is stored into their file
      * @throws IOException
      * @throws ParseException
      */
@@ -269,7 +271,7 @@ public class FileManager {
      * method: loadUser
      *          assumes that multiple gamelists are not implemented. Fetches the user
      *          file to get each jsonObject.get(). Each is stored into gamelist(0)
-     * @param user User to load the gamelist into
+     * @param user com.cs_group.objects.User to load the gamelist into
      * @throws IOException
      * @throws ParseException
      */
@@ -298,7 +300,7 @@ public class FileManager {
 
             for(int j =0; j<m_jsonArrayData.size(); j++){
                 JSONObject m_jsonObject = (JSONObject) m_jsonArrayData.get(j);
-                Game m_tmpGame = new Game();//Creates a new Game object so that data can be sent to another class
+                Game m_tmpGame = new Game();//Creates a new com.cs_group.objects.Game object so that data can be sent to another class
                 m_tmpGame.setId((String) m_jsonObject.get("ID"));
                 m_tmpGame.setTitle((String) m_jsonObject.get("Title"));
                 m_tmpGame.setHighlights((String) m_jsonObject.get("Highlights Supported?"));

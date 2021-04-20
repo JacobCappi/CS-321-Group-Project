@@ -1,3 +1,9 @@
+package com.cs_group.panels;
+
+import com.cs_group.managers.FileManager;
+import com.cs_group.objects.Game;
+import com.cs_group.objects.GameList;
+import com.cs_group.objects.User;
 import org.json.simple.parser.ParseException;
 
 import javax.swing.*;
@@ -94,7 +100,7 @@ public class searchResultsDisplay extends JPanel{
             }
         });
 
-        //ActionListener on searchButton that searches the Game file again to find another game
+        //ActionListener on searchButton that searches the com.cs_group.objects.Game file again to find another game
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -102,7 +108,7 @@ public class searchResultsDisplay extends JPanel{
                 m_testGame.setTitle(searchGameText.getText());
                 try {
                     if(m_fileManager1.isGameInList(m_testGame)){ // if the game is in the file
-                       m_NewSearchResult = m_fileManager1.gamesSearchResult(m_testGame); //makes a new GameList with the search Result
+                       m_NewSearchResult = m_fileManager1.gamesSearchResult(m_testGame); //makes a new com.cs_group.objects.GameList with the search Result
                         ChangeEvent event = new ChangeEvent(this);
                         for (ChangeListener listener : m_addAnotherGame) {
                             listener.stateChanged(event);
@@ -147,7 +153,7 @@ public class searchResultsDisplay extends JPanel{
 
     /**
      * Method: getSearchResultPanel
-     * Description: Gets the searchResultPanel for ScreenManager
+     * Description: Gets the searchResultPanel for com.cs_group.managers.ScreenManager
      * @return returns the searchResultPanel
      */
     public JPanel getSearchResultPanel(){return searchResultPanel;}
@@ -178,6 +184,10 @@ public class searchResultsDisplay extends JPanel{
      */
     public void setSearchResultLabel(String resultLabel){ searchResultLabel.setText(resultLabel);}
 
+    public GameList getSearchResult(){ return m_NewSearchResult;}
+    public Game getTestGame(){
+        return m_testGame;
+    }
 
 
 }

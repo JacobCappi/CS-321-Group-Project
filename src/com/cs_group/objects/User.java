@@ -1,13 +1,15 @@
+package com.cs_group.objects;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
- * Class User
+ * Class com.cs_group.objects.User
  * Description: The main data struct that is passed around through the panels
- *       Contains every information the User needs to use the software
+ *       Contains every information the com.cs_group.objects.User needs to use the software
  */
 public class User implements Iterable, Cloneable{
-    ArrayList<GameList> m_GameLists = new ArrayList<>(); // Game list placeholder
+    ArrayList<GameList> m_GameLists = new ArrayList<>(); // com.cs_group.objects.Game list placeholder
     GameList m_activeGameList;
     String m_Name;
     String m_Password;
@@ -24,8 +26,8 @@ public class User implements Iterable, Cloneable{
 
     /**
      * Overloaded contructor with name and password set
-     * @param name name for User
-     * @param password password for User
+     * @param name name for com.cs_group.objects.User
+     * @param password password for com.cs_group.objects.User
      */
     public User(String name, String password){
         m_Name = name;
@@ -84,7 +86,7 @@ public class User implements Iterable, Cloneable{
      */
     @Override
     public String toString() {
-        return "User{" +
+        return "com.cs_group.objects.User{" +
                 "m_Name='" + m_Name + '\'' +
                 ", m_Password='" + m_Password + '\'' +
                 '}';
@@ -96,7 +98,7 @@ public class User implements Iterable, Cloneable{
      * @return string for that JSON
      */
     public String toJSON(){
-        return "{\"ID\":\""+ "User{" +
+        return "{\"ID\":\""+ "com.cs_group.objects.User{" +
                 "m_Name='" + m_Name + '\'' +
                 ", m_Password='" + m_Password + '\'' +
                 "}\"}";
