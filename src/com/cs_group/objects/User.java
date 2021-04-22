@@ -104,18 +104,38 @@ public class User implements Iterable, Cloneable{
                 "}\"}";
     }
 
-
+    /**
+     * Method: createGameList
+     * Descripton: Creates a new game list for the user.
+     * @param gameList: Passes in a gameList object so that it can be added to the users list
+     */
     public void createGameList(GameList gameList){
         m_GameLists.add(gameList);
     }
 
+
+    /**
+     * Method: removeGameList
+     * Description: removes a gameList by the name givent to it by the user. NOT IMPLEMENTED.
+     * @param gameListName string parameter that will search the gamelist for the corresponding gameList to be removed.
+     */
     public void removeGameList(String gameListName){
     }
 
+    /**
+     * Method: addGame
+     * Description: Adds a game to a specific game list. NOT IMPLEMENTED.
+     * @param gameListName
+     * @param game
+     */
     public void addGame(String gameListName, Game game){
 
     }
 
+    /**
+     * Method: iterator.
+     * @return Returns a GameList iterator.
+     */
     public Iterator<GameList> iterator() {
         return this.m_GameLists.iterator();
     }

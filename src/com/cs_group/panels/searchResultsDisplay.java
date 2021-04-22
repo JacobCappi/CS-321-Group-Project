@@ -19,7 +19,8 @@ import java.util.ArrayList;
 /**
  * Class: searchResultsDisplay
  * Description: The panel for displaying the results of the search from the UserpageDisplay.
- *              The class also handles the same search from within the class itself, and allows the user to add the game to their list
+ *              The class also handles the same search from within the class itself, and allows the user to add the game to their list.
+ *              Implements the Observer Pattern.
  */
 public class searchResultsDisplay extends JPanel{
     private JPanel searchResultPanel;
