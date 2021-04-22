@@ -114,23 +114,6 @@ public class User implements Iterable, Cloneable{
     }
 
 
-    /**
-     * Method: removeGameList
-     * Description: removes a gameList by the name givent to it by the user. NOT IMPLEMENTED.
-     * @param gameListName string parameter that will search the gamelist for the corresponding gameList to be removed.
-     */
-    public void removeGameList(String gameListName){
-    }
-
-    /**
-     * Method: addGame
-     * Description: Adds a game to a specific game list. NOT IMPLEMENTED.
-     * @param gameListName
-     * @param game
-     */
-    public void addGame(String gameListName, Game game){
-
-    }
 
     /**
      * Method: iterator.
