@@ -140,7 +140,7 @@ public class UserpageDisplay extends JPanel{
             m_data[m_counter][2] = g.getPublisher();
             m_data[m_counter++][3] = g.getRating();
         }
-
+        //sets the combobox string to basic information
         m_gameTable.setModel( new DefaultTableModel(
                 m_data,
                 new String[]{"Title", "Genre", "Publisher" , "Rating" }
@@ -162,7 +162,7 @@ public class UserpageDisplay extends JPanel{
             public void itemStateChanged(ItemEvent e) {
                 if(e.getStateChange() == ItemEvent.SELECTED){
                     String genreSelect = (String)genreCombo.getSelectedItem(); //grab genre selection
-                    if(genreSelect.equals("Default")){
+                    if(genreSelect.equals("Default")){ //if default selected, loads entire List
                         createTable(user);
                     }
                     else{
@@ -216,7 +216,7 @@ public class UserpageDisplay extends JPanel{
 
     /**
      * Method: setUserTitle
-     * Description: sets titleLabel to the user's name, so "[com.cs_group.objects.User]'s com.cs_group.objects.Game Diary" appears as the title
+     * Description: sets titleLabel to the user's name, so "Name's Game Diary" appears as the title
      * @param Name Pass in the user's name
      */
     public void setUserTitle(String Name){

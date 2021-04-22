@@ -47,7 +47,7 @@ public class GameList implements Cloneable, Iterable{
      *         bug(duplicate game names aren't handled, the first one found is deleted)
      *         out of time, and not a huge issue
      * @param game game to delete
-     * @return
+     * @return True if the game is sucessfully deleted, if else returns false.
      */
     public boolean deleteGame(Game game){
         for(int i =0; i<m_length; i++){

@@ -93,15 +93,19 @@ public class RegisterUserDisplay extends JPanel{
         m_inputStringUserName = "";
         m_inputStringPassword = "";
 
+
+        //Action Listener that takes the information of the user and adds it to the list of users so that they can log in upon pressing the button.
         l_submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
+
+                //gets the users information
                 m_inputStringUserName = l_userNameBlank.getText();
                 m_inputStringPassword = l_passwordBlank.getText();
 
                 m_tmpUser.setInfo(m_inputStringUserName, m_inputStringPassword);
                 try {
-                    if(m_fileManager.addUser(m_tmpUser) == 1){
+                    if(m_fileManager.addUser(m_tmpUser) == 1){ // if duplicate user
                         JOptionPane.showMessageDialog(null, "Error: User with that name already exists", "ERROR", JOptionPane.ERROR_MESSAGE);
                     }
 
