@@ -23,7 +23,7 @@ import java.util.ArrayList;
  * Description: The panel for displaying the user's list. Creates table populated with com.cs_group.objects.User's game list. Also allows user's to delete games from their list.
  * Uses the Observer pattern
  */
-public class UserpageDisplay {
+public class UserpageDisplay extends JPanel{
 
     private JPanel userListPanel;
     private JTable m_gameTable;
@@ -110,8 +110,8 @@ public class UserpageDisplay {
     }
 
     /**
-     * Method: getRootPanel
-     * Description: Gets the rootPanel for com.cs_group.managers.ScreenManager
+     * Method: getUserListPanel
+     * Description: Gets the userList for com.cs_group.managers.ScreenManager
      * @return returns the rootPanel
      */
     public JPanel getUserListPanel() {
@@ -222,8 +222,18 @@ public class UserpageDisplay {
     public void setUserTitle(String Name){
         titleLabel.setText(Name);
     }
-
+    /**
+     * Method: getSearchResult
+     * Description: returns a list of games that match the user's search
+     * @return Returns a gameList object that is filled with the information of every game that matches the users search
+     */
     public GameList getSearchResult(){ return m_searchResult;}
+
+    /**
+     * Method: getTestGame
+     * Description:  gets the Game object of the title that the user searched so that it can be displayed in searchResultsDisplay.
+     * @return
+     */
     public Game getTestGame(){
         return m_testGame;
     }

@@ -184,7 +184,18 @@ public class searchResultsDisplay extends JPanel{
      */
     public void setSearchResultLabel(String resultLabel){ searchResultLabel.setText(resultLabel);}
 
+    /**
+     * Method: getSearchResult
+     * Description: returns a list of games that match the user's search
+     * @return Returns a gameList object that is filled with the information of every game that matches the users search
+     */
     public GameList getSearchResult(){ return m_NewSearchResult;}
+
+    /**
+     * Method: getTestGame
+     * Description:  gets the Game object of the title that the user searched so that it can be displayed in searchResultsDisplay.
+     * @return
+     */
     public Game getTestGame(){
         return m_testGame;
     }

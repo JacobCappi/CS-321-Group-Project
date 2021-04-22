@@ -23,27 +23,29 @@ public class ScreenManager {
     public ScreenManager(){}
 
     public static void main(String[] args) throws IOException, ParseException {
-        JFrame testFrame = new JFrame(); //creates a new Jframe
+        JFrame mainFrame = new JFrame(); //creates a new Jframe
         FileManager m_fileManager = new FileManager();
         User m_user = new User();
+        //sets the format of the Jframe
+        mainFrame.setSize(1200,750); //sets the Jframe size
+        mainFrame.setLocationRelativeTo(null); // sets the location to null so that the Jframe does not open in the top left corner of the screen
 
-        testFrame.setSize(1200,750); //sets the Jframe size
-        testFrame.setLocationRelativeTo(null); // sets the location to null so that the Jframe does not open in the top left corner of the screen
+
         final LoginScreenDisplay userLogin = new LoginScreenDisplay(m_user); //creates a new loginDisplay for the card Layout
         final RegisterUserDisplay userRegister = new RegisterUserDisplay(); // creates a new Register user display for the card Layout;
-        final searchResultsDisplay searchResults = new searchResultsDisplay(m_user); //   creates a new testDisplay (CAN  BE CHANGED TO WHATEVER YOU ARE USING TO ADD THE GAME )
+        final searchResultsDisplay searchResults = new searchResultsDisplay(m_user); //   creates a new testDisplay
         final UserpageDisplay userListPage = new UserpageDisplay(m_user); // Creates a new userpage display
         final JPanel cardSet= new JPanel(new CardLayout());       //creates a card set which will accept Jpanels into its cardset;
 
         cardSet.add(userLogin.getLoginPanel(), "LoginView"); //adds the login display Panel
         cardSet.add(userRegister.getRegisterDisplay(), "RegisterView"); //adds the Regiser Display
         cardSet.add(userListPage.getUserListPanel(),"UserView"); //adds the userpage display
-        cardSet.add(searchResults.getSearchResultPanel(),"Search Results"); //adds the testDisplay
-        testFrame.add(cardSet);  //adds  cardset to the JFrame
+        cardSet.add(searchResults.getSearchResultPanel(),"Search Results"); //adds the searchResult Display
+        mainFrame.add(cardSet);  //adds  cardset to the JFrame
 
 
-        testFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        testFrame.setVisible(true);
+        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainFrame.setVisible(true);
         CardLayout cl = (CardLayout) (cardSet.getLayout());
     /*
       Change listener that listens for a change to happen in the userLogin(LoginScreenDisplay) panel, which will be when the Log in button is clicked
@@ -62,7 +64,7 @@ public class ScreenManager {
         userLogin.addRegisterUserListener(new ChangeListener(){
             @Override
             public void stateChanged(ChangeEvent  e2){
-                testFrame.setSize(500,500);
+                mainFrame.setSize(500,500);
                 cl.show(cardSet,  "RegisterView"); //shows the the registerUser Card
             }
 
@@ -72,7 +74,7 @@ public class ScreenManager {
         userRegister.addListenerReturntoLogin(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent changeEvent) {
-                testFrame.setSize(1200,750);
+                mainFrame.setSize(1200,750);
                 String event = changeEvent.getSource().toString();
                 cl.show(cardSet, "LoginView"); //  shows the login card after logout button is clicked
             }
